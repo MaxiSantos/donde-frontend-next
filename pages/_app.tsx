@@ -1,7 +1,39 @@
-import '../styles/globals.css'
+import NProgress from 'nprogress';
+import Router from 'next/router';
+import { ApolloProvider } from '@apollo/client';
+import withData from '../lib/withData';
+
+// import 'nprogress/nprogress.css';
+import '../app/styles/nprogress.css';
+import '../app/styles/icons.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '@szhsin/react-menu/dist/index.css';
+import 'react-image-gallery/styles/css/image-gallery.css';
+
 import type { AppProps } from 'next/app'
 
-function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+Router.events.on('routeChangeStart', () => {
+  NProgress.start();
+});
+Router.events.on('routeChangeComplete', () => NProgress.done());
+Router.events.on('routeChangeError', () => NProgress.done());
+
+function MyApp({ Component, pageProps, apollo }) {
+  return (
+    <ApolloProvider client={apollo}>
+      <Component {...pageProps} />
+    </ApolloProvider>
+  );
 }
-export default MyApp
+
+MyApp.getInitialProps = async function ({ Component, ctx }) {
+  //let pageProps: any = {};
+  let pageProps: { [k: string]: any } = {};
+  if (Component.getInitialProps) {
+    pageProps = await Component.getInitialProps(ctx);
+  }
+  pageProps.query = ctx.query;
+  return { pageProps };
+};
+
+export default withData(MyApp);
