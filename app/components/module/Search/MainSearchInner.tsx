@@ -1,11 +1,12 @@
 import { Col, Container, Form, Row } from 'react-bootstrap';
+import { useApolloClient } from '@apollo/client';
 import styled from 'styled-components';
 import AsyncSelect from 'react-select/async';
 import Select from 'react-select';
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import debounce from 'lodash.debounce';
 import { useAllCategory1Level } from '../../../graphql/Category';
-import { useSeachProducts } from '../../../graphql/Product';
+import { ALL_PRODUCT_QUERY, useSeachProducts } from '../../../graphql/Product';
 
 const MainSearchInnerContainer = styled.div`
   position: relative;
@@ -85,7 +86,8 @@ const H4 = styled.h4`
   font-size: 24px;
 `;
 
-export default function MainSearchInner() {
+export default function MainSearchInner({ props }) {
+  const client = useApolloClient();
   const { data, error, loading } = useAllCategory1Level();
   const {
     findItems,
@@ -93,6 +95,15 @@ export default function MainSearchInner() {
     error: resultsError,
     loading: resultsLoading,
   } = useSeachProducts();
+
+  useEffect(() => {
+    if (results?.products?.length > 0) {
+      client.writeQuery({
+        query: ALL_PRODUCT_QUERY,
+        data: results
+      });
+    }
+  }, [results]);
 
   const findItemsButChill = debounce(findItems, 350);
 
@@ -123,6 +134,8 @@ export default function MainSearchInner() {
                   type="text"
                   onChange={(e) => {
                     console.log(e.target.value);
+                    console.log("is it running?");
+
                     findItemsButChill({
                       variables: {
                         searchTerm: e.target.value,
@@ -148,16 +161,14 @@ export default function MainSearchInner() {
 
               <MainSearchInputItem md={3} xs={12}>
                 <Select
-                  options={data?.getCategory1Level.map((item) => ({
+                  inputId="react-select-input-id"
+                  instanceId="react-select-instance-id"
+                  options={data?.categories.map((item) => ({
                     value: item.id,
                     label: item.name,
                   }))}
                 />
-                <AsyncSelect
-                  cacheOptions
-                  defaultOptions
-                  loadOptions={findItemsButChill}
-                />
+
               </MainSearchInputItem>
               <MainSearchInputItem md={3} xs={12}>
                 <button type="button" className="button">

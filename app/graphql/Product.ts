@@ -1,9 +1,10 @@
 import { useLazyQuery, useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
+import { update } from 'lodash';
 
 export const SEARCH_PRODUCTS_QUERY = gql`
   query SEARCH_PRODUCTS_QUERY($searchTerm: String!) {
-    searchTerms: products(
+    products(
       where: {
         OR: [
           { name: { contains: $searchTerm } }
@@ -13,6 +14,10 @@ export const SEARCH_PRODUCTS_QUERY = gql`
     ) {
       id
       name
+      description
+      category {
+        name
+      }
     }
   }
 `;
@@ -22,7 +27,8 @@ export const useSeachProducts = () => {
     SEARCH_PRODUCTS_QUERY,
     {
       fetchPolicy: 'no-cache',
-    }
+    },
+
   );
   return {
     findItems,

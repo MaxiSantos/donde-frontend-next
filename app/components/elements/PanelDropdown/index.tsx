@@ -1,6 +1,5 @@
 import { Collapse } from 'react-bootstrap';
 import styled from 'styled-components';
-import Select from 'react-select';
 import { useState } from 'react';
 
 const Panel = styled.div`

@@ -19,7 +19,6 @@ export default function SortBy({ options }) {
     word-wrap: break-word;
     cursor: pointer;
   `;
-  console.log({ options });
   return (
     <Ul>
       {options.map((option) => (

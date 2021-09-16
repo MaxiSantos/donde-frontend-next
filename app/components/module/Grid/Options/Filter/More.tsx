@@ -18,7 +18,7 @@ export default function More({ options }) {
   return (
     <StlCol md={12}>
       {options.map((option) => (
-        <Form.Check type="checkbox" label={`${option.label}`} />
+        <Form.Check key={option.id} type="checkbox" label={`${option.label}`} />
       ))}
       <PanelButton>
         <Button>Apply</Button>

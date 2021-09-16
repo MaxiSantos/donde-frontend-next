@@ -6,8 +6,7 @@ import { Menu as ReactMenu, MenuItem, MenuDivider } from '@szhsin/react-menu';
 import React from 'react';
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/client';
-import { CURRENT_USER_QUERY, useUser } from '../../../../hooks/useUser';
-import { useCart } from '../../../../store/cartState';
+import { CURRENT_USER_QUERY } from '../../../../hooks/useUser';
 
 const Container = styled.nav`
   float: right;
@@ -140,7 +139,6 @@ const SIGN_OUT_MUTATION = gql`
 `;
 
 export default function Menu() {
-  const user = useUser();
   const [logout, { loading }] = useMutation(SIGN_OUT_MUTATION, {
     refetchQueries: [{ query: CURRENT_USER_QUERY }],
   });

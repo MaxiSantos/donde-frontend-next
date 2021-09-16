@@ -2,8 +2,8 @@ import { useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
 
 export const ALL_CATEGORY_1_LEVEL = gql`
-  query graphQLData {
-    getCategory1Level {
+  query ALL_CATEGORY_1_LEVEL {
+    categories(where:{categoryId:{equals:null}}){
       id
       name
     }

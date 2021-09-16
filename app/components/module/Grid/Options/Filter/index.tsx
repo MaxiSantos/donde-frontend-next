@@ -1,15 +1,15 @@
 import { Col, Row } from 'react-bootstrap';
 import styled from 'styled-components';
 import PanelDropdown from '../../../../elements/PanelDropdown';
-import More from './More.js.js';
+import More from './More';
 import SortBy from './SortBy';
 
 const options = [
-  { value: 'Default Order', label: 'Default Order' },
-  { value: 'Highest Rated', label: 'Highest Rated' },
-  { value: 'Most Reviewed', label: 'Most Reviewed' },
-  { value: 'Newest Listings', label: 'Newest Listings' },
-  { value: 'Oldest Listings', label: 'Oldest Listings' },
+  { id: "1", value: 'Default Order', label: 'Default Order' },
+  { id: "2", value: 'Highest Rated', label: 'Highest Rated' },
+  { id: "3", value: 'Most Reviewed', label: 'Most Reviewed' },
+  { id: "4", value: 'Newest Listings', label: 'Newest Listings' },
+  { id: "5", value: 'Oldest Listings', label: 'Oldest Listings' },
 ];
 
 export default function Filter() {

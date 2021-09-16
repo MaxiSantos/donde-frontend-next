@@ -39,7 +39,8 @@ const Container = styled.div`
 `;
 
 export default function Header() {
-  const user = useUser();
+  //const user = useUser();
+  const user = {};
   return (
     <HeaderContainer>
       <HeaderWrapper>

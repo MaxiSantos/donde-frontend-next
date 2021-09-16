@@ -13,6 +13,6 @@ export default function GridGroup({ list, link }) {
 }
 
 GridGroup.propTypes = {
-  list: PropTypes.object,
+  list: PropTypes.array,
   link: PropTypes.string,
 };

@@ -5,9 +5,11 @@ import { createUploadLink } from 'apollo-upload-client';
 import withApollo from 'next-with-apollo';
 import { endpoint, prodEndpoint } from '../config';
 
+console.log("process.env.ENDPOINT ", process.env.ENDPOINT)
 function createClient({ headers, initialState }) {
   return new ApolloClient({
-    link: ApolloLink.from([
+    uri: "http://localhost:8000/graphql",
+    /*link: ApolloLink.from([
       onError(({ graphQLErrors, networkError }) => {
         if (graphQLErrors)
           graphQLErrors.forEach(({ message, locations, path }) =>
@@ -29,7 +31,7 @@ function createClient({ headers, initialState }) {
         // pass the headers along from this request. This enables SSR with logged in state
         headers,
       }),
-    ]),
+    ]),*/
     cache: new InMemoryCache({
       typePolicies: {
         Query: {
