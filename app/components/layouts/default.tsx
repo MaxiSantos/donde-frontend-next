@@ -1,6 +1,6 @@
 import { Container } from 'react-bootstrap';
 import styled from 'styled-components';
-import { GlobalStyles } from '../../styles/global';
+import { GlobalStyles } from '../../../styles/global';
 import { Clear } from '../elements/Clear';
 import Header from '../module/Header';
 import Search from '../module/Search';
@@ -11,7 +11,7 @@ const InnerStyles = styled(Container)`
   padding: 2rem;
 `;
 
-export const Default = ({ children }) => (
+export const Default = ({ children }: DefaultProps) => (
   <div>
     <GlobalStyles />
     <Header />
@@ -20,3 +20,5 @@ export const Default = ({ children }) => (
     <InnerStyles>{children}</InnerStyles>
   </div>
 );
+
+type DefaultProps = React.PropsWithChildren<{}>;

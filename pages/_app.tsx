@@ -1,11 +1,11 @@
 import NProgress from 'nprogress';
 import Router from 'next/router';
 import { ApolloProvider } from '@apollo/client';
-import withData from '../lib/withData';
+import withData from '../app/lib/withData';
 
 // import 'nprogress/nprogress.css';
-import '../app/styles/nprogress.css';
-import '../app/styles/icons.css';
+import '../styles/nprogress.css';
+import '../styles/icons.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@szhsin/react-menu/dist/index.css';
 import 'react-image-gallery/styles/css/image-gallery.css';

@@ -1,11 +1,10 @@
-import { Collapse } from 'react-bootstrap';
+import { Collapse, CollapseProps } from 'react-bootstrap';
 import styled from 'styled-components';
 import { useState } from 'react';
 
 const Panel = styled.div`
   position: relative;
   display: inline-block;
-
   float: right;
 `;
 
@@ -41,11 +40,15 @@ const Arrow = styled.div`
     color: #c0c0c0;
     font-weight: normal;
     transition: transform 0.3s;
-    ${({ open }) => open && `transform: translate3d(0,0,0) rotate(180deg);`}
+    ${({ open }: ArrowProps) => open && `transform: translate3d(0,0,0) rotate(180deg);`}
   }
 `;
 
-const StlCollapse = styled(Collapse)`
+interface ArrowProps {
+  open?: boolean;
+}
+
+const StlCollapse = styled(Collapse) <StlCollapseProps>`
   transition: all 0.3s;
   position: absolute;
   top: 44px;
@@ -58,12 +61,17 @@ const StlCollapse = styled(Collapse)`
   padding: 20px 24px;
   overflow-y: hidden;
   white-space: normal;
-  width: ${(props) => props.dwidth || 'auto'};
+  width: ${(props: StlCollapseProps) => props.dwidth || 'auto'};
   left: auto;
   right: 0;
 `;
 
-export default function PanelDropdown({ children, options, dwidth, title }) {
+interface StlCollapseProps extends CollapseProps {
+  dwidth?: string,
+  onBlur?: () => void
+}
+
+export default function PanelDropdown({ children, options, dwidth, title }: PanelDropdownProps) {
   const [open, setOpen] = useState(false);
   return (
     <Panel>
@@ -91,3 +99,9 @@ export default function PanelDropdown({ children, options, dwidth, title }) {
     </Panel>
   );
 }
+
+type PanelDropdownProps = React.PropsWithChildren<{
+  dwidth: string,
+  title: string,
+  options: any
+}>;

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
 // const Button = styled.button
@@ -14,9 +15,9 @@ const Button = styled.button`
   border-radius: 50px;
   background-color: #66676b;
   color: #fff;
-  color: ${(props) => props.dwidth || 'auto'};
+  color: ${(props: ButtonProps) => props.dwidth || 'auto'};
   ${(props) =>
-    props.type === 'cancel'
+    props.mode === 'cancel'
       ? css`
           background-color: #f0f0f0;
           color: #666;
@@ -27,8 +28,13 @@ const Button = styled.button`
         `}
 `;
 
+interface ButtonProps {
+  dwidth?: string;
+  mode?: string;
+}
+
 Button.defaultProps = {
-  type: 'primary',
+  mode: 'primary',
 };
 
 export default Button;

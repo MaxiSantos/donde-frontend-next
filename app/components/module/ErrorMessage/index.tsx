@@ -18,14 +18,14 @@ const ErrorStyles = styled.div`
   }
 `;
 
-export const DisplayError = ({ error }) => {
+export const DisplayError = ({ error }: DisplayErrorProps) => {
   if (!error || !error.message) return null;
   if (
     error.networkError &&
     error.networkError.result &&
     error.networkError.result.errors.length
   ) {
-    return error.networkError.result.errors.map((error, i) => (
+    return error.networkError.result.errors.map((error: Error, i: React.Key | null | undefined) => (
       <ErrorStyles key={i}>
         <p data-test="graphql-error">
           <strong>Shoot!</strong>
@@ -44,10 +44,12 @@ export const DisplayError = ({ error }) => {
   );
 };
 
-DisplayError.defaultProps = {
-  error: {},
+type Error = {
+  message: string,
+  networkError?: any
 };
 
-DisplayError.propTypes = {
-  error: PropTypes.object,
-};
+
+type DisplayErrorProps = React.PropsWithChildren<{
+  error: Error,
+}>;

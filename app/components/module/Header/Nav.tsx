@@ -76,7 +76,7 @@ export default function Nav({ user }) {
           {user && (
             <>
               <li>
-                <ActiveLink activeClassName="active" href="/notifications">
+                <ActiveLink activeClassName="active" href="/notification">
                   <a className="nav-link">Notifications</a>
                 </ActiveLink>
               </li>

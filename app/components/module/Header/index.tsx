@@ -3,8 +3,6 @@ import Link from 'next/link';
 
 import Nav from './Nav';
 import Menu from './Menu';
-import { useUser } from '../../../../hooks/useUser';
-import Cart from '../Cart/Cart';
 
 const HeaderContainer = styled.header`
   width: 100%;
@@ -39,7 +37,6 @@ const Container = styled.div`
 `;
 
 export default function Header() {
-  //const user = useUser();
   const user = {};
   return (
     <HeaderContainer>

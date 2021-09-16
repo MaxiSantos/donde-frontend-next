@@ -22,7 +22,7 @@ export default function More({ options }) {
       ))}
       <PanelButton>
         <Button>Apply</Button>
-        <Button type="cancel">Cancel</Button>
+        <Button mode="cancel">Cancel</Button>
       </PanelButton>
     </StlCol>
   );

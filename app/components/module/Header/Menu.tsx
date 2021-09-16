@@ -6,7 +6,7 @@ import { Menu as ReactMenu, MenuItem, MenuDivider } from '@szhsin/react-menu';
 import React from 'react';
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/client';
-import { CURRENT_USER_QUERY } from '../../../../hooks/useUser';
+//import { CURRENT_USER_QUERY } from '../../../../hooks/useUser';
 
 const Container = styled.nav`
   float: right;
@@ -132,16 +132,10 @@ const UserNameWithDropdown = () => (
   </UserName>
 );
 
-const SIGN_OUT_MUTATION = gql`
-  mutation {
-    endSession
-  }
-`;
-
 export default function Menu() {
-  const [logout, { loading }] = useMutation(SIGN_OUT_MUTATION, {
+  /*const [logout, { loading }] = useMutation(SIGN_OUT_MUTATION, {
     refetchQueries: [{ query: CURRENT_USER_QUERY }],
-  });
+  });*/
   // const { openCart } = useCart();
   return (
     <Container>
@@ -153,7 +147,7 @@ export default function Menu() {
           <Link href="/profile">Profile</Link>
           <MenuItem href="/messages">Messages</MenuItem>
           <MenuDivider />
-          <MenuItem onClick={logout}>Log out</MenuItem>
+          <MenuItem>Log out</MenuItem>
         </ReactMenu>
       </HeaderWidget>
     </Container>
