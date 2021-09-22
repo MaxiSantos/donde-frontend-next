@@ -1,5 +1,5 @@
 import { Default } from '../app/components/layouts/default';
-import Notification from '../app/components/template/Notification';
+import Notification from '../app/components/pageTemplate/Notification';
 
 const App = () => (
   <Default>

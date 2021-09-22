@@ -1,6 +1,6 @@
 import { Col, Row } from 'react-bootstrap';
 import styled from 'styled-components';
-import PanelDropdown from '../../../../elements/PanelDropdown';
+import PanelDropdown from '../../../PanelDropdown';
 import More from './More';
 import SortBy from './SortBy';
 

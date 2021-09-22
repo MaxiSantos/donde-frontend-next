@@ -2,8 +2,8 @@ import { Container } from 'react-bootstrap';
 import styled from 'styled-components';
 import { GlobalStyles } from '../../../styles/global';
 import { Clear } from '../elements/Clear';
-import Header from '../module/Header';
-import Search from '../module/Search';
+import Header from '../sections/Header';
+import Search from '../sections/Search';
 
 const InnerStyles = styled(Container)`
   //max-width: var(--maxWidth);

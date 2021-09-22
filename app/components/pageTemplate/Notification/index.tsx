@@ -1,4 +1,4 @@
-import Product from '../../module/Product';
+import Product from '../../sections/Product';
 import { useAllProductQuery } from '../../../graphql/Product';
 
 export default function Home() {

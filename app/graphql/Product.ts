@@ -1,6 +1,5 @@
 import { useLazyQuery, useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
-import { update } from 'lodash';
 
 export const SEARCH_PRODUCTS_QUERY = gql`
   query SEARCH_PRODUCTS_QUERY($searchTerm: String!) {
@@ -60,3 +59,12 @@ export const useAllProductQuery = () => {
     loading,
   };
 };
+
+export const PRODUCTS_SUBSCRIPTION = gql`
+  subscription OnProductAdded($id: ID!) {
+    productAdded(id: $id) {
+      id
+      name
+    }
+  }
+`;

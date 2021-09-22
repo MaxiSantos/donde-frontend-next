@@ -10,8 +10,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '@szhsin/react-menu/dist/index.css';
 import 'react-image-gallery/styles/css/image-gallery.css';
 
-import type { AppProps } from 'next/app'
-
 Router.events.on('routeChangeStart', () => {
   NProgress.start();
 });

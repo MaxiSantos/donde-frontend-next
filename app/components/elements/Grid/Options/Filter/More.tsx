@@ -1,6 +1,6 @@
 import { Col, Form } from 'react-bootstrap';
 import styled from 'styled-components';
-import Button from '../../../../elements/Button';
+import Button from '../../../Button';
 
 export default function More({ options }) {
   const StlCol = styled(Col)`
