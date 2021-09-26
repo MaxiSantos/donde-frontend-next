@@ -1,5 +1,5 @@
-import { Default } from '../app/components/layouts/default';
-import Home from '../app/components/pageTemplate/Home';
+import { Default } from "../app/common/components/layouts/default";
+import Home from "../app/components/pageTemplate/Home";
 
 const App = () => (
   <Default>

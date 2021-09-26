@@ -120,3 +120,7 @@ build
 web/src/graphql/operations.tsx
 backend/packages/graphql/schema.graphql
 backend/packages/graphql/types/schema.ts
+
+# common files addedd by symlink
+app/common
+public

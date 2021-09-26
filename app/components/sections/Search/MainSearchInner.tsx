@@ -1,73 +1,15 @@
 import { Col, Container, Form, Row } from 'react-bootstrap';
 import { useApolloClient } from '@apollo/client';
 import styled from 'styled-components';
-import AsyncSelect from 'react-select/async';
 import Select from 'react-select';
-import { useCallback, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import debounce from 'lodash.debounce';
-import { useAllCategory1Level } from '../../../graphql/Category';
-import { ALL_PRODUCT_QUERY, useSeachProducts } from '../../../graphql/Product';
-
-const MainSearchInnerContainer = styled.div`
-  position: relative;
-  display: block;
-  top: 35%;
-  transform: translate(0, -50%);
-  padding-bottom: 30px;
-  z-index: 2;
-`;
-
-const MainSearchInput = styled(Row)`
-  margin-top: 50px;
-  border-radius: 50px;
-  width: 100%;
-  background-color: #fff;
-  box-shadow: 0 0 8px 0 rgb(0 0 0 / 12%);
-  padding: 9px;
-  max-height: 68px;
-`;
-
-const MainSearchInputItem = styled(Col)`
-  &&& {
-    flex: 1;
-    border-right: 1px solid #e9e9e9;
-    margin-top: 3px;
-    position: relative;
-    padding-left: 30px;
-    padding-right: 30px;
-    height: 100%;
-    input {
-      font-size: 16px;
-      border: none;
-      background: #fff;
-      margin: 0;
-      padding: 0;
-      height: 44px;
-      line-height: 44px;
-      box-shadow: none;
-    }
-    select {
-      border: none;
-      //padding-top: 2px;
-      //padding-bottom: 0;
-      height: 44px;
-      box-shadow: none;
-    }
-    button {
-      font-size: 18px;
-      font-weight: 600;
-      padding: 0 40px;
-      margin-right: 1px;
-      height: 50px;
-      outline: none;
-    }
-    :nth-last-child(-n + 2) {
-      border-right: none;
-      padding-left: 15px;
-      padding-right: 15px;
-    }
-  }
-`;
+import { MainSearchInputItem } from './elements/MainSearchInputItem';
+import { MainSearchInnerContainer } from './elements/MainSearchInnerContainer';
+import { MainSearchInput } from './elements/MainSearchInput';
+import { useSeachProducts } from '../../../common/graphql/Search';
+import { ALL_STORE } from '../../../graphql/Store';
+import { useAllCategory1Level } from '../../../common/graphql/Category';
 
 const MainSearchHeadlines = styled.div`
   padding-right: 550px;
@@ -88,7 +30,15 @@ const H4 = styled.h4`
 
 export default function MainSearchInner({ props }) {
   const client = useApolloClient();
+  const [searchTerm, setSearchTerm] = useState('');
+
   const { data, error, loading } = useAllCategory1Level();
+  let options = data?.categories.map((item: { id: any; name: any; }) => ({
+    value: item.id,
+    label: item.name,
+  })) || [];
+  const [searchCategory, setSearchCategory] = useState(options[0]);
+
   const {
     findItems,
     data: results,
@@ -97,13 +47,27 @@ export default function MainSearchInner({ props }) {
   } = useSeachProducts();
 
   useEffect(() => {
-    if (results?.products?.length > 0) {
+    if (results?.search?.length > 0) {
       client.writeQuery({
-        query: ALL_PRODUCT_QUERY,
-        data: results
+        query: ALL_STORE,
+        data: { stores: results.search }
       });
     }
   }, [results]);
+
+  const search = () => {
+    findItems({
+      variables: {
+        userId: 7,
+        categoryId: searchCategory.value,
+        productId: 64,
+      },
+    })
+  }
+
+  const onChangeSelect = (item) => {
+    setSearchCategory(item);
+  };
 
   const findItemsButChill = debounce(findItems, 350);
 
@@ -133,15 +97,14 @@ export default function MainSearchInner({ props }) {
                 <input
                   type="text"
                   onChange={(e) => {
-                    console.log(e.target.value);
-                    console.log("is it running?");
-
-                    findItemsButChill({
+                    setSearchTerm(e.target.value)
+                    /*findItemsButChill({
                       variables: {
                         searchTerm: e.target.value,
                       },
-                    });
+                    });*/
                   }}
+                  value={searchTerm}
                   placeholder="What are you looking for?"
                 />
               </MainSearchInputItem>
@@ -163,15 +126,17 @@ export default function MainSearchInner({ props }) {
                 <Select
                   inputId="react-select-input-id"
                   instanceId="react-select-instance-id"
-                  options={data?.categories.map((item) => ({
-                    value: item.id,
-                    label: item.name,
-                  }))}
+                  onChange={onChangeSelect}
+                  value={searchCategory}
+                  options={options}
                 />
 
               </MainSearchInputItem>
               <MainSearchInputItem md={3} xs={12}>
-                <button type="button" className="button">
+                <button
+                  type="button"
+                  className="button"
+                  onClick={search}>
                   Search
                 </button>
               </MainSearchInputItem>

@@ -1,4 +1,4 @@
-import { Default } from '../app/components/layouts/default';
+import { Default } from '../app/common/components/layouts/default';
 import Notification from '../app/components/pageTemplate/Notification';
 
 const App = () => (
