@@ -1,14 +1,15 @@
 import NProgress from 'nprogress';
 import Router from 'next/router';
 import { ApolloProvider } from '@apollo/client';
-import '../app/common/styles/nprogress.css';
-import '../app/common/styles/icons.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@szhsin/react-menu/dist/index.css';
 import 'react-image-gallery/styles/css/image-gallery.css';
+import '../app/common/styles/nprogress.css';
+import '../app/common/styles/icons.css';
 
 import type { AppProps, AppContext } from 'next/app';
 import withData from '../app/common/lib/withData';
+
 
 Router.events.on('routeChangeStart', () => {
   NProgress.start();
