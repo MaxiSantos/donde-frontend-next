@@ -25,5 +25,15 @@
     "**/.next": true
   },
   "diffEditor.wordWrap": "on",
-  "editor.wordWrap": "on"
+  "editor.wordWrap": "on",
+  "search.useIgnoreFiles": false,
+  "files.insertFinalNewline": true,
+  "vsicons.associations.folders": [
+    {
+      "icon": "public",
+      "extensions": [
+        "common"
+      ]
+    }
+  ]
 }
