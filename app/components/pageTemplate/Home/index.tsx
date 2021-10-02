@@ -12,5 +12,8 @@ export default function Home() {
     return <p>Something went wrong...</p>;
   }
   console.log("home component " + loading)
-  return <Grid list={data.stores} type="store" />;
+  return data?.stores?.length > 0 ?
+    <Grid list={data.stores} type="store" />
+    :
+    <p>no data</p>
 }
