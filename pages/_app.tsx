@@ -1,15 +1,19 @@
 import NProgress from 'nprogress';
 import Router from 'next/router';
+import dynamic from "next/dynamic";
 import { ApolloProvider } from '@apollo/client';
+import type { AppProps, AppContext } from 'next/app';
+import Head from 'next/head';
+import CssBaseline from '@mui/material/CssBaseline';
+import { ThemeProvider } from '@mui/material/styles';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@szhsin/react-menu/dist/index.css';
 import 'react-image-gallery/styles/css/image-gallery.css';
 import '../app/common/styles/nprogress.css';
 import '../app/common/styles/icons.css';
 
-import type { AppProps, AppContext } from 'next/app';
 import withData from '../app/common/lib/withData';
-
+import theme from '../app/common/styles/theme';
 
 Router.events.on('routeChangeStart', () => {
   NProgress.start();
@@ -23,9 +27,19 @@ interface IAppProps extends AppProps {
 
 const MyApp = ({ Component, pageProps, apollo }: IAppProps) => {
   return (
-    <ApolloProvider client={apollo}>
-      <Component {...pageProps} />
-    </ApolloProvider>
+    <>
+      <Head>
+        <title>Frontent client</title>
+        <link href="/favicon.ico" rel="icon" />
+        <meta content="minimum-scale=1, initial-scale=1, width=device-width" name="viewport" />
+      </Head>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <ApolloProvider client={apollo}>
+          <Component {...pageProps} />
+        </ApolloProvider>
+      </ThemeProvider>
+    </>
   );
 }
 
