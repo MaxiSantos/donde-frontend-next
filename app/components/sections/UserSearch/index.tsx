@@ -5,9 +5,9 @@ import { GetUserSearchId } from "../../../common/graphql/local";
 import { GetNewStoreBySearch } from "../../../common/graphql/local";
 import { useEffect } from "react";
 import { addToCollection } from "../../../common/lib/apolloCache";
+import { ALL_STORE } from "../../../graphql/Store";
 
 export default function UserSearchSubscription() {
-  const client = useApolloClient();
   const { data: { userSearchId } = {} } = useQuery(GetUserSearchId);
   const { data: { newStoreBySearch } = {} } = useQuery(GetNewStoreBySearch);
 
@@ -23,13 +23,7 @@ export default function UserSearchSubscription() {
   useEffect(() => {
     if (subscriptionData) {
       console.log("new data comming " + subscriptionData)
-      //addToCollection("newStoreBySearch", subscriptionData)
-      client.writeQuery({
-        query: GetNewStoreBySearch,
-        data: {
-          newStoreBySearch: [subscriptionData]
-        },
-      });
+      addToCollection("stores", subscriptionData)
     }
   }, [subscriptionData])
 
