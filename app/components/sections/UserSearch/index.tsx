@@ -1,14 +1,13 @@
-import { useApolloClient, useQuery, useSubscription } from "@apollo/client";
+import { useQuery, useSubscription } from "@apollo/client";
 import { USER_SEARCH_SUBSCRIPTION } from '../../../graphql/UserSearch';
 import Grid from '../../../common/components/elements/Grid';
 import { GetUserSearchId } from "../../../common/graphql/local";
 import { GetNewStoreBySearch } from "../../../common/graphql/local";
 import { useEffect } from "react";
 import { addToCollection } from "../../../common/lib/apolloCache";
-import { ALL_STORE } from "../../../graphql/Store";
 
-export default function UserSearchSubscription() {
-  const { data: { userSearchId } = {} } = useQuery(GetUserSearchId);
+export default function UserSearchSubscription({ userSearchId }) {
+  //const { data: { userSearchId } = {} } = useQuery(GetUserSearchId);
   const { data: { newStoreBySearch } = {} } = useQuery(GetNewStoreBySearch);
 
   const { data: { userSearchSubscription: subscriptionData } = {}, loading: subscriptionLoading, error: subscriptionError } = useSubscription(

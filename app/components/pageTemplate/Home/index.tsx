@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/client';
 import Grid from '../../../common/components/elements/Grid';
-import { GetIsSubscribed } from '../../../common/graphql/local';
+import { GetIsSubscribed, GetUserSearchId } from '../../../common/graphql/local';
 import { ALL_STORE, useAllStore } from '../../../graphql/Store';
 import UserSearchSubscription from '../../sections/UserSearch';
 
@@ -8,6 +8,8 @@ export default function Home() {
   //const { data, error, loading } = useAllStore();
   const { data, error, loading } = useQuery(ALL_STORE);
   const { data: { isSubscribed } = {} } = useQuery(GetIsSubscribed);
+  const { data: { userSearchId } = {} } = useQuery(GetUserSearchId);
+
   if (loading) {
     return <p>Loading...</p>;
   }
@@ -22,7 +24,7 @@ export default function Home() {
         :
         <p>no data</p>}
       {
-        isSubscribed && <UserSearchSubscription />
+        isSubscribed && <UserSearchSubscription key={userSearchId} userSearchId={userSearchId} />
       }
     </>
   )
