@@ -11,8 +11,10 @@ import 'react-image-gallery/styles/css/image-gallery.css';
 import '../app/common/styles/nprogress.css';
 import '../app/common/styles/icons.css';
 
-import withData from '../app/common/lib/withData';
+import client from '../app/common/lib/apolloClient';
+import AuthorizationProvider from '../app/common/lib/AuthorizationProvider';
 import theme from '../app/common/styles/theme';
+import { Auth0Provider } from '@auth0/auth0-react';
 
 Router.events.on('routeChangeStart', () => {
   NProgress.start();
@@ -20,11 +22,12 @@ Router.events.on('routeChangeStart', () => {
 Router.events.on('routeChangeComplete', () => NProgress.done());
 Router.events.on('routeChangeError', () => NProgress.done());
 
-interface IAppProps extends AppProps {
-  apollo: any
-}
+const onRedirectCallback = (appState) => {
+  // Use Next.js's Router.replace method to replace the url
+  Router.replace(appState?.returnTo || '/');
+};
 
-const MyApp = ({ Component, pageProps, apollo }: IAppProps) => {
+const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <>
       <Head>
@@ -34,9 +37,19 @@ const MyApp = ({ Component, pageProps, apollo }: IAppProps) => {
       </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <ApolloProvider client={apollo}>
-          <Component {...pageProps} />
-        </ApolloProvider>
+        <Auth0Provider
+          domain="dev-5h496mdf.us.auth0.com"
+          clientId="lEfIbjisHX52gsvUh7paE0suVAQDtCHR"
+          redirectUri={typeof window !== 'undefined' ? window.location.origin : ''}
+          audience="https://donde.com"
+          onRedirectCallback={onRedirectCallback}
+        >
+          <ApolloProvider client={client}>
+            <AuthorizationProvider pageProps={pageProps}>
+              <Component {...pageProps} />
+            </AuthorizationProvider>
+          </ApolloProvider>
+        </Auth0Provider>
       </ThemeProvider>
     </>
   );
@@ -51,4 +64,4 @@ MyApp.getInitialProps = async function ({ Component, ctx }: AppContext) {
   return { pageProps };
 };
 
-export default withData(MyApp);
+export default MyApp;
