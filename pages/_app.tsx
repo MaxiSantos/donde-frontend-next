@@ -37,19 +37,11 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
       </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Auth0Provider
-          domain="dev-5h496mdf.us.auth0.com"
-          clientId="lEfIbjisHX52gsvUh7paE0suVAQDtCHR"
-          redirectUri={typeof window !== 'undefined' ? window.location.origin : ''}
-          audience="https://donde.com"
-          onRedirectCallback={onRedirectCallback}
-        >
-          <ApolloProvider client={client}>
-            <AuthorizationProvider pageProps={pageProps}>
-              <Component {...pageProps} />
-            </AuthorizationProvider>
-          </ApolloProvider>
-        </Auth0Provider>
+        <ApolloProvider client={client}>
+          <AuthorizationProvider pageProps={pageProps}>
+            <Component {...pageProps} />
+          </AuthorizationProvider>
+        </ApolloProvider>
       </ThemeProvider>
     </>
   );
