@@ -15,6 +15,7 @@ import client from '../app/common/lib/apolloClient';
 import AuthorizationProvider from '../app/common/lib/AuthorizationProvider';
 import theme from '../app/common/styles/theme';
 import { Auth0Provider } from '@auth0/auth0-react';
+import { AuthProvider } from '../app/common/hooks/useAuthContext';
 
 Router.events.on('routeChangeStart', () => {
   NProgress.start();
@@ -38,9 +39,11 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <ApolloProvider client={client}>
-          <AuthorizationProvider pageProps={pageProps}>
-            <Component {...pageProps} />
-          </AuthorizationProvider>
+          <AuthProvider>
+            <AuthorizationProvider pageProps={pageProps}>
+              <Component {...pageProps} />
+            </AuthorizationProvider>
+          </AuthProvider>
         </ApolloProvider>
       </ThemeProvider>
     </>
