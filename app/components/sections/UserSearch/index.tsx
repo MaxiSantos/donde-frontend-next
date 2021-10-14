@@ -45,7 +45,7 @@ export default function UserSearchSubscription({ userSearchId, userSearchRespons
   };
 
   if (subscriptionError) {
-    return <p>Something went asking other stores...</p>;
+    return <p>Something went wrong asking other stores...</p>;
   }
   console.log("UserSearchSubscription")
   return (

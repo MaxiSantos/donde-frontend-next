@@ -6,7 +6,12 @@ export const USER_SEARCH_SUBSCRIPTION = gql`
       id
       name
       location
-      telephone   
+      telephone
+      wsp
+      category{
+        id
+        name
+      }   
     }
   }
 `;
