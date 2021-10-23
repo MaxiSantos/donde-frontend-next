@@ -6,15 +6,14 @@ import type { AppProps, AppContext } from 'next/app';
 import Head from 'next/head';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
-import '@szhsin/react-menu/dist/index.css';
-import 'react-image-gallery/styles/css/image-gallery.css';
+//import '@szhsin/react-menu/dist/index.css';
+//import 'react-image-gallery/styles/css/image-gallery.css';
 import '../app/common/styles/nprogress.css';
 import '../app/common/styles/icons.css';
 
 import client from '../app/common/lib/apolloClient';
 import AuthorizationProvider from '../app/common/lib/AuthorizationProvider';
 import theme from '../app/common/styles/theme';
-import { Auth0Provider } from '@auth0/auth0-react';
 import { AuthProvider } from '../app/common/hooks/useAuthContext';
 
 Router.events.on('routeChangeStart', () => {
@@ -37,7 +36,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         <meta content="minimum-scale=1, initial-scale=1, width=device-width" name="viewport" />
       </Head>
       <ThemeProvider theme={theme}>
-        <CssBaseline />
+        {<CssBaseline />}
         <ApolloProvider client={client}>
           <AuthProvider>
             <AuthorizationProvider pageProps={pageProps}>
@@ -59,4 +58,8 @@ MyApp.getInitialProps = async function ({ Component, ctx }: AppContext) {
   return { pageProps };
 };
 
-export default MyApp;
+//export default MyApp;
+
+export default dynamic(() => Promise.resolve(MyApp), {
+  ssr: false,
+});
