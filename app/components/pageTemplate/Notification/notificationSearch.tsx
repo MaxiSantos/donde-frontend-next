@@ -5,10 +5,16 @@ import { CategorySelect } from "../../../common/components/elements/Form/withDat
 import { SearchFactory } from "../../../common/components/sections/Search2/factory"
 import { FormSelect } from "../../../common/components/elements/Form/FormSelect";
 import { Button } from "@mui/material";
-import { useSeachProductsByCategory } from "../../../common/graphql/Product";
 import { CategoryForm } from "../../../common/constants/types";
+import { useApolloClient } from "@apollo/client";
+import { useAuth } from "../../../common/hooks/useAuthContext";
+import { GetIsSearching, GetIsSubscribed, GetUserSearchId, GetUserSearchResponse } from "../../../common/graphql/local";
+import { useEffect } from "react";
+import { ALL_PUBLICATION_QUERY, usePublicationsByCategory } from "app/common/graphql/queries/Publication";
 
-export const HomeSearch = () => {
+export const NotificationSearch = () => {
+  const client = useApolloClient();
+  const { authResponse: { user } } = useAuth();
   const defaultValues = {
     category: 'a',
     location: "Mendoza",
@@ -22,52 +28,76 @@ export const HomeSearch = () => {
   }
 
   const {
-    findItems: findProductsByCategory,
-    data: results2,
-    error: resultsError2,
-    loading: resultsLoading2,
-  } = useSeachProductsByCategory();
+    findItems: findPublicationsBySearch,
+    data: { publications } = {},
+    error: resultsError,
+    loading: resultsLoading,
+  } = usePublicationsByCategory();
 
-  let productOptions = results2?.products.map((item: { id: string; name: string; category: [{ name: string }] }) => ({
-    value: item.id,
-    title: item.name,
-    category: item.category[0].name,
-  })) || [];
+  useEffect(() => {
+    if (publications?.length >= 0) {
+      client.writeQuery({
+        query: ALL_PUBLICATION_QUERY,
+        data: { publications }
+      });
+    }
+  }, [client, publications]);
 
   const methods = useForm({ defaultValues: defaultValues });
   const { handleSubmit, reset, control, getValues } = methods;
-  const onChangeCategorySelect = (item) => {
-    console.log({ item })
-    if (item?.value) {
-      findProductsByCategory({
-        variables: {
-          categoryId: item.value
-        }
-      })
-    } else {
 
-    }
-  };
   const onSearch = (data: IFormInput) => {
     console.dir(data)
+    let variables = {
+      categoryId: data.category.value,
+      //location: data.location
+    }
+
+    client.writeQuery({
+      query: GetIsSearching,
+      data: {
+        isSearching: true
+      },
+    });
+
+    findPublicationsBySearch({
+      variables,
+    })
   }
   const options = [
     {
       name: "category",
-      component: <CategorySelect control={control} onUpdate={onChangeCategorySelect} />
+      component: <CategorySelect control={control} />
+    },
+    {
+      name: "notification",
+      component: <FormSelect name="notification" control={control} label="Select notification type" options={[
+        {
+          value: "DISCOUNT",
+          title: "Discounts",
+        },
+        {
+          value: "PROMOTION",
+          title: "Promotions",
+        },
+        {
+          value: "NEW_PRODUCT",
+          title: "New product",
+        }
+      ]}
+      />
     },
     {
       name: "location",
       component: <FormInputText name="location" control={control} variant="standard" label="Location" icon={<LocationOnIcon />} />
     },
-    {
+    /*{
       name: "search",
       component: <FormSelect name="search" control={control} label="What are you looking for?" options={productOptions} freeSolo
-        onUpdate={() => console.log(5)}
         groupBy={(option) => {
           return option?.category
         }} />
-    },
+    },*/
     {
       name: "submit",
       component: <Button
