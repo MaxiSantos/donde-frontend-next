@@ -18,9 +18,9 @@ export const HomeSearch = () => {
   const client = useApolloClient();
   const { authResponse: { user } } = useAuth();
   const defaultValues = {
-    category: 'a',
+    category: null,
     location: "Mendoza",
-    search: 'a',
+    search: null,
   };
 
   interface IFormInput {
@@ -126,7 +126,7 @@ export const HomeSearch = () => {
   const options = [
     {
       name: "category",
-      component: <CategorySelect control={control} onUpdate={onChangeCategorySelect} />
+      component: <CategorySelect control={control} byChange={onChangeCategorySelect} />
     },
     {
       name: "location",

@@ -1,0 +1,14 @@
+[
+  {
+    "path": "/products",
+    "title": "Products"
+  },
+  {
+    "path": "/notification",
+    "title": "Notification"
+  },
+  {
+    "path": "/blog",
+    "title": "Blog"
+  }
+]
