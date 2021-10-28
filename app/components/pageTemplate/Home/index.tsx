@@ -13,7 +13,7 @@ export default function Home() {
 
   return (
     <>
-      <HomeSearch />
+      {/*<HomeSearch />*/}
       {data?.stores?.length > 0 ?
         <Grid list={data.stores} type="store" />
         :

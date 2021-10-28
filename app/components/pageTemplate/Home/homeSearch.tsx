@@ -6,13 +6,13 @@ import { SearchFactory } from "../../../common/components/sections/Search2/facto
 import { FormSelect } from "../../../common/components/elements/Form/FormSelect";
 import { Button } from "@mui/material";
 import { useSeachProductsByCategory } from "../../../common/graphql/Product";
-import { CategoryForm } from "../../../common/constants/types";
 import { useSeachStore } from "../../../common/graphql/Search";
 import { useApolloClient } from "@apollo/client";
 import { useAuth } from "../../../common/hooks/useAuthContext";
 import { GetIsSearching, GetIsSubscribed, GetUserSearchId, GetUserSearchResponse } from "../../../common/graphql/local";
 import { ALL_STORE } from "../../../graphql/Store";
 import { useEffect } from "react";
+import { selectOptionsProps } from "app/common/components/elements/Form/FormProps";
 
 export const HomeSearch = () => {
   const client = useApolloClient();
@@ -24,7 +24,7 @@ export const HomeSearch = () => {
   };
 
   interface IFormInput {
-    category: [CategoryForm] | null,
+    category: selectOptionsProps | null,
     location: string,
     search: number | string,
   }

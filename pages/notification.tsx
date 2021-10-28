@@ -1,10 +1,9 @@
-import { Default } from '../app/common/components/layouts/default';
-import Search from '../app/common/components/sections/Search';
-import Notification from '../app/components/pageTemplate/Notification';
+import { Default } from 'app/common/components/layouts/default';
+import Notification from 'app/components/pageTemplate/Notification';
+import { NotificationSearch } from 'app/components/pageTemplate/Notification/notificationSearch';
 
 const App = () => (
-  <Default>
-
+  <Default top={<NotificationSearch />}>
     <Notification />
   </Default>
 );

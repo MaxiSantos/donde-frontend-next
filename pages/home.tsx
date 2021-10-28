@@ -1,8 +1,9 @@
+import { HomeSearch } from "app/components/pageTemplate/Home/homeSearch";
 import { Default } from "../app/common/components/layouts/default";
 import Home from "../app/components/pageTemplate/Home";
 
 const App = () => (
-  <Default withSearch={true}>
+  <Default top={<HomeSearch />}>
     <Home />
   </Default>
 );

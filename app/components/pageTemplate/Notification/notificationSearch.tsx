@@ -5,24 +5,24 @@ import { CategorySelect } from "../../../common/components/elements/Form/withDat
 import { SearchFactory } from "../../../common/components/sections/Search2/factory"
 import { FormSelect } from "../../../common/components/elements/Form/FormSelect";
 import { Button } from "@mui/material";
-import { CategoryForm } from "../../../common/constants/types";
 import { useApolloClient } from "@apollo/client";
 import { useAuth } from "../../../common/hooks/useAuthContext";
 import { GetIsSearching, GetIsSubscribed, GetUserSearchId, GetUserSearchResponse } from "../../../common/graphql/local";
 import { useEffect } from "react";
 import { ALL_PUBLICATION_QUERY, usePublicationsByCategory } from "app/common/graphql/queries/Publication";
+import { selectOptionsProps } from "app/common/components/elements/Form/FormProps";
 
 export const NotificationSearch = () => {
   const client = useApolloClient();
   const { authResponse: { user } } = useAuth();
   const defaultValues = {
-    category: 'a',
+    category: null,
     location: "Mendoza",
-    search: 'a',
+    search: null,
   };
 
   interface IFormInput {
-    category: [CategoryForm] | null,
+    category: selectOptionsProps | null,
     location: string,
     search: number | string,
   }
@@ -49,7 +49,7 @@ export const NotificationSearch = () => {
   const onSearch = (data: IFormInput) => {
     console.dir(data)
     let variables = {
-      categoryId: data.category.value,
+      categoryId: data?.category?.value,
       //location: data.location
     }
 
@@ -91,13 +91,6 @@ export const NotificationSearch = () => {
       name: "location",
       component: <FormInputText name="location" control={control} variant="standard" label="Location" icon={<LocationOnIcon />} />
     },
-    /*{
-      name: "search",
-      component: <FormSelect name="search" control={control} label="What are you looking for?" options={productOptions} freeSolo
-        groupBy={(option) => {
-          return option?.category
-        }} />
-    },*/
     {
       name: "submit",
       component: <Button

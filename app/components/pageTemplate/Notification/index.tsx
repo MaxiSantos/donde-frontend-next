@@ -3,7 +3,6 @@ import Grid from '../../../common/components/elements/Grid';
 import { GetIsSubscribed, GetUserSearchId, GetUserSearchResponse } from '../../../common/graphql/local';
 import UserSearchSubscription from '../../sections/UserSearch';
 import { ALL_PUBLICATION_QUERY } from 'app/common/graphql/queries/Publication';
-import { NotificationSearch } from './notificationSearch';
 
 export default function Notification() {
   //const { data, error, loading } = useAllStore();
@@ -15,7 +14,7 @@ export default function Notification() {
   console.dir(publications)
   return (
     <>
-      <NotificationSearch />
+      {/*<NotificationSearch />*/}
       {publications?.length > 0 ?
         <Grid list={publications} type="publication" />
         :
