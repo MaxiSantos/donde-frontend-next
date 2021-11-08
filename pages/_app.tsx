@@ -14,7 +14,7 @@ import '../app/common/styles/icons.css';
 import client from '../app/common/lib/apolloClient';
 import AuthorizationProvider from '../app/common/lib/AuthorizationProvider';
 import theme from '../app/common/styles/theme';
-import { AuthProvider } from '../app/common/hooks/useAuthContext';
+import { AuthProvider } from '../app/common/context/useAuthContext';
 
 Router.events.on('routeChangeStart', () => {
   NProgress.start();

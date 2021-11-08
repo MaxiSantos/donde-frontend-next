@@ -38,8 +38,9 @@
     "react-dom": "17.0.2",
     "react-hook-form": "7.17.2",
     "react-image-gallery": "1.2.7",
+    "react-toastify": "^8.1.0",
     "styled-components": "5.3.1",
-    "use-between": "0.0.18",
+    "use-between": "^0.1.0",
     "websocket": "1.0.34",
     "yup": "0.32.11"
   },

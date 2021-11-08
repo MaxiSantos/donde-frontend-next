@@ -6,9 +6,5 @@
   {
     "path": "/notification",
     "title": "Notification"
-  },
-  {
-    "path": "/blog",
-    "title": "Blog"
   }
 ]

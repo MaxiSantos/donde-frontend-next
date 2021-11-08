@@ -8,7 +8,7 @@ import { Button } from "@mui/material";
 import { useSeachProductsByCategory } from "../../../common/graphql/Product";
 import { useSeachStore } from "../../../common/graphql/Search";
 import { useApolloClient } from "@apollo/client";
-import { useAuth } from "../../../common/hooks/useAuthContext";
+import { useAuth } from 'app/common/context/useAuthContext';
 import { GetIsSearching, GetIsSubscribed, GetUserSearchId, GetUserSearchResponse } from "../../../common/graphql/local";
 import { ALL_STORE } from "../../../graphql/Store";
 import { useEffect } from "react";
