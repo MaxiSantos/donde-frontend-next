@@ -6,8 +6,6 @@ import type { AppProps, AppContext } from 'next/app';
 import Head from 'next/head';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
-//import '@szhsin/react-menu/dist/index.css';
-//import 'react-image-gallery/styles/css/image-gallery.css';
 import '../app/common/styles/nprogress.css';
 import '../app/common/styles/icons.css';
 import "./_app.css";

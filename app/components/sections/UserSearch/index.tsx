@@ -47,9 +47,8 @@ export default function UserSearchSubscription({ userSearchId, userSearchRespons
   if (subscriptionError) {
     return <p>Something went wrong asking other stores...</p>;
   }
-  console.log("UserSearchSubscription")
   return (
-    <Container>
+    <Container sx={{ width: "50%" }}>
       <Countdown
         key={"cdown_" + userSearchResponse?.userSearchId}
         date={new Date(userSearchResponse?.createdAt).getTime() + subscriptionTime}

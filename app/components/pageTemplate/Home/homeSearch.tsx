@@ -5,7 +5,7 @@ import { CategorySelect } from "../../../common/components/elements/Form/withDat
 import { SearchFactory } from "../../../common/components/sections/Search2/factory"
 import { FormSelect } from "../../../common/components/elements/Form/FormSelect";
 import { Button } from "@mui/material";
-import { useSeachProductsByCategory } from "../../../common/graphql/Product";
+import { useSearchProductsByCategory } from "../../../common/graphql/Product";
 import { useSeachStore } from "../../../common/graphql/Search";
 import { useApolloClient } from "@apollo/client";
 import { useAuth } from 'app/common/context/useAuthContext';
@@ -35,7 +35,7 @@ export const HomeSearch = () => {
     data: results2,
     error: resultsError2,
     loading: resultsLoading2,
-  } = useSeachProductsByCategory();
+  } = useSearchProductsByCategory();
 
   const {
     findItems: findStoresBySearch,
