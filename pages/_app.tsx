@@ -14,6 +14,7 @@ import client from '../app/common/lib/apolloClient';
 import AuthorizationProvider from '../app/common/lib/AuthorizationProvider';
 import theme from '../app/common/styles/theme';
 import { AuthProvider } from '../app/common/context/useAuthContext';
+import { appWithTranslation } from 'next-i18next';
 
 Router.events.on('routeChangeStart', () => {
   NProgress.start();
@@ -58,7 +59,8 @@ MyApp.getInitialProps = async function ({ Component, ctx }: AppContext) {
 };
 
 //export default MyApp;
+export default appWithTranslation(MyApp);
 
-export default dynamic(() => Promise.resolve(MyApp), {
+/*export default dynamic(() => Promise.resolve(appWithTranslation(MyApp)), {
   ssr: false,
-});
+});*/

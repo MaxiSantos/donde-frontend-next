@@ -4,7 +4,6 @@ import { FormInputText } from "../../../common/components/elements/Form/FormInpu
 import { CategorySelect } from "../../../common/components/elements/Form/withData/CategorySelect";
 import { SearchFactory } from "../../../common/components/sections/Search2/factory"
 import { FormSelect } from "../../../common/components/elements/Form/FormSelect";
-import { Button } from "@mui/material";
 import { useSearchProductsByCategory } from "../../../common/graphql/Product";
 import { useSeachStore } from "../../../common/graphql/Search";
 import { useApolloClient } from "@apollo/client";
@@ -14,10 +13,13 @@ import { ALL_STORE } from "../../../graphql/Store";
 import { useEffect } from "react";
 import { selectOptionsProps } from "app/common/components/elements/Form/FormProps";
 import CustomButton from "app/common/components/elements/Button";
+import { useTranslation } from 'next-i18next';
 
 export const HomeSearch = () => {
   const client = useApolloClient();
   const { authResponse: { user } } = useAuth();
+  const { t } = useTranslation('common');
+
   const defaultValues = {
     category: null,
     location: "Mendoza",
@@ -131,11 +133,11 @@ export const HomeSearch = () => {
     },
     {
       name: "location",
-      component: <FormInputText name="location" control={control} variant="standard" label="Location" icon={<LocationOnIcon />} />
+      component: <FormInputText name="location" control={control} variant="standard" label={t('location')} icon={<LocationOnIcon />} />
     },
     {
       name: "search",
-      component: <FormSelect name="search" control={control} label="What are you looking for?" options={productOptions} freeSolo
+      component: <FormSelect name="search" control={control} label={t('what-u-looking')} options={productOptions} freeSolo
         groupBy={(option) => {
           return option?.category
         }} />
@@ -145,7 +147,7 @@ export const HomeSearch = () => {
       component: <CustomButton
         variant="contained"
         onClick={handleSubmit(onSearch)}>
-        Search
+        {t('search')}
       </CustomButton>
     }
   ]
