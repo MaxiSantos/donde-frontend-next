@@ -10,6 +10,7 @@ import { ThemeProvider } from '@mui/material/styles';
 //import 'react-image-gallery/styles/css/image-gallery.css';
 import '../app/common/styles/nprogress.css';
 import '../app/common/styles/icons.css';
+import "./_app.css";
 
 import client from '../app/common/lib/apolloClient';
 import AuthorizationProvider from '../app/common/lib/AuthorizationProvider';

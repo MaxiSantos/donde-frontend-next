@@ -13,6 +13,7 @@ import { GetIsSearching, GetIsSubscribed, GetUserSearchId, GetUserSearchResponse
 import { ALL_STORE } from "../../../graphql/Store";
 import { useEffect } from "react";
 import { selectOptionsProps } from "app/common/components/elements/Form/FormProps";
+import CustomButton from "app/common/components/elements/Button";
 
 export const HomeSearch = () => {
   const client = useApolloClient();
@@ -101,7 +102,7 @@ export const HomeSearch = () => {
     let variables = {
       userId: user.id,
       categoryId: data.category.value,
-      productId: null,
+      productId: undefined,
       query: "",
       location: data.location
     }
@@ -126,7 +127,7 @@ export const HomeSearch = () => {
   const options = [
     {
       name: "category",
-      component: <CategorySelect control={control} byChange={onChangeCategorySelect} />
+      component: <CategorySelect control={control} freeSolo={false} byChange={onChangeCategorySelect} multiple={false} />
     },
     {
       name: "location",
@@ -141,11 +142,11 @@ export const HomeSearch = () => {
     },
     {
       name: "submit",
-      component: <Button
+      component: <CustomButton
         variant="contained"
         onClick={handleSubmit(onSearch)}>
         Search
-      </Button>
+      </CustomButton>
     }
   ]
 
