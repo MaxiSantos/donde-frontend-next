@@ -4,7 +4,7 @@ import Home from "../app/components/pageTemplate/Home";
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 const App = () => (
-  <Default top={<HomeSearch />}>
+  <Default top={<HomeSearch />} pageTitle="Home">
     <Home />
   </Default>
 );

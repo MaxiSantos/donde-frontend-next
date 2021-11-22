@@ -7,7 +7,7 @@ import { FormSelect } from "../../../common/components/elements/Form/FormSelect"
 import { Button } from "@mui/material";
 import { useApolloClient } from "@apollo/client";
 import { useAuth } from 'app/common/context/useAuthContext';
-import { GetIsSearching, GetIsSubscribed, GetUserSearchId, GetUserSearchResponse } from "../../../common/graphql/local";
+import { GetIsSearching, GetIsSearchBoxOpen, GetIsSubscribed, GetUserSearchId, GetUserSearchResponse } from "../../../common/graphql/local";
 import { useEffect } from "react";
 import { ALL_PUBLICATION_QUERY, usePublicationsByCategory } from "app/common/graphql/queries/Publication";
 import { selectOptionsProps } from "app/common/components/elements/Form/FormProps";
@@ -57,6 +57,13 @@ export const NotificationSearch = () => {
       query: GetIsSearching,
       data: {
         isSearching: true
+      },
+    });
+
+    client.writeQuery({
+      query: GetIsSearchBoxOpen,
+      data: {
+        isSearching: false
       },
     });
 

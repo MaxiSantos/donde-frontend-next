@@ -3,7 +3,7 @@ import Notification from 'app/components/pageTemplate/Notification';
 import { NotificationSearch } from 'app/components/pageTemplate/Notification/notificationSearch';
 
 const App = () => (
-  <Default top={<NotificationSearch />}>
+  <Default top={<NotificationSearch />} pageTitle="Notification">
     <Notification />
   </Default>
 );
