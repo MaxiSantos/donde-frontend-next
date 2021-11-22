@@ -39,7 +39,7 @@ export default function UserSearchSubscription({ userSearchId, userSearchRespons
       const progress = (total - seconds) * 100 / total
       return <Box sx={{ width: '100%' }}>
         <span>asking other stores</span>
-        <LinearProgressWithLabel value={progress} label={seconds} />
+        <LinearProgressWithLabel value={progress} />
       </Box>
     }
   };
