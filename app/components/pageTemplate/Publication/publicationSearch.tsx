@@ -12,7 +12,7 @@ import { useEffect } from "react";
 import { ALL_PUBLICATION_QUERY, usePublicationsByCategory } from "app/common/graphql/queries/Publication";
 import { selectOptionsProps } from "app/common/components/elements/Form/FormProps";
 
-export const NotificationSearch = () => {
+export const PublicationSearch = () => {
   const client = useApolloClient();
   const { authResponse: { user } } = useAuth();
   const defaultValues = {

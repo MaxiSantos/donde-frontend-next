@@ -3,7 +3,6 @@ import Grid from '../../../common/components/elements/Grid';
 import { GetIsSubscribed, GetUserSearchId, GetUserSearchResponse } from '../../../common/graphql/local';
 import { useAllStore } from '../../../graphql/Store';
 import UserSearchSubscription from '../../sections/UserSearch';
-import { HomeSearch } from './homeSearch';
 
 export default function Home() {
   const { data, error, loading } = useAllStore();
@@ -13,7 +12,6 @@ export default function Home() {
 
   return (
     <>
-      {/*<HomeSearch />*/}
       {data?.stores?.length > 0 ?
         <Grid list={data.stores} type="store" />
         :

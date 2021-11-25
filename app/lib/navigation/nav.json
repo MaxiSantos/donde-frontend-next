@@ -4,6 +4,10 @@
     "title": "Products"
   },
   {
+    "path": "/publications",
+    "title": "Publications"
+  },
+  {
     "path": "/notification",
     "title": "Notification"
   }

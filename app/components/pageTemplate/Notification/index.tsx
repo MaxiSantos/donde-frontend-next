@@ -3,6 +3,7 @@ import Grid from '../../../common/components/elements/Grid';
 import { GetIsSubscribed, GetUserSearchId, GetUserSearchResponse } from '../../../common/graphql/local';
 import UserSearchSubscription from '../../sections/UserSearch';
 import { ALL_PUBLICATION_QUERY } from 'app/common/graphql/queries/Publication';
+import { Typography } from '@mui/material';
 
 export default function Notification() {
   //const { data, error, loading } = useAllStore();
@@ -13,15 +14,6 @@ export default function Notification() {
   console.log("data")
   console.dir(publications)
   return (
-    <>
-      {/*<NotificationSearch />*/}
-      {publications?.length > 0 ?
-        <Grid list={publications} type="publication" />
-        :
-        <p>no data</p>}
-      {
-        isSubscribed && userSearchResponse?.id && <UserSearchSubscription key={userSearchId} userSearchId={userSearchId} userSearchResponse={userSearchResponse} />
-      }
-    </>
+    <Typography variant="h4">Comming soon</Typography>
   )
 }
