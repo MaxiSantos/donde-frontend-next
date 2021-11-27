@@ -135,7 +135,7 @@ export const HomeSearch = () => {
   const options = [
     {
       name: "category",
-      component: <CategorySelect control={control} freeSolo={false} byChange={onChangeCategorySelect} multiple={false} />
+      component: <CategorySelect control={control} freeSolo={false} byChange={onChangeCategorySelect} multiple={false} variant="standard" />
     },
     {
       name: "location",
@@ -143,7 +143,7 @@ export const HomeSearch = () => {
     },
     {
       name: "search",
-      component: <FormSelect name="search" control={control} label={t('what-u-looking')} options={productOptions} freeSolo
+      component: <FormSelect name="search" control={control} label={t('what-u-looking')} options={productOptions} freeSolo variant="standard"
         groupBy={(option) => {
           return option?.category
         }} />

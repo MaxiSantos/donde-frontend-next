@@ -11,6 +11,7 @@ import { GetIsSearching, GetIsSearchBoxOpen, GetIsSubscribed, GetUserSearchId, G
 import { useEffect } from "react";
 import { ALL_PUBLICATION_QUERY, usePublicationsByCategory } from "app/common/graphql/queries/Publication";
 import { selectOptionsProps } from "app/common/components/elements/Form/FormProps";
+import CustomButton from "app/common/components/elements/Button";
 
 export const PublicationSearch = () => {
   const client = useApolloClient();
@@ -63,7 +64,7 @@ export const PublicationSearch = () => {
     client.writeQuery({
       query: GetIsSearchBoxOpen,
       data: {
-        isSearching: false
+        isSearchBoxOpen: false
       },
     });
 
@@ -74,11 +75,15 @@ export const PublicationSearch = () => {
   const options = [
     {
       name: "category",
-      component: <CategorySelect control={control} />
+      component: <CategorySelect control={control} variant="standard" />
+    },
+    {
+      name: "location",
+      component: <FormInputText name="location" control={control} variant="standard" label="Location" icon={<LocationOnIcon />} />
     },
     {
       name: "notification",
-      component: <FormSelect name="notification" control={control} label="Select notification type" options={[
+      component: <FormSelect name="notification" control={control} variant="standard" label="Select notification type" options={[
         {
           value: "DISCOUNT",
           title: "Discounts",
@@ -95,16 +100,12 @@ export const PublicationSearch = () => {
       />
     },
     {
-      name: "location",
-      component: <FormInputText name="location" control={control} variant="standard" label="Location" icon={<LocationOnIcon />} />
-    },
-    {
       name: "submit",
-      component: <Button
+      component: <CustomButton
         variant="contained"
         onClick={handleSubmit(onSearch)}>
         Search
-      </Button>
+      </CustomButton>
     }
   ]
 
