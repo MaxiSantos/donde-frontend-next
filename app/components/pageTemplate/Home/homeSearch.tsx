@@ -15,6 +15,13 @@ import { selectOptionsProps } from "app/common/components/elements/Form/FormProp
 import CustomButton from "app/common/components/elements/Button";
 import { useTranslation } from 'next-i18next';
 
+const locations = [
+  {
+    value: "ciudad",
+    title: "Ciudad"
+  }
+];
+
 export const HomeSearch = () => {
   const client = useApolloClient();
   const { authResponse: { user } } = useAuth();
@@ -22,7 +29,7 @@ export const HomeSearch = () => {
 
   const defaultValues = {
     category: null,
-    location: "Mendoza",
+    location: locations[0],
     search: null,
   };
 
@@ -106,7 +113,7 @@ export const HomeSearch = () => {
       categoryId: data.category.value,
       productId: undefined,
       query: "",
-      location: data.location
+      location: data.location.value
     }
 
     if (data.search.value === "NEW") {
@@ -137,9 +144,14 @@ export const HomeSearch = () => {
       name: "category",
       component: <CategorySelect control={control} freeSolo={false} byChange={onChangeCategorySelect} multiple={false} variant="standard" />
     },
-    {
+    /*{
       name: "location",
       component: <FormInputText name="location" control={control} variant="standard" label={t('location')} icon={<LocationOnIcon />} />
+    },*/
+    {
+      name: "location",
+      component: <FormSelect name="location" control={control} label={t('location')} options={locations} variant="standard"
+      />
     },
     {
       name: "search",

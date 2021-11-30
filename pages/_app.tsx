@@ -11,6 +11,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import '../app/common/styles/nprogress.css';
 import '../app/common/styles/icons.css';
 import "./_app.css";
+import "swiper/css";
+import "swiper/css/navigation"
+
 
 import client from '../app/common/lib/apolloClient';
 import AuthorizationProvider from '../app/common/lib/AuthorizationProvider';
