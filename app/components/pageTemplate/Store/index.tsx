@@ -2,11 +2,12 @@ import { useLazyQuery, useQuery } from '@apollo/client';
 import { useEffect } from 'react';
 import { STORE_BY_ID } from 'app/common/graphql/queries/Store';
 import { useRouter } from 'next/router';
-import { Grid as MaterialGrid } from '@mui/material';
+import { Grid as MaterialGrid, Typography } from '@mui/material';
 import Grid from 'app/common/components/elements/Grid';
 import { Promotion } from 'app/common/components/elements/Cards/Publication/Promotion';
 import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { OpeningHours } from 'app/common/components/elements/Cards/OpeningHours';
 
 SwiperCore.use([Navigation]);
 
@@ -34,18 +35,16 @@ export default function Store() {
   return (
     <>
       {data.store.name}
-      <MaterialGrid container >
-        <MaterialGrid item xs={12} sm={9}>
+      <MaterialGrid container spacing={{ xs: 2, md: 3 }} >
+        <MaterialGrid item xs={12} sm={8} >
           <p>{data.store.description}</p>
         </MaterialGrid>
-        {/* Open hours */}
-        <MaterialGrid item xs={12} sm={3} >
-          open hours
+        <MaterialGrid item xs={12} sm={4} >
+          <OpeningHours></OpeningHours>
         </MaterialGrid>
       </MaterialGrid>
+      <Typography variant="h2">Publications</Typography>
       <Swiper
-        //1modules={[Navigation, Pagination, Scrollbar, A11y]}
-        //onSwiper={(swiper) => (window.swiper = swiper)}
         slidesPerView={1}
         spaceBetween={10}
         navigation={true}
@@ -64,8 +63,6 @@ export default function Store() {
             "spaceBetween": 50
           }
         }}
-      //scrollbar={{ draggable: true }}
-      //pagination={{ clickable: true }}
       >
         {publications.map(item => {
           return <SwiperSlide key={"prmotion_" + item.id}>
@@ -73,6 +70,7 @@ export default function Store() {
           </SwiperSlide>
         })}
       </Swiper>
+      <Typography variant="h2">Products</Typography>
       <Grid list={products} type="product" />
     </>
   )
