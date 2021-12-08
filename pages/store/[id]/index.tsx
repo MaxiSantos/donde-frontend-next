@@ -1,5 +1,6 @@
 import { Default } from "app/common/components/layouts/default";
 import Store from "app/components/pageTemplate/Store/item";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const App = () => (
   <Default pageTitle="Store">
@@ -11,6 +12,7 @@ export async function getStaticProps(context) {
   return {
     props: {
       protected: true,
+      ...(await serverSideTranslations(context.locale, ['common'])),
     }
   };
 }

@@ -1,19 +1,15 @@
 import { useQuery } from '@apollo/client';
+import { BASE_STORE_FIELDS } from 'app/common/graphql/fragments/Store';
 import gql from 'graphql-tag';
 import moment from 'moment';
 
 // stores(where:{createdAt:{equals: $startDate}}) {
 // query ALL_STORE{
 export const ALL_STORE = gql`
+  ${BASE_STORE_FIELDS}
   query ALL_STORE($startDate: DateTime!){
     stores(where:{createdAt:{equals: $startDate}}) {
-      id
-      name
-      location
-      telephone
-      category {
-        name
-      }
+      ...BaseStoreFields
     }
   }               
 `;

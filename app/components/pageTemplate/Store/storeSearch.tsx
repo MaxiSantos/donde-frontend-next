@@ -12,6 +12,7 @@ import { useEffect } from "react";
 import { ALL_PUBLICATION_QUERY, usePublicationsByCategory } from "app/common/graphql/queries/Publication";
 import { selectOptionsProps } from "app/common/components/elements/Form/FormProps";
 import CustomButton from "app/common/components/elements/Button";
+import { ALL_STORE_QUERY, useStoreByCategory } from "app/common/graphql/queries/Store";
 
 const locations = [
   {
@@ -20,36 +21,34 @@ const locations = [
   }
 ];
 
-export const PublicationSearch = () => {
+export const StoreSearch = () => {
   const client = useApolloClient();
   const { authResponse: { user } } = useAuth();
   const defaultValues = {
     category: null,
     location: locations[0],
-    search: null,
   };
 
   interface IFormInput {
     category: selectOptionsProps | null,
     location: string,
-    search: number | string,
   }
 
   const {
-    findItems: findPublicationsBySearch,
-    data: { publications } = {},
+    findItems: findStoresBySearch,
+    data: { stores } = {},
     error: resultsError,
     loading: resultsLoading,
-  } = usePublicationsByCategory();
+  } = useStoreByCategory();
 
   useEffect(() => {
-    if (publications?.length >= 0) {
+    if (stores?.length >= 0) {
       client.writeQuery({
-        query: ALL_PUBLICATION_QUERY,
-        data: { publications }
+        query: ALL_STORE_QUERY,
+        data: { stores }
       });
     }
-  }, [client, publications]);
+  }, [client, stores]);
 
   const methods = useForm({ defaultValues: defaultValues });
   const { handleSubmit, reset, control, getValues } = methods;
@@ -75,7 +74,7 @@ export const PublicationSearch = () => {
       },
     });
 
-    findPublicationsBySearch({
+    findStoresBySearch({
       variables,
     })
   }
@@ -86,24 +85,7 @@ export const PublicationSearch = () => {
     },
     {
       name: "location",
-      component: <FormInputText name="location" control={control} variant="standard" label="Location" icon={<LocationOnIcon />} />
-    },
-    {
-      name: "notification",
-      component: <FormSelect name="notification" control={control} variant="standard" label="Select notification type" options={[
-        {
-          value: "DISCOUNT",
-          title: "Discounts",
-        },
-        {
-          value: "PROMOTION",
-          title: "Promotions",
-        },
-        {
-          value: "NEW_PRODUCT",
-          title: "New product",
-        }
-      ]}
+      component: <FormSelect name="location" control={control} label={'location'} options={locations} variant="standard"
       />
     },
     {

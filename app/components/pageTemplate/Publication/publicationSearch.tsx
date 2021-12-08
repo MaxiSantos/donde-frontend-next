@@ -86,7 +86,8 @@ export const PublicationSearch = () => {
     },
     {
       name: "location",
-      component: <FormInputText name="location" control={control} variant="standard" label="Location" icon={<LocationOnIcon />} />
+      component: <FormSelect name="location" control={control} label={'location'} options={locations} variant="standard"
+      />
     },
     {
       name: "notification",
