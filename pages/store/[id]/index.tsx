@@ -1,5 +1,5 @@
 import { Default } from "app/common/components/layouts/default";
-import Store from "app/components/pageTemplate/Store";
+import Store from "app/components/pageTemplate/Store/item";
 
 const App = () => (
   <Default pageTitle="Store">

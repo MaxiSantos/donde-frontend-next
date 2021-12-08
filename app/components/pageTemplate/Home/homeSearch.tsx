@@ -1,6 +1,5 @@
 import { useForm } from "react-hook-form";
 import LocationOnIcon from '@mui/icons-material/LocationOn';
-import { FormInputText } from "../../../common/components/elements/Form/FormInputText";
 import { CategorySelect } from "../../../common/components/elements/Form/withData/CategorySelect";
 import { SearchFactory } from "../../../common/components/sections/Search2/factory"
 import { FormSelect } from "../../../common/components/elements/Form/FormSelect";
