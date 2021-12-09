@@ -1,14 +1,14 @@
 [
   {
     "path": "/store",
-    "title": "Store"
+    "title": "store"
   },
   {
     "path": "/publications",
-    "title": "Publications"
+    "title": "publication"
   },
   {
     "path": "/notification",
-    "title": "Notification"
+    "title": "notification"
   }
 ]

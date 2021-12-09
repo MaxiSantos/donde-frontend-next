@@ -3,7 +3,7 @@ import { Profile } from "app/components/pageTemplate/Profile";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const App = () => (
-  <Default pageTitle="Profile">
+  <Default pageTitle="profile">
     <Profile />
   </Default>
 );
@@ -12,7 +12,7 @@ export async function getStaticProps(context) {
   return {
     props: {
       protected: true,
-      ...(await serverSideTranslations(context.locale, ['common'])),
+      ...(await serverSideTranslations(context.locale, ['common', 'profile'])),
     }
   };
 }

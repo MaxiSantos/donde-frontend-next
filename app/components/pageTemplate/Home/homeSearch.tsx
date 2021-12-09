@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { CategorySelect } from "../../../common/components/elements/Form/withData/CategorySelect";
 import { SearchFactory } from "../../../common/components/sections/Search2/factory"
-import { FormSelect } from "../../../common/components/elements/Form/FormSelect";
+import { FormSelect } from "app/common/components/elements/Form/FormSelect";
 import { useSearchProductsByCategory } from "../../../common/graphql/Product";
 import { useSeachStore } from "../../../common/graphql/Search";
 import { useApolloClient } from "@apollo/client";
@@ -13,6 +13,7 @@ import { useEffect } from "react";
 import { selectOptionsProps } from "app/common/components/elements/Form/FormProps";
 import CustomButton from "app/common/components/elements/Button";
 import { useTranslation } from 'next-i18next';
+import { LocationSelect } from "app/common/components/elements/Form/withData/LocationSelect";
 
 const locations = [
   {
@@ -143,18 +144,13 @@ export const HomeSearch = () => {
       name: "category",
       component: <CategorySelect control={control} freeSolo={false} byChange={onChangeCategorySelect} multiple={false} variant="standard" />
     },
-    /*{
-      name: "location",
-      component: <FormInputText name="location" control={control} variant="standard" label={t('location')} icon={<LocationOnIcon />} />
-    },*/
     {
       name: "location",
-      component: <FormSelect name="location" control={control} label={t('location')} options={locations} variant="standard"
-      />
+      component: <LocationSelect control={control} freeSolo={false} multiple={false} variant="standard" />
     },
     {
       name: "search",
-      component: <FormSelect name="search" control={control} label={t('what-u-looking')} options={productOptions} freeSolo variant="standard"
+      component: <FormSelect name="search" control={control} label={t('search-box.what-u-looking')} options={productOptions} freeSolo variant="standard"
         groupBy={(option) => {
           return option?.category
         }} />
@@ -164,7 +160,7 @@ export const HomeSearch = () => {
       component: <CustomButton
         variant="contained"
         onClick={handleSubmit(onSearch)}>
-        {t('search')}
+        {t('search-box.search')}
       </CustomButton>
     }
   ]

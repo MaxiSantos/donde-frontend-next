@@ -12,6 +12,8 @@ import { useEffect } from "react";
 import { ALL_PUBLICATION_QUERY, usePublicationsByCategory } from "app/common/graphql/queries/Publication";
 import { selectOptionsProps } from "app/common/components/elements/Form/FormProps";
 import CustomButton from "app/common/components/elements/Button";
+import { LocationSelect } from "app/common/components/elements/Form/withData/LocationSelect";
+import { useTranslation } from "react-i18next";
 
 const locations = [
   {
@@ -23,6 +25,7 @@ const locations = [
 export const PublicationSearch = () => {
   const client = useApolloClient();
   const { authResponse: { user } } = useAuth();
+  const { t } = useTranslation('common');
   const defaultValues = {
     category: null,
     location: locations[0],
@@ -86,10 +89,9 @@ export const PublicationSearch = () => {
     },
     {
       name: "location",
-      component: <FormSelect name="location" control={control} label={'location'} options={locations} variant="standard"
-      />
+      component: <LocationSelect control={control} freeSolo={false} multiple={false} variant="standard" />
     },
-    {
+    /*{
       name: "notification",
       component: <FormSelect name="notification" control={control} variant="standard" label="Select notification type" options={[
         {
@@ -106,13 +108,13 @@ export const PublicationSearch = () => {
         }
       ]}
       />
-    },
+    },*/
     {
       name: "submit",
       component: <CustomButton
         variant="contained"
         onClick={handleSubmit(onSearch)}>
-        Search
+        {t('search-box.search')}
       </CustomButton>
     }
   ]

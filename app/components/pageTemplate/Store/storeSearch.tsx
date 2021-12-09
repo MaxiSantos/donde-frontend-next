@@ -13,6 +13,8 @@ import { ALL_PUBLICATION_QUERY, usePublicationsByCategory } from "app/common/gra
 import { selectOptionsProps } from "app/common/components/elements/Form/FormProps";
 import CustomButton from "app/common/components/elements/Button";
 import { ALL_STORE_QUERY, useStoreByCategory } from "app/common/graphql/queries/Store";
+import { useTranslation } from "react-i18next";
+import { LocationSelect } from "app/common/components/elements/Form/withData/LocationSelect";
 
 const locations = [
   {
@@ -24,6 +26,7 @@ const locations = [
 export const StoreSearch = () => {
   const client = useApolloClient();
   const { authResponse: { user } } = useAuth();
+  const { t } = useTranslation('common');
   const defaultValues = {
     category: null,
     location: locations[0],
@@ -85,15 +88,14 @@ export const StoreSearch = () => {
     },
     {
       name: "location",
-      component: <FormSelect name="location" control={control} label={'location'} options={locations} variant="standard"
-      />
+      component: <LocationSelect control={control} freeSolo={false} multiple={false} variant="standard" />
     },
     {
       name: "submit",
       component: <CustomButton
         variant="contained"
         onClick={handleSubmit(onSearch)}>
-        Search
+        {t('search-box.search')}
       </CustomButton>
     }
   ]

@@ -10,12 +10,15 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { OpeningDays } from 'app/common/components/elements/Cards/OpeningDays';
 import { InnerContainerSection } from 'app/common/components/elements/InnerContainerSection';
 import { useMedia } from 'app/common/hooks/useMedia';
+import { useTranslation } from 'react-i18next';
+import { TextHelper } from 'app/common/lib/text';
 
 SwiperCore.use([Navigation]);
 
 export default function Store() {
   const router = useRouter();
   const { isMobile } = useMedia()
+  const { t } = useTranslation('common');
   const [getStore, { loading, data, error }] = useLazyQuery(
     STORE_BY_ID
   );
@@ -31,7 +34,7 @@ export default function Store() {
   console.log({ loading })
   console.log({ data })
   if (loading || !data?.store) {
-    return <p>Loading</p>
+    return <p>{t('loading')}</p>
   }
   const products = data.store.storeProduct.map(item => item.product) || []
   const publications = data.store.publication || []
@@ -48,7 +51,7 @@ export default function Store() {
         </MaterialGrid>
       </MaterialGrid>
       <InnerContainerSection ismobile={isMobile}>
-        <Typography variant="subtitle1">Publications</Typography>
+        <Typography variant="subtitle1">{TextHelper.capitalize(t('navigation.publication'))}</Typography>
         {
           publications.length > 0
             ?
@@ -79,11 +82,11 @@ export default function Store() {
               })}
             </Swiper>
             :
-            <span>No publications yet</span>
+            <span>{TextHelper.capitalize(t('no-publication'))}</span>
         }
       </InnerContainerSection>
       <InnerContainerSection ismobile={isMobile}>
-        <Typography variant="subtitle1">Products</Typography>
+        <Typography variant="subtitle1">{TextHelper.capitalize(t('dashboard.product'))}</Typography>
         <Grid list={products} type="product" />
       </InnerContainerSection>
     </>

@@ -4,7 +4,7 @@ import { StoreSearch } from 'app/components/pageTemplate/Store/storeSearch';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 const App = () => (
-  <Default top={<StoreSearch />} pageTitle="Store">
+  <Default top={<StoreSearch />} pageTitle="store">
     <Store />
   </Default>
 );
