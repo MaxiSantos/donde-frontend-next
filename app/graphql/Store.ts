@@ -1,5 +1,6 @@
 import { useQuery } from '@apollo/client';
 import { BASE_STORE_FIELDS } from 'app/common/graphql/fragments/Store';
+import { BASE_STORE_PRODUCT_FIELDS } from 'app/common/graphql/fragments/StoreProduct';
 import gql from 'graphql-tag';
 import moment from 'moment';
 
@@ -7,9 +8,13 @@ import moment from 'moment';
 // query ALL_STORE{
 export const ALL_STORE = gql`
   ${BASE_STORE_FIELDS}
-  query ALL_STORE($startDate: DateTime!){
+  ${BASE_STORE_PRODUCT_FIELDS}
+  query ALL_STORE($startDate: DateTime!, $includeStoreProduct: Boolean = false){
     stores(where:{createdAt:{equals: $startDate}}) {
       ...BaseStoreFields
+      storeProduct @include(if: $includeStoreProduct){ 
+        ...BaseStoreProductFields
+      }  
     }
   }               
 `;
@@ -19,7 +24,7 @@ export const useAllRecentlyAddedStore = () => {
   const startOfWeek = new Date(today.startOf('week').format());
   const { data, error, loading } = useQuery(ALL_STORE, {
     variables: {
-      startDate: startOfWeek
+      startDate: startOfWeek,
     },
     //fetchPolicy: "cache-and-network"
   });

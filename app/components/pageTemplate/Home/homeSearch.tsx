@@ -107,7 +107,6 @@ export const HomeSearch = () => {
     }
   };
   const onSearch = (data: IFormInput) => {
-    console.dir(data)
     let variables = {
       userId: user.id,
       categoryId: data.category.value,

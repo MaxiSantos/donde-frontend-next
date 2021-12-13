@@ -8,10 +8,22 @@ export const USER_SEARCH_SUBSCRIPTION = gql`
       location
       telephone
       wsp
+      image
       category{
         id
         name
-      }   
+      }
+      storeProductFiltered{
+        storeId
+        productId
+        image
+      }         
     }
   }
 `;
+
+/*storeProductFiltered{
+        storeId
+        productId
+        image
+      }*/

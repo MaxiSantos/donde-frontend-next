@@ -23,7 +23,6 @@ export default function UserSearchSubscription({ userSearchId, userSearchRespons
 
   useEffect(() => {
     if (subscriptionData) {
-      console.log("new data comming " + subscriptionData)
       addToCollection("stores", subscriptionData)
     }
   }, [subscriptionData])
@@ -31,7 +30,6 @@ export default function UserSearchSubscription({ userSearchId, userSearchRespons
   const renderer = ({ hours, minutes, seconds, completed, api, props }) => {
     if (completed) {
       // Render a completed state
-
       return <span>No one else answered to your search</span>;
     } else {
       // Render a countdown
