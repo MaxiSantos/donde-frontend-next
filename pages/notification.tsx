@@ -4,7 +4,7 @@ import { NotificationSearch } from 'app/components/pageTemplate/Notification/not
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 const App = () => (
-  <Default pageTitle="Notification">
+  <Default pageTitle="notification">
     <Notification />
   </Default>
 );

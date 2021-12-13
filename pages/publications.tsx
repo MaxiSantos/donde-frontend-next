@@ -4,7 +4,7 @@ import { PublicationSearch } from 'app/components/pageTemplate/Publication/publi
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 const App = () => (
-  <Default top={<PublicationSearch />} pageTitle="Publication">
+  <Default top={<PublicationSearch />} pageTitle="publication">
     <Publication />
   </Default>
 );
