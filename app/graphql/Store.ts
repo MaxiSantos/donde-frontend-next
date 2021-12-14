@@ -14,6 +14,11 @@ export const ALL_STORE = gql`
       ...BaseStoreFields
       storeProduct @include(if: $includeStoreProduct){ 
         ...BaseStoreProductFields
+      }
+      storeProductFiltered{
+        storeId
+        productId
+        image
       }  
     }
   }               
@@ -26,7 +31,8 @@ export const useAllRecentlyAddedStore = () => {
     variables: {
       startDate: startOfWeek,
     },
-    //fetchPolicy: "cache-and-network"
+    fetchPolicy: "cache-and-network",
+    nextFetchPolicy: "cache-only"
   });
 
   return {
