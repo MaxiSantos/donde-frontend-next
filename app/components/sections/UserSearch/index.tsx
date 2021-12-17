@@ -34,10 +34,11 @@ export default function UserSearchSubscription({ userSearchId, userSearchRespons
     } else {
       // Render a countdown
       const total = subscriptionTime / 1000;
-      const progress = (total - seconds) * 100 / total
+      const remaining = (total - seconds);
+      const progress = remaining * 100 / total
       return <Box sx={{ width: '100%' }}>
         <span>asking other stores</span>
-        <LinearProgressWithLabel value={progress} />
+        <LinearProgressWithLabel value={progress} label={(seconds).toString()} />
       </Box>
     }
   };
