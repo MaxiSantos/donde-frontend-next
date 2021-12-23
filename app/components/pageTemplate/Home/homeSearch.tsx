@@ -14,6 +14,7 @@ import { selectOptionsProps } from "app/common/components/elements/Form/FormProp
 import CustomButton from "app/common/components/elements/Button";
 import { useTranslation } from 'next-i18next';
 import { LocationSelect } from "app/common/components/elements/Form/withData/LocationSelect";
+import { StoreHelper } from "app/common/model/Store";
 
 const locations = [
   {
@@ -83,9 +84,11 @@ export const HomeSearch = () => {
         },
       });
       if (searchData.stores.length >= 0 && !resultsLoading2) {
+        StoreHelper.addIsOpen(searchData.stores)
+        const sortedStores = searchData.stores.sort(function (a, b) { return b.isOpen - a.isOpen });
         client.writeQuery({
           query: ALL_STORE,
-          data: { stores: searchData.stores }
+          data: { stores: sortedStores }
         });
       }
     }
