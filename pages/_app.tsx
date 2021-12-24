@@ -46,16 +46,16 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
       <ThemeProvider theme={theme}>
         {<CssBaseline />}
         <ToastContainer />
-        <AuthProvider>
-          <NotificationProvider>
-            <CustomNotification />
-            <ApolloProvider client={client}>
+        <ApolloProvider client={client}>
+          <AuthProvider>
+            <NotificationProvider>
+              <CustomNotification />
               <AuthorizationProvider pageProps={pageProps}>
                 <Component {...pageProps} />
               </AuthorizationProvider>
-            </ApolloProvider>
-          </NotificationProvider>
-        </AuthProvider>
+            </NotificationProvider>
+          </AuthProvider>
+        </ApolloProvider>
       </ThemeProvider>
     </>
   );
