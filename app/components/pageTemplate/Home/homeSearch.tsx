@@ -1,5 +1,4 @@
 import { useForm } from "react-hook-form";
-import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { CategorySelect } from "../../../common/components/elements/Form/withData/CategorySelect";
 import { SearchFactory } from "../../../common/components/sections/Search2/factory"
 import { FormSelect } from "app/common/components/elements/Form/FormSelect";
@@ -15,6 +14,8 @@ import CustomButton from "app/common/components/elements/Button";
 import { useTranslation } from 'next-i18next';
 import { LocationSelect } from "app/common/components/elements/Form/withData/LocationSelect";
 import { StoreHelper } from "app/common/model/Store";
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as Yup from 'yup';
 
 const locations = [
   {
@@ -27,6 +28,14 @@ export const HomeSearch = () => {
   const client = useApolloClient();
   const { authResponse: { user } } = useAuth();
   const { t } = useTranslation('common');
+
+  const schema = Yup.object().shape({
+    category: Yup.object().shape({
+      value: Yup.number(),
+      title: Yup.string()
+    }).required(t("form-error.required")).nullable("false"),
+    search: Yup.object().required(t("form-error.required")).nullable("false"),
+  });
 
   const defaultValues = {
     category: null,
@@ -94,8 +103,17 @@ export const HomeSearch = () => {
     }
   }, [client, searchData]);
 
-  const methods = useForm({ defaultValues: defaultValues });
-  const { handleSubmit, reset, control, getValues } = methods;
+  const methods = useForm({
+    resolver: yupResolver(schema),
+    defaultValues
+  });
+  const { handleSubmit, reset, control, getValues, formState } = methods;
+
+  useEffect(() => {
+    if (formState.errors) {
+      console.log({ formError: formState.errors })
+    }
+  }, [formState]);
 
   const onChangeCategorySelect = (item) => {
     console.log({ item })

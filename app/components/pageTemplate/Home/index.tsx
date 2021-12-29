@@ -21,7 +21,6 @@ export default function Home() {
       {
         isSubscribed && userSearchResponse?.id && <UserSearchSubscription key={userSearchId} userSearchId={userSearchId} userSearchResponse={userSearchResponse} />
       }
-      <p>Tutorial</p>
     </>
   )
 }

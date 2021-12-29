@@ -9,10 +9,12 @@ import { useEffect } from "react";
 import { addToCollection } from "../../../common/lib/apolloCache";
 import { subscriptionTime } from "../../../common/constants";
 import { LinearProgressWithLabel } from '../../../common/components/elements/Progress/LinearProgressWithLabel'
+import { StoreHelper } from "app/common/model/Store";
+import { useTranslation } from "next-i18next";
 
 export default function UserSearchSubscription({ userSearchId, userSearchResponse = {} }) {
   const { data: { newStoreBySearch } = {} } = useQuery(GetNewStoreBySearch);
-
+  const { t } = useTranslation('common');
   const { data: { userSearchSubscription: subscriptionData } = {}, loading: subscriptionLoading, error: subscriptionError } = useSubscription(
     USER_SEARCH_SUBSCRIPTION, {
     variables: {
@@ -23,6 +25,9 @@ export default function UserSearchSubscription({ userSearchId, userSearchRespons
 
   useEffect(() => {
     if (subscriptionData) {
+      console.log({ subscriptionData })
+      const openingDay = StoreHelper.getCurrentOpDay(subscriptionData.openingDay)
+      subscriptionData.isOpen = StoreHelper.isOpen(openingDay)
       addToCollection("stores", subscriptionData)
     }
   }, [subscriptionData])
@@ -30,14 +35,16 @@ export default function UserSearchSubscription({ userSearchId, userSearchRespons
   const renderer = ({ hours, minutes, seconds, completed, api, props }) => {
     if (completed) {
       // Render a completed state
-      return <span>No one else answered to your search</span>;
+      return <Box sx={{ width: '100%', marginTop: "40px" }}>
+        <span>{t("search-box.no-answer")}</span>
+      </Box>
     } else {
       // Render a countdown
       const total = subscriptionTime / 1000;
       const remaining = (total - seconds);
       const progress = remaining * 100 / total
-      return <Box sx={{ width: '100%' }}>
-        <span>asking other stores</span>
+      return <Box sx={{ width: '100%', marginTop: "40px" }}>
+        <span>{t("search-box.asking-stores")}</span>
         <LinearProgressWithLabel value={progress} label={(seconds).toString()} />
       </Box>
     }

@@ -8,7 +8,15 @@ export const USER_SEARCH_SUBSCRIPTION = gql`
       location
       telephone
       wsp
-      image
+      openingDay{
+        id
+        day
+        openingHour{
+          id
+          open
+          close
+        }
+      }      
       category{
         id
         name

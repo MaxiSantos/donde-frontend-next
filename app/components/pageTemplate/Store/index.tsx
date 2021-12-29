@@ -6,11 +6,12 @@ import { useTranslation } from 'react-i18next';
 
 export default function Store() {
   const { t } = useTranslation('common');
-  const { data: { stores } = {}, error, loading } = useAllRecentlyAddedStore();
+  //const { data: { stores } = {}, error, loading } = useAllRecentlyAddedStore();
+  const { data, error, loading } = useAllRecentlyAddedStore();
   return (
     <>
-      {stores?.length > 0 ?
-        <Grid list={stores} type="store" />
+      {data?.stores?.length > 0 ?
+        <Grid list={data.stores} type="store" />
         :
         <p>{t('no-data')}</p>}
     </>

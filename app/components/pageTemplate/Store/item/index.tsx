@@ -36,7 +36,11 @@ export default function Store() {
   if (loading || !data?.store) {
     return <p>{t('loading')}</p>
   }
-  const products = data.store.storeProduct.map(item => item.product) || []
+  const products = data.store.storeProduct.map(item => ({
+    ...item.product,
+    image: item.image,
+    description: item.description
+  })) || []
   const publications = data.store.publication || []
   const openingDays = data.store.openingDay || []
   return (

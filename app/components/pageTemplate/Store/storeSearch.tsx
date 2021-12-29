@@ -1,20 +1,17 @@
 import { useForm } from "react-hook-form";
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-import { FormInputText } from "../../../common/components/elements/Form/FormInputText";
 import { CategorySelect } from "../../../common/components/elements/Form/withData/CategorySelect";
 import { SearchFactory } from "../../../common/components/sections/Search2/factory"
-import { FormSelect } from "../../../common/components/elements/Form/FormSelect";
-import { Button } from "@mui/material";
 import { useApolloClient } from "@apollo/client";
 import { useAuth } from 'app/common/context/useAuthContext';
-import { GetIsSearching, GetIsSearchBoxOpen, GetIsSubscribed, GetUserSearchId, GetUserSearchResponse } from "../../../common/graphql/local";
+import { GetIsSearching, GetIsSearchBoxOpen } from "../../../common/graphql/local";
 import { useEffect } from "react";
-import { ALL_PUBLICATION_QUERY, usePublicationsByCategory } from "app/common/graphql/queries/Publication";
 import { selectOptionsProps } from "app/common/components/elements/Form/FormProps";
 import CustomButton from "app/common/components/elements/Button";
 import { ALL_STORE_QUERY, useStoreByCategory } from "app/common/graphql/queries/Store";
 import { useTranslation } from "react-i18next";
 import { LocationSelect } from "app/common/components/elements/Form/withData/LocationSelect";
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as Yup from 'yup';
 
 const locations = [
   {
@@ -27,6 +24,12 @@ export const StoreSearch = () => {
   const client = useApolloClient();
   const { authResponse: { user } } = useAuth();
   const { t } = useTranslation('common');
+  const schema = Yup.object().shape({
+    category: Yup.object().shape({
+      value: Yup.number(),
+      title: Yup.string()
+    }).required(t("form-error.required")).nullable("false"),
+  });
   const defaultValues = {
     category: null,
     location: locations[0],
@@ -53,8 +56,17 @@ export const StoreSearch = () => {
     }
   }, [client, stores]);
 
-  const methods = useForm({ defaultValues: defaultValues });
-  const { handleSubmit, reset, control, getValues } = methods;
+  const methods = useForm({
+    resolver: yupResolver(schema),
+    defaultValues
+  });
+  const { handleSubmit, reset, control, getValues, formState } = methods;
+
+  useEffect(() => {
+    if (formState.errors) {
+      console.log({ formError: formState.errors })
+    }
+  }, [formState]);
 
   const onSearch = (data: IFormInput) => {
     console.dir(data)
@@ -81,6 +93,7 @@ export const StoreSearch = () => {
       variables,
     })
   }
+
   const options = [
     {
       name: "category",
