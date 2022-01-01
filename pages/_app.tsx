@@ -23,6 +23,7 @@ import theme from '../app/common/styles/theme';
 import { AuthProvider } from '../app/common/context/useAuthContext';
 import { appWithTranslation } from 'next-i18next';
 import { ToastContainer } from 'react-toastify';
+import { UserActivityProvider } from 'app/common/context/useUserActivity';
 
 Router.events.on('routeChangeStart', () => {
   NProgress.start();
@@ -48,12 +49,14 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         <ToastContainer />
         <ApolloProvider client={client}>
           <AuthProvider>
-            <NotificationProvider>
-              <CustomNotification />
-              <AuthorizationProvider pageProps={pageProps}>
-                <Component {...pageProps} />
-              </AuthorizationProvider>
-            </NotificationProvider>
+            <UserActivityProvider>
+              <NotificationProvider>
+                <CustomNotification />
+                <AuthorizationProvider pageProps={pageProps}>
+                  <Component {...pageProps} />
+                </AuthorizationProvider>
+              </NotificationProvider>
+            </UserActivityProvider>
           </AuthProvider>
         </ApolloProvider>
       </ThemeProvider>
