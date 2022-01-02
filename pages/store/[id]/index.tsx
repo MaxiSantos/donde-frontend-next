@@ -1,4 +1,5 @@
 import { Default } from "app/common/components/layouts/default";
+import { TranslationHelper } from "app/common/lib/translation";
 import Store from "app/components/pageTemplate/Store/item";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
@@ -12,7 +13,7 @@ export async function getStaticProps(context) {
   return {
     props: {
       protected: true,
-      ...(await serverSideTranslations(context.locale, ['common'])),
+      ...(await serverSideTranslations(context.locale, TranslationHelper.getCommonSource())),
     }
   };
 }

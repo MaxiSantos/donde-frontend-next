@@ -3,6 +3,7 @@ import { Default } from "../app/common/components/layouts/default";
 import Home from "../app/components/pageTemplate/Home";
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Script from 'next/script'
+import { TranslationHelper } from "app/common/lib/translation";
 
 const App = () => (
   <Default top={<HomeSearch />} pageTitle="home">
@@ -14,7 +15,7 @@ const App = () => (
 export async function getStaticProps(context) {
   const props = {
     protected: true,
-    ...(await serverSideTranslations(context.locale, ['common'])),
+    ...(await serverSideTranslations(context.locale, TranslationHelper.getCommonSource())),
   }
   return {
     props

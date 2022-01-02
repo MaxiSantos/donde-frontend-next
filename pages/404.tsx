@@ -1,9 +1,10 @@
 import { Default } from 'app/common/components/layouts/default';
 import { NotFound } from 'app/common/components/pageTemplate/404';
+import { TranslationHelper } from 'app/common/lib/translation';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 const App = () => (
-  <Default pageTitle="Not found">
+  <Default pageTitle="not-found">
     <NotFound />
   </Default>
 );
@@ -11,7 +12,7 @@ const App = () => (
 export async function getStaticProps(context) {
   const props = {
     protected: true,
-    ...(await serverSideTranslations(context.locale, ['common'])),
+    ...(await serverSideTranslations(context.locale, TranslationHelper.getCommonSource())),
   }
   return {
     props
