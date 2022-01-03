@@ -12,6 +12,7 @@ import { useTranslation } from "react-i18next";
 import { LocationSelect } from "app/common/components/elements/Form/withData/LocationSelect";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
+import { StoreHelper } from "app/common/model/Store";
 
 const locations = [
   {
@@ -49,9 +50,11 @@ export const StoreSearch = () => {
 
   useEffect(() => {
     if (stores?.length >= 0) {
+      StoreHelper.addIsOpen(stores)
+      const sortedStores = stores.sort(function (a, b) { return b.isOpen - a.isOpen });
       client.writeQuery({
         query: ALL_STORE_QUERY,
-        data: { stores }
+        data: { stores: sortedStores }
       });
     }
   }, [client, stores]);

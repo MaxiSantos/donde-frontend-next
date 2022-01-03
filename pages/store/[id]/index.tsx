@@ -4,7 +4,7 @@ import Store from "app/components/pageTemplate/Store/item";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const App = () => (
-  <Default pageTitle="sing_store">
+  <Default>
     <Store />
   </Default>
 );
