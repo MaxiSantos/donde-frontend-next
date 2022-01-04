@@ -35,7 +35,7 @@ export default function UserSearchSubscription({ userSearchId, userSearchRespons
   const renderer = ({ hours, minutes, seconds, completed, api, props }) => {
     if (completed) {
       // Render a completed state
-      return <Box sx={{ width: '100%', marginTop: "40px" }}>
+      return <Box sx={{ width: '100%', marginTop: "40px", textAlign: "center" }}>
         <span>{t("search-box.no-answer")}</span>
       </Box>
     } else {
