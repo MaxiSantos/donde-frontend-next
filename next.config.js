@@ -9,6 +9,10 @@ module.exports = {
     // your project has ESLint errors.
     ignoreDuringBuilds: true,
   },
+  env: {
+    ENDPOINT: process.env.ENDPOINT,
+    WS_ENDPOINT: process.env.WS_ENDPOINT
+  },
   typescript:{
     ignoreBuildErrors: true
   },
