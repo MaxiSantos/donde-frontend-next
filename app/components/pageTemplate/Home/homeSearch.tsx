@@ -34,7 +34,7 @@ export const HomeSearch = () => {
       value: Yup.number(),
       title: Yup.string()
     }).required(t("form-error.required")).nullable("false"),
-    search: Yup.object().required(t("form-error.required")).nullable("false"),
+    search: Yup.object().required(t("form-error.required")).nullable(false),
   });
 
   const defaultValues = {
