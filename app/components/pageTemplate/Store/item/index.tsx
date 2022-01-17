@@ -79,7 +79,7 @@ export default function Store() {
           <OpeningDays days={openingDays} />
         </MaterialGrid>
       </MaterialGrid>
-      <InnerContainerSection ismobile={isMobile}>
+      <InnerContainerSection $ismobile={isMobile}>
         <Typography variant="subtitle1">{TextHelper.capitalize(t('navigation.publication'))}</Typography>
         {
           publications.length > 0
@@ -114,7 +114,7 @@ export default function Store() {
             <span>{TextHelper.capitalize(t('no-publication'))}</span>
         }
       </InnerContainerSection>
-      <InnerContainerSection ismobile={isMobile}>
+      <InnerContainerSection $ismobile={isMobile}>
         <Typography variant="subtitle1">{TextHelper.capitalize(t('sidebar.product.title'))}</Typography>
         <Grid list={products} type="product" />
       </InnerContainerSection>
