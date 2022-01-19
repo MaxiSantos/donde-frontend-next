@@ -34,7 +34,6 @@ export default function UserSearchSubscription({ userSearchId, userSearchRespons
 
   const renderer = (obj) => {
     const { hours, minutes, seconds, completed, api, props } = obj;
-    console.log({ obj })
     if (completed) {
       // Render a completed state
       return <Box sx={{ width: '100%', marginTop: "40px", textAlign: "center" }}>
