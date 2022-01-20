@@ -14,13 +14,13 @@ export default function Home() {
 
   return (
     <>
+      {
+        isSubscribed && userSearchResponse?.id && <UserSearchSubscription key={userSearchId} userSearchId={userSearchId} userSearchResponse={userSearchResponse} />
+      }
       {data?.stores?.length > 0 ?
         <Grid list={data.stores} type="store" />
         :
         <p>{t('no-data')}</p>}
-      {
-        isSubscribed && userSearchResponse?.id && <UserSearchSubscription key={userSearchId} userSearchId={userSearchId} userSearchResponse={userSearchResponse} />
-      }
     </>
   )
 }

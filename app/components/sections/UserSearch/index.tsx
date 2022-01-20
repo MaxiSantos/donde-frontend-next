@@ -36,7 +36,7 @@ export default function UserSearchSubscription({ userSearchId, userSearchRespons
     const { hours, minutes, seconds, completed, api, props } = obj;
     if (completed) {
       // Render a completed state
-      return <Box sx={{ width: '100%', marginTop: "40px", textAlign: "center" }}>
+      return <Box sx={{ width: '100%', marginBottom: "40px", textAlign: "center" }}>
         <span>{t("search-box.no-answer")}</span>
       </Box>
     } else {
@@ -44,7 +44,7 @@ export default function UserSearchSubscription({ userSearchId, userSearchRespons
       const total = subscriptionTime / 1000;
       const remaining = (total - seconds);
       const progress = remaining * 100 / total
-      return <Box sx={{ width: '100%', marginTop: "40px" }}>
+      return <Box sx={{ width: '100%', marginBottom: "40px" }}>
         <span>{t("search-box.asking-stores")}</span>
         <LinearProgressWithLabel value={progress} label={(seconds).toString()} />
       </Box>
@@ -52,7 +52,8 @@ export default function UserSearchSubscription({ userSearchId, userSearchRespons
   };
 
   if (subscriptionError) {
-    return <p>Something went wrong asking other stores...</p>;
+    console.log(subscriptionError)
+    return <p>{t("search-box.error-answer")}</p>;
   }
   return (
     <Container sx={{ width: "50%" }}>
