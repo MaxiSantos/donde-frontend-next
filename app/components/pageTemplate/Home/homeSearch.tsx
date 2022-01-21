@@ -16,6 +16,11 @@ import { LocationSelect } from "app/common/components/elements/Form/withData/Loc
 import { StoreHelper } from "app/common/model/Store";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
+import {
+  AmplitudeProvider,
+  Amplitude,
+  LogOnMount
+} from "@amplitude/react-amplitude";
 
 const locations = [
   {
@@ -177,11 +182,16 @@ export const HomeSearch = () => {
     },
     {
       name: "submit",
-      component: <CustomButton
-        variant="contained"
-        onClick={handleSubmit(onSearch)}>
-        {t('search-box.search')}
-      </CustomButton>
+      component: <Amplitude>
+        {({ logEvent, instrument }) =>
+          <CustomButton
+            variant="contained"
+            //onClick={handleSubmit(onSearch)}>
+            onClick={instrument('user searching', handleSubmit(onSearch))}>
+            {t('search-box.search')}
+          </CustomButton>
+        }
+      </Amplitude >
     }
   ]
 
