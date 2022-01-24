@@ -7,8 +7,6 @@ import Head from 'next/head';
 import { AmplitudeClient, Identify } from 'amplitude-js';
 import {
   AmplitudeProvider,
-  Amplitude,
-  LogOnMount
 } from "@amplitude/react-amplitude";
 
 import CssBaseline from '@mui/material/CssBaseline';
