@@ -1,25 +1,7 @@
 {
   "headers": [
     {
-      "source": "/profile(.*)",
-      "headers": [
-        {
-          "key": "x-robots-tag",
-          "value": "noindex"
-        }
-      ]
-    },
-    {
-      "source": "/auth/(.*)",
-      "headers": [
-        {
-          "key": "x-robots-tag",
-          "value": "noindex"
-        }
-      ]
-    },
-    {
-      "source": "/404",
+      "source": "/(.*)",
       "headers": [
         {
           "key": "x-robots-tag",

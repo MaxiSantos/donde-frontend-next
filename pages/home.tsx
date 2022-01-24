@@ -5,7 +5,6 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Script from 'next/script'
 import { TranslationHelper } from "app/common/lib/translation";
 import {
-  AmplitudeProvider,
   Amplitude,
   LogOnMount
 } from "@amplitude/react-amplitude";
