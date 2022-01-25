@@ -87,7 +87,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
       },
     });
 
-    amplitudeInstance.setVersionName(process.env.APP_VERSION); // e.g: 1.0.0
+    amplitudeInstance.setVersionName(process.env.NEXT_PUBLIC_APP_VERSION); // e.g: 1.0.0
     return <AmplitudeProvider
       amplitudeInstance={amplitude.getInstance()}
       apiKey={process.env.NEXT_PUBLIC_AMPLITUDE_API_KEY}

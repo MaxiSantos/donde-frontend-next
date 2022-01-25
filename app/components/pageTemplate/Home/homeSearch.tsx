@@ -4,9 +4,9 @@ import { SearchFactory } from "../../../common/components/sections/Search2/facto
 import { FormSelect } from "app/common/components/elements/Form/FormSelect";
 import { useSearchProductsByCategory } from "../../../common/graphql/Product";
 import { useSeachStore } from "../../../common/graphql/Search";
-import { useApolloClient } from "@apollo/client";
+import { useApolloClient, useQuery } from "@apollo/client";
 import { useAuth } from 'app/common/context/useAuthContext';
-import { GetIsSearching, GetIsSearchBoxOpen, GetIsSubscribed, GetUserSearchId, GetUserSearchResponse } from "../../../common/graphql/local";
+import { GetIsSearching, GetIsSearchBoxOpen, GetIsSubscribed, GetUserSearchId, GetUserSearchResponse, GetCountdownTimeout } from "../../../common/graphql/local";
 import { ALL_STORE } from "../../../graphql/Store";
 import { useEffect } from "react";
 import { selectOptionsProps } from "app/common/components/elements/Form/FormProps";
@@ -32,6 +32,7 @@ const locations = [
 export const HomeSearch = () => {
   const client = useApolloClient();
   const { authResponse: { user } } = useAuth();
+  const { data: { isSubscribed } = {} } = useQuery(GetIsSubscribed);
   const { t } = useTranslation('common');
 
   const schema = Yup.object().shape({
@@ -148,6 +149,13 @@ export const HomeSearch = () => {
     }
 
     client.writeQuery({
+      query: GetIsSubscribed,
+      data: {
+        isSubscribed: false
+      },
+    });
+
+    client.writeQuery({
       query: GetIsSearching,
       data: {
         isSearching: true
@@ -157,6 +165,12 @@ export const HomeSearch = () => {
       query: GetIsSearchBoxOpen,
       data: {
         isSearchBoxOpen: false
+      },
+    });
+    client.writeQuery({
+      query: GetCountdownTimeout,
+      data: {
+        countdownTimeout: false
       },
     });
 
@@ -186,6 +200,7 @@ export const HomeSearch = () => {
         {({ logEvent, instrument }) =>
           <CustomButton
             variant="contained"
+            //disabled={isSubscribed}
             //onClick={handleSubmit(onSearch)}>
             onClick={instrument('user searching', handleSubmit(onSearch))}>
             {t('search-box.search')}
