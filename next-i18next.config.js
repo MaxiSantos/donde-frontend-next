@@ -7,6 +7,6 @@ module.exports = {
   i18n: {
     defaultLocale: 'es',
     locales: ['es', 'en'],
-    reloadOnPrerender: true
+    reloadOnPrerender: process.env.NEXT_PUBLIC_APP_STAGE === "DEVELOPMENT"
   },
 };

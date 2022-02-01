@@ -27,6 +27,7 @@ import { AuthProvider } from '../app/common/context/useAuthContext';
 import { appWithTranslation } from 'next-i18next';
 import { ToastContainer } from 'react-toastify';
 import { UserActivityProvider } from 'app/common/context/useUserActivity';
+import ErrorBoundary from 'app/common/components/elements/ErrorBoundary'
 
 Router.events.on('routeChangeStart', () => {
   NProgress.start();
@@ -50,18 +51,20 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
       <ThemeProvider theme={theme}>
         {<CssBaseline />}
         <ToastContainer />
-        <ApolloProvider client={client}>
-          <AuthProvider>
-            <UserActivityProvider>
-              <NotificationProvider>
-                <CustomNotification />
-                <AuthorizationProvider pageProps={pageProps}>
-                  <Component {...pageProps} />
-                </AuthorizationProvider>
-              </NotificationProvider>
-            </UserActivityProvider>
-          </AuthProvider>
-        </ApolloProvider>
+        <ErrorBoundary>
+          <ApolloProvider client={client}>
+            <AuthProvider>
+              <UserActivityProvider>
+                <NotificationProvider>
+                  <CustomNotification />
+                  <AuthorizationProvider pageProps={pageProps}>
+                    <Component {...pageProps} />
+                  </AuthorizationProvider>
+                </NotificationProvider>
+              </UserActivityProvider>
+            </AuthProvider>
+          </ApolloProvider>
+        </ErrorBoundary>
       </ThemeProvider>
     </>
   )
