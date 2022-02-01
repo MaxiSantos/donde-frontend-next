@@ -12,11 +12,17 @@ const App = () => (
 
 export async function getStaticProps(context) {
   let sst: any;
+  //sst = await serverSideTranslations(context.locale, TranslationHelper.getCommonSource());
   try {
     sst = await serverSideTranslations(context.locale, TranslationHelper.getCommonSource());
   } catch (err) {
     console.log("error in getStaticProps")
     console.log({ err })
+    //fetch('api/handler')
+    /*fetch(process.env.NEXT_PUBLIC_ENDPOINT + '/api/handler', {
+      method: 'POST',
+      body: JSON.stringify(err) // body data type must match "Content-Type" header
+    });*/
   };
 
   return {
