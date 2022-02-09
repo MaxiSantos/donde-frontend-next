@@ -88,7 +88,6 @@ export default function Store() {
               slidesPerView={1}
               spaceBetween={10}
               navigation={true}
-
               breakpoints={{
                 "640": {
                   "slidesPerView": 2,
