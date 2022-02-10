@@ -4,7 +4,7 @@ import { STORE_BY_ID } from 'app/common/graphql/queries/Store';
 import { useRouter } from 'next/router';
 import { Grid as MaterialGrid, Typography } from '@mui/material';
 import Grid from 'app/common/components/elements/Grid';
-import { Promotion } from 'app/common/components/elements/Cards/Publication/Promotion';
+import { Publication } from 'app/common/components/elements/Cards/Publication';
 import SwiperCore, { Navigation } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { OpeningDays } from 'app/common/components/elements/Cards/OpeningDays';
@@ -105,7 +105,7 @@ export default function Store() {
             >
               {publications.map(item => {
                 return <SwiperSlide key={"prmotion_" + item.id}>
-                  <Promotion publication={item} />
+                  <Publication publication={item} />
                 </SwiperSlide>
               })}
             </Swiper>
