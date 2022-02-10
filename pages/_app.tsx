@@ -15,6 +15,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import '../app/common/styles/nprogress.css';
 import '../app/common/styles/icons.css';
 import "./_app.css";
+import "app/common/styles/theme/themes-vars.module.scss"
+
 import "swiper/css";
 import "swiper/css/navigation"
 
@@ -22,7 +24,7 @@ import client from '../app/common/lib/apolloClient';
 import AuthorizationProvider from '../app/common/lib/AuthorizationProvider';
 import { NotificationProvider } from 'app/common/context/useNotification';
 import { CustomNotification } from 'app/common/components/elements/CustomNotification';
-import theme from '../app/common/styles/theme';
+import { theme } from 'app/common/styles/theme';
 import { AuthProvider } from '../app/common/context/useAuthContext';
 import { appWithTranslation } from 'next-i18next';
 import { ToastContainer } from 'react-toastify';
@@ -48,7 +50,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         <link href="/favicon.ico" rel="icon" />
         <meta content="minimum-scale=1, initial-scale=1, width=device-width" name="viewport" />
       </Head>
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={theme({})}>
         {<CssBaseline />}
         <ToastContainer />
         <ErrorBoundary>
@@ -110,8 +112,8 @@ MyApp.getInitialProps = async function ({ Component, ctx }: AppContext) {
 };
 
 //export default MyApp;
-export default appWithTranslation(MyApp);
+//export default appWithTranslation(MyApp);
 
-/*export default dynamic(() => Promise.resolve(appWithTranslation(MyApp)), {
+export default dynamic(() => Promise.resolve(appWithTranslation(MyApp)), {
   ssr: false,
-});*/
+});

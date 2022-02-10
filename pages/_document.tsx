@@ -1,7 +1,6 @@
 // eslint-disable-next-line @next/next/no-document-import-in-page
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
-import theme from '../app/common/styles/theme'
 
 /*make next, ts, mui and styled-component work togheter
 https://github.com/mui-org/material-ui/issues/28559
@@ -41,7 +40,7 @@ export default class MyDocument extends Document {
       <Html lang="en">
         <Head>
           {/* PWA primary color */}
-          <meta content={theme.palette.primary.main} name="theme-color" />
+          <meta content="#469be2" name="theme-color" />
           <link
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
             rel="stylesheet"
