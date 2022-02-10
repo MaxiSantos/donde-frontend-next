@@ -112,8 +112,8 @@ MyApp.getInitialProps = async function ({ Component, ctx }: AppContext) {
 };
 
 //export default MyApp;
-//export default appWithTranslation(MyApp);
+export default appWithTranslation(MyApp);
 
-export default dynamic(() => Promise.resolve(appWithTranslation(MyApp)), {
+/*export default dynamic(() => Promise.resolve(appWithTranslation(MyApp)), {
   ssr: false,
-});
+});*/
