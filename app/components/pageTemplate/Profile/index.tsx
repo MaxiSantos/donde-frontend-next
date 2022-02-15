@@ -4,12 +4,13 @@ import { useTranslation } from 'react-i18next';
 
 export const Profile = (props) => {
   const { t } = useTranslation(['profile', 'common']);
-  const customTabs = [
+  /*const customTabs = [
     {
       label: t('subscription.title'),
-      content: <p>{TextHelper.capitalize(t('wip', { ns: 'common' }))}</p>
+      content: <p>{TextHelper.capitalize(t('wip', { ns: 'common' }))}</p>,
+      disabled: true
     }
-  ];
+  ];*/
 
-  return <BaseProfile customTabs={customTabs} />
+  return <BaseProfile />
 };

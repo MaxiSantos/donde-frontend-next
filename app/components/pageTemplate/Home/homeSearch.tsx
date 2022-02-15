@@ -13,13 +13,12 @@ import { selectOptionsProps } from "app/common/components/elements/Form/FormProp
 import CustomButton from "app/common/components/elements/Button";
 import { useTranslation } from 'next-i18next';
 import { LocationSelect } from "app/common/components/elements/Form/withData/LocationSelect";
+import { useFocus } from 'app/common/hooks/useFocus'
 import { StoreHelper } from "app/common/model/Store";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import {
-  AmplitudeProvider,
   Amplitude,
-  LogOnMount
 } from "@amplitude/react-amplitude";
 
 const locations = [
@@ -31,6 +30,10 @@ const locations = [
 
 export const HomeSearch = () => {
   const client = useApolloClient();
+  const [ref, setFocus] = useFocus();
+
+  console.log("{ref}")
+  console.log({ ref })
   const { authResponse: { user } } = useAuth();
   const { data: { isSubscribed } = {} } = useQuery(GetIsSubscribed);
   const { t } = useTranslation('common');
@@ -178,10 +181,14 @@ export const HomeSearch = () => {
       variables,
     })
   }
+
   const options = [
     {
       name: "category",
-      component: <CategorySelect control={control} freeSolo={false} byChange={onChangeCategorySelect} multiple={false} variant="standard" />
+      component: <CategorySelect onClose={() => {
+        console.log("haaaaaaaaa")
+        setFocus()
+      }} control={control} freeSolo={false} byChange={onChangeCategorySelect} multiple={false} variant="standard" />
     },
     {
       name: "location",
@@ -189,7 +196,7 @@ export const HomeSearch = () => {
     },
     {
       name: "search",
-      component: <FormSelect name="search" control={control} label={t('search-box.what-u-looking')} options={productOptions} $isAsking={true} freeSolo variant="standard"
+      component: <FormSelect optional={ref} name="search" control={control} label={t('search-box.what-u-looking')} options={productOptions} $isAsking={true} freeSolo variant="standard"
         groupBy={(option) => {
           return option?.category
         }} />
