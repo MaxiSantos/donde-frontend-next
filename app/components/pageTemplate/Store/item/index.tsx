@@ -16,6 +16,7 @@ import { ContactLink } from './elements/ContactLink';
 import { Title } from 'app/common/components/elements/Title';
 import { Box } from '@mui/system';
 import { CategoryTag } from 'app/common/components/elements/Tag/CategoryTag'
+import { Actions } from 'app/common/components/elements/Grid/Items/Store/Actions';
 
 SwiperCore.use([Navigation]);
 
@@ -62,18 +63,10 @@ export default function Store() {
       <MaterialGrid container spacing={{ xs: 2, md: 3 }} >
         <MaterialGrid item xs={12} sm={7} md={7} lg={8} >
           <p>{data.store.description}</p>
-          <ContactLink>
+          {/*<ContactLink>
             {data.store.telephone && <li><a href="tel:12-345-678"><i className="fa fa-phone"></i>{data.store.telephone}</a></li>}
-            {data.store.wsp && <li><a href={`https://wa.me/${data.store.wsp}/?text=Hola`}><i className="fa fa-whatsapp"></i>{data.store.wsp}</a></li>}
-            {data.store.email && <li><a href="mailto:mail@example.com"><i className="fa fa-envelope-o"></i> {data.store.email}</a></li>}
-            {data.store.web && <li><a href="#" target="_blank"><i className="fa fa-link"></i> {data.store.web}</a></li>}
-          </ContactLink>
-          <ContactLink>
-            {data.store.faceboook && <li><a href={data.store.faceboook} target="_blank" rel="noreferrer"><i className="fa fa-facebook-square"></i> Facebook</a></li>}
-            {data.store.youtube && <li><a href={data.store.youtube} target="_blank" rel="noreferrer"><i className="fa fa-facebook-square"></i> YouTube</a></li>}
-            {data.store.instagram && <li><a href={data.store.instagram} target="_blank" rel="noreferrer"><i className="fa fa-facebook-square"></i> Instagram</a></li>}
-            {data.store.twitter && <li><a href={data.store.twitter} target="_blank" rel="noreferrer"><i className="fa fa-facebook-square"></i> Twitter</a></li>}
-          </ContactLink>
+          </ContactLink>*/}
+          <Actions item={data.store} />
         </MaterialGrid>
         <MaterialGrid item xs={12} sm={5} md={5} lg={4}>
           <OpeningDays days={openingDays} />
