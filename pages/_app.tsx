@@ -46,7 +46,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   const UniversalApp = (): JSX.Element => (
     <>
       <Head>
-        <title>Frontent client</title>
+        <title>Donde lo busco</title>
         <link href="/favicon.ico" rel="icon" />
         <meta content="minimum-scale=1, initial-scale=1, width=device-width" name="viewport" />
       </Head>
