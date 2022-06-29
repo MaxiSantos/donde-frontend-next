@@ -10,11 +10,13 @@ import { LinearProgressWithLabel } from '../../../common/components/elements/Pro
 import { StoreHelper } from "app/common/model/Store";
 import { useTranslation } from "next-i18next";
 import moment from "moment";
+import { useMedia } from "app/common/hooks/useMedia";
 
 export default function UserSearchSubscription({ userSearchId, userSearchResponse = {} }) {
   const client = useApolloClient();
   const { data: { newStoreBySearch } = {} } = useQuery(GetNewStoreBySearch);
   const { t } = useTranslation('common');
+  const { isMobile } = useMedia();
   const { data: { userSearchSubscription: subscriptionData } = {}, loading: subscriptionLoading, error: subscriptionError } = useSubscription(
     USER_SEARCH_SUBSCRIPTION, {
     variables: {
@@ -78,7 +80,7 @@ export default function UserSearchSubscription({ userSearchId, userSearchRespons
   }
   console.log(process?.env)
   return (
-    <Container sx={{ width: "50%" }}>
+    <Container sx={{ width: isMobile ? "100%" : "50%" }}>
       <Countdown
         key={"cdown_" + userSearchResponse?.userSearchId}
         date={new Date(userSearchResponse?.createdAt).getTime() + parseInt(process.env.NEXT_PUBLIC_SUBSCRIPTION_TIME)}

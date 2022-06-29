@@ -10,7 +10,7 @@ import {
 } from "@amplitude/react-amplitude";
 
 const App = () => (
-  <Default top={<HomeSearch />} pageTitle="home">
+  <Default top={<HomeSearch />}>
     <Script src="https://code.responsivevoice.org/responsivevoice.js?key=OWqODxS0"></Script>
     <Amplitude
       eventProperties={{

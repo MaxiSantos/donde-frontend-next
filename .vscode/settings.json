@@ -4,10 +4,10 @@
     "editor.selectionHighlightBackground": "#135564",
     "titleBar.inactiveForeground": "#000000CC",
     "titleBar.inactiveBackground": "#008374",
-    "tab.activeBorder": "#7d3f98",
-    "titleBar.activeBackground": "#7d3f98",
+    "tab.activeBorder": "#0abf53",
+    "titleBar.activeBackground": "#0abf53",
     "titleBar.activeForeground": "#ffffff",
-    "statusBar.background": "#7d3f98",
+    "statusBar.background": "#0abf53",
     "statusBar.foreground": "#ffffff"
   },
   "colorTabs.config": [

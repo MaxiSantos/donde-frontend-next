@@ -12,6 +12,9 @@ import moment from 'moment';
 /*
 TODO: if the query returns zero results the first time, then on Store page after I do a search the results comes from the server but the initial request is made again and therefore an empty array overlaps the response returned by server. Strange this is not happening in home page
 */
+/*
+TODO: storeProductFiltered is not available on store page. Index is sing allStore which is using storeProductFiltered but its only used on home page. StoreSearch is doing well, we just need to update ALL_STORE query and remove storeProductFiltered when user is in store page.
+*/
 export const ALL_STORE = gql`
   ${BASE_STORE_FIELDS}
   ${BASE_STORE_PRODUCT_FIELDS}
@@ -25,7 +28,7 @@ export const ALL_STORE = gql`
       storeProduct @include(if: $includeStoreProduct){ 
         ...BaseStoreProductFields
       }
-      storeProductFiltered{
+      storeProductFiltered @include(if: $includeStoreProduct){
         storeId
         productId
         image
