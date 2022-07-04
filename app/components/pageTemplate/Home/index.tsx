@@ -41,6 +41,7 @@ export default function Home() {
       }
       {
         countdownTimeout && <Box sx={{ width: '100%', marginBottom: "40px", textAlign: "center" }}>
+          {/* TODO: why do we need this message here if its already appearing in other place? search-box.no-answer */}
           <span>{t("search-box.no-answer")}</span>
         </Box>
       }

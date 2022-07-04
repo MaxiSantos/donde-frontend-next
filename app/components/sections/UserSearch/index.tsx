@@ -11,6 +11,7 @@ import { StoreHelper } from "app/common/model/Store";
 import { useTranslation } from "next-i18next";
 import moment from "moment";
 import { useMedia } from "app/common/hooks/useMedia";
+import { TypingIndicator } from "app/common/components/elements/Typing/TypingIndicator";
 
 export default function UserSearchSubscription({ userSearchId, userSearchResponse = {} }) {
   const client = useApolloClient();
@@ -70,6 +71,7 @@ export default function UserSearchSubscription({ userSearchId, userSearchRespons
       const progress = remaining * 100 / total
       return <Box sx={{ width: '100%', marginBottom: "40px" }}>
         <span>{t("search-box.asking-stores")}</span>
+        <Box sx={{ marginLeft: "10px", display: "inline" }}><TypingIndicator /></Box>
         <LinearProgressWithLabel value={progress} label={(seconds).toString()} />
       </Box>
     }
@@ -80,7 +82,7 @@ export default function UserSearchSubscription({ userSearchId, userSearchRespons
   }
   console.log(process?.env)
   return (
-    <Container sx={{ width: isMobile ? "100%" : "50%" }}>
+    <Container sx={{ width: isMobile ? "100%" : "70%" }}>
       <Countdown
         key={"cdown_" + userSearchResponse?.userSearchId}
         date={new Date(userSearchResponse?.createdAt).getTime() + parseInt(process.env.NEXT_PUBLIC_SUBSCRIPTION_TIME)}
