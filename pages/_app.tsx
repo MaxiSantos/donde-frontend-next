@@ -18,7 +18,9 @@ import "./_app.css";
 import "app/common/styles/theme/themes-vars.module.scss"
 
 import "swiper/css";
-import "swiper/css/navigation"
+import "swiper/css/navigation";
+
+import '@algolia/autocomplete-theme-classic';
 
 import client from '../app/common/lib/apolloClient';
 import AuthorizationProvider from '../app/common/lib/AuthorizationProvider';

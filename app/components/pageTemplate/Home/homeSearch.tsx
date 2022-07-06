@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { CategorySelect } from "../../../common/components/elements/Form/withData/CategorySelect";
 import { SearchFactory } from "../../../common/components/sections/Search2/factory"
+import { FormSelect2 } from "app/common/components/elements/Form/FormSelect2";
 import { FormSelect } from "app/common/components/elements/Form/FormSelect";
 import { useSearchProductsByCategory } from "../../../common/graphql/Product";
 import { useSeachStore } from "../../../common/graphql/Search";
@@ -32,8 +33,6 @@ export const HomeSearch = () => {
   const client = useApolloClient();
   const [ref, setFocus] = useFocus();
 
-  console.log("{ref}")
-  console.log({ ref })
   const { authResponse: { user } } = useAuth();
   const { data: { isSubscribed } = {} } = useQuery(GetIsSubscribed);
   const { t } = useTranslation('common');
@@ -122,10 +121,15 @@ export const HomeSearch = () => {
     if (formState.errors) {
       console.log({ formError: formState.errors })
     }
+    /*if (formState) {
+      console.log({ formState: formState })
+    }*/
+    const values = getValues();
+    console.log(values)
   }, [formState]);
 
   const onChangeCategorySelect = (item) => {
-    console.log({ item })
+    //console.log({ item })
     if (item?.value) {
       findProductsByCategory({
         variables: {
@@ -186,7 +190,6 @@ export const HomeSearch = () => {
     {
       name: "category",
       component: <CategorySelect onClose={() => {
-        console.log("haaaaaaaaa")
         setFocus()
       }} control={control} freeSolo={false} byChange={onChangeCategorySelect} multiple={false} variant="standard" />
     },
@@ -196,7 +199,7 @@ export const HomeSearch = () => {
     },
     {
       name: "search",
-      component: <FormSelect optional={ref} name="search" control={control} label={t('search-box.what-u-looking')} options={productOptions} $isAsking={true} freeSolo variant="standard"
+      component: <FormSelect2 optional={ref} name="search" control={control} label={t('search-box.what-u-looking')} options={productOptions} $isAsking={true} freeSolo variant="standard"
         groupBy={(option) => {
           return option?.category
         }} />
