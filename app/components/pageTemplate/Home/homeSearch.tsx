@@ -199,7 +199,7 @@ export const HomeSearch = () => {
     },
     {
       name: "search",
-      component: <FormSelect2 optional={ref} name="search" control={control} label={t('search-box.what-u-looking')} options={productOptions} $isAsking={true} freeSolo variant="standard"
+      component: <FormSelect2 optional={ref} name="search" control={control} label={t('search-box.what-u-looking')} options={productOptions} $isAsking={true} freeSolo variant="standard" onSelect={handleSubmit(onSearch)}
         groupBy={(option) => {
           return option?.category
         }} />
