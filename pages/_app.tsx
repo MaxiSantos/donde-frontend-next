@@ -12,21 +12,19 @@ import {
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
 import 'react-toastify/dist/ReactToastify.css';
-import '../app/common/styles/nprogress.css';
+import 'app/common/styles/nprogress.css';
+import '@algolia/autocomplete-theme-classic';
+import "swiper/css";
+import "swiper/css/navigation";
 import '../app/common/styles/icons.css';
 import "./_app.css";
 import "app/common/styles/theme/themes-vars.module.scss"
 
-import "swiper/css";
-import "swiper/css/navigation";
-
-import '@algolia/autocomplete-theme-classic';
-
+import { theme } from 'app/common/styles/theme';
 import client from '../app/common/lib/apolloClient';
 import AuthorizationProvider from '../app/common/lib/AuthorizationProvider';
 import { NotificationProvider } from 'app/common/context/useNotification';
 import { CustomNotification } from 'app/common/components/elements/CustomNotification';
-import { theme } from 'app/common/styles/theme';
 import { AuthProvider } from '../app/common/context/useAuthContext';
 import { appWithTranslation } from 'next-i18next';
 import { ToastContainer } from 'react-toastify';
