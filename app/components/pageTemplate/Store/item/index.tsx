@@ -66,7 +66,7 @@ export default function Store() {
           {/*<ContactLink>
             {data.store.telephone && <li><a href="tel:12-345-678"><i className="fa fa-phone"></i>{data.store.telephone}</a></li>}
           </ContactLink>*/}
-          <Actions item={data.store} />
+          <Actions item={data.store} link={["all"]} />
         </MaterialGrid>
         <MaterialGrid item xs={12} sm={5} md={5} lg={4}>
           <OpeningDays days={openingDays} />
