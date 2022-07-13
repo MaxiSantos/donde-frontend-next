@@ -15,7 +15,7 @@ export const udpateUserSearchState = (props) => {
       isSubscribed
     },
   });
-  userSearchResponse && client.writeQuery({
+  userSearchResponse !== undefined && client.writeQuery({
     query: GetUserSearchResponse,
     data: {
       userSearchResponse
