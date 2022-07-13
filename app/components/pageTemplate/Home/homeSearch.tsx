@@ -21,6 +21,7 @@ import * as Yup from 'yup';
 import {
   Amplitude,
 } from "@amplitude/react-amplitude";
+import { udpateUserSearchState } from "./helper";
 
 const locations = [
   {
@@ -79,27 +80,22 @@ export const HomeSearch = () => {
 
   useEffect(() => {
     if (searchData) {
-      client.writeQuery({
-        query: GetIsSubscribed,
-        data: {
-          isSubscribed: true
-        },
-      });
+
       client.writeQuery({
         query: GetUserSearchId,
         data: {
           userSearchId: searchData.id
         },
       });
-      client.writeQuery({
-        query: GetUserSearchResponse,
-        data: {
-          userSearchResponse: {
-            id: searchData.id,
-            createdAt: searchData.createdAt
-          }
-        },
-      });
+
+      udpateUserSearchState({
+        client,
+        isSubscribed: true,
+        userSearchResponse: {
+          id: searchData.id,
+          createdAt: searchData.createdAt
+        }
+      })
       if (searchData.stores.length >= 0 && !resultsLoading2) {
         StoreHelper.addIsOpen(searchData.stores)
         const sortedStores = searchData.stores.sort(function (a, b) { return b.isOpen - a.isOpen });
@@ -119,13 +115,13 @@ export const HomeSearch = () => {
 
   useEffect(() => {
     if (formState.errors) {
-      console.log({ formError: formState.errors })
+      //console.log({ formError: formState.errors })
     }
     /*if (formState) {
       console.log({ formState: formState })
     }*/
     const values = getValues();
-    console.log(values)
+    //console.log(values)
   }, [formState]);
 
   const onChangeCategorySelect = (item) => {
@@ -156,13 +152,6 @@ export const HomeSearch = () => {
     }
 
     client.writeQuery({
-      query: GetIsSubscribed,
-      data: {
-        isSubscribed: false
-      },
-    });
-
-    client.writeQuery({
       query: GetIsSearching,
       data: {
         isSearching: true
@@ -174,12 +163,12 @@ export const HomeSearch = () => {
         isSearchBoxOpen: false
       },
     });
-    client.writeQuery({
-      query: GetCountdownTimeout,
-      data: {
-        countdownTimeout: false
-      },
-    });
+
+    udpateUserSearchState({
+      client,
+      isSubscribed: false,
+      countdownTimeout: false
+    })
 
     findStoresBySearch({
       variables,

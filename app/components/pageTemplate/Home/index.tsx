@@ -9,10 +9,14 @@ import { Delayed } from 'app/common/components/elements/Delayed'
 import { useEffect } from 'react';
 import { StoreHelper } from 'app/common/model/Store';
 import cloneDeep from "lodash.clonedeep";
+import moment from 'moment';
+import { useRouteChange } from 'app/common/hooks/useRouteChange';
+import { udpateUserSearchState } from './helper';
 
 export default function Home() {
   const client = useApolloClient();
-  const { data, error, loading } = useAllRecentlyAddedStore();
+
+  const { data: { stores } = { stores: [] }, error, loading } = useAllRecentlyAddedStore();
   const { t } = useTranslation('common');
   const { data: { isSubscribed } = {} } = useQuery(GetIsSubscribed);
   const { data: { userSearchId } = {} } = useQuery(GetUserSearchId);
@@ -20,17 +24,34 @@ export default function Home() {
   const { data: { userSearchResponse } = {} } = useQuery(GetUserSearchResponse);
 
   useEffect(() => {
-    if (data?.stores.length >= 0 && !loading) {
-      const clonedData = cloneDeep(data);
-      StoreHelper.addIsOpen(clonedData.stores)
-      const sortedStores = clonedData.stores.sort(function (a, b) { return b.isOpen - a.isOpen });
+    if (stores.length >= 0 && !loading) {
+      const clonedStores = cloneDeep(stores);
+      StoreHelper.addIsOpen(clonedStores)
+      const sortedStores = clonedStores.sort(function (a, b) { return b.isOpen - a.isOpen });
       client.writeQuery({
         query: ALL_STORE,
         data: { stores: sortedStores }
       });
     }
-  }, [client, data]);
+    return () => {
+      console.log("cleaned up: " + moment().format("hh:mm:ss"));
+    };
+  }, [stores]);
 
+  useRouteChange(() => udpateUserSearchState({
+    client,
+    isSubscribed: false,
+    userSearchResponse: null,
+    /**
+     * * UserSearchSubscription is closing countdown on router change so we just need to make sure its reseted to default here so next time we come back to home we dont see the "no answer" (dont make sense.. it should only be shown once the countdown has finished and the user hasnt leave the page)
+     */
+    countdownTimeout: false
+  }))
+
+  console.log("logging some variables")
+  //console.log({ userSearchResponse })
+  console.log({ isSubscribed })
+  console.log({ countdownTimeout })
   return (
     <>
       {
@@ -45,8 +66,8 @@ export default function Home() {
           <span>{t("search-box.no-answer")}</span>
         </Box>
       }
-      {data?.stores?.length > 0 ?
-        <Grid list={data.stores} type="store" />
+      {stores?.length > 0 ?
+        <Grid list={stores} type="store" />
         :
         <p>{t('no-data')}</p>}
     </>
