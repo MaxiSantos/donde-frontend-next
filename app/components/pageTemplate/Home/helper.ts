@@ -27,7 +27,6 @@ export const udpateUserSearchState = (props) => {
       countdownTimeout
     }
   });
-  console.log("updating user search state on udpateUserSearchState !!!", props)
 
   //return { isSubscribed, countdownTimeout, userSearchResponse };
   return null;
