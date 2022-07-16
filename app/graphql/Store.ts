@@ -23,7 +23,26 @@ export const ALL_STORE = gql`
       orderBy:{
         createdAt: desc
       }
-      take: 2) {
+      take: 2
+      ) {
+      ...BaseStoreFields
+      storeProduct @include(if: $includeStoreProduct){ 
+        ...BaseStoreProductFields
+      }
+      storeProductFiltered @include(if: $includeStoreProduct){
+        storeId
+        productId
+        image
+      }  
+    }
+  }               
+`;
+
+export const STORE = gql`
+  ${BASE_STORE_FIELDS}
+  ${BASE_STORE_PRODUCT_FIELDS}
+  query STORE($includeStoreProduct: Boolean = false){
+    store {
       ...BaseStoreFields
       storeProduct @include(if: $includeStoreProduct){ 
         ...BaseStoreProductFields
@@ -62,8 +81,10 @@ export const useAllRecentlyAddedStore = () => {
       startDate: startOfWeek
     },*/
   const { data, error, loading } = useQuery(ALL_STORE, {
-    fetchPolicy: "cache-and-network",
-    nextFetchPolicy: "cache-only"
+    //fetchPolicy: "cache-and-network",
+    fetchPolicy: "cache-only",
+    returnPartialData: true
+    //nextFetchPolicy: "cache-only"    
   });
 
   return {

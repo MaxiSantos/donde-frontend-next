@@ -12,11 +12,16 @@ import cloneDeep from "lodash.clonedeep";
 import moment from 'moment';
 import { useRouteChange } from 'app/common/hooks/useRouteChange';
 import { udpateUserSearchState } from './helper';
+import { cache } from 'app/common/lib/apolloCache';
 
 export default function Home() {
+  console.log("rendering home page template !!!!!!!!!!!!")
   const client = useApolloClient();
 
-  const { data: { stores } = { stores: [] }, error, loading } = useAllRecentlyAddedStore();
+  const { data, error, loading } = useAllRecentlyAddedStore();
+  //const { stores } = data;
+  //const stores = [];
+
   const { t } = useTranslation('common');
   const { data: { isSubscribed } = {} } = useQuery(GetIsSubscribed);
   const { data: { userSearchId } = {} } = useQuery(GetUserSearchId);
@@ -24,8 +29,10 @@ export default function Home() {
   const { data: { userSearchResponse } = {} } = useQuery(GetUserSearchResponse);
 
   useEffect(() => {
-    if (stores.length >= 0 && !loading) {
-      const clonedStores = cloneDeep(stores);
+    //if (stores.length >= 0 && !loading) {
+    console.log({ stores: data?.stores }, "from useEffect")
+    if (data?.stores.length >= 0) {
+      const clonedStores = cloneDeep(data?.stores);
       StoreHelper.addIsOpen(clonedStores)
       const sortedStores = clonedStores.sort(function (a, b) { return b.isOpen - a.isOpen });
       client.writeQuery({
@@ -34,24 +41,27 @@ export default function Home() {
       });
     }
     return () => {
-      console.log("cleaned up: " + moment().format("hh:mm:ss"));
+      //console.log("cleaned up: " + moment().format("hh:mm:ss"));
     };
-  }, [stores]);
+  }, [data]);
 
-  useRouteChange(() => udpateUserSearchState({
-    client,
-    isSubscribed: false,
-    userSearchResponse: null,
-    /**
-     * * UserSearchSubscription is closing countdown on router change so we just need to make sure its reseted to default here so next time we come back to home we dont see the "no answer" (dont make sense.. it should only be shown once the countdown has finished and the user hasnt leave the page)
-     */
-    countdownTimeout: false
-  }))
+  useRouteChange(() => {
+    client.writeQuery({
+      query: ALL_STORE,
+      data: { stores: [] }
+    });
+    cache.gc();
 
-  console.log("logging some variables")
-  //console.log({ userSearchResponse })
-  console.log({ isSubscribed })
-  console.log({ countdownTimeout })
+    udpateUserSearchState({
+      client,
+      isSubscribed: false,
+      userSearchResponse: null,
+      /**
+       * * UserSearchSubscription is closing countdown on router change so we just need to make sure its reseted to default here so next time we come back to home we dont see the "no answer" (dont make sense.. it should only be shown once the countdown has finished and the user hasnt leave the page)
+       */
+      countdownTimeout: false
+    })
+  })
   return (
     <>
       {
@@ -66,8 +76,8 @@ export default function Home() {
           <span>{t("search-box.no-answer")}</span>
         </Box>
       }
-      {stores?.length > 0 ?
-        <Grid list={stores} type="store" />
+      {data?.stores?.length > 0 ?
+        <Grid list={data.stores} type="store" />
         :
         <p>{t('no-data')}</p>}
     </>

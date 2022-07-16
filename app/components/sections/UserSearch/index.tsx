@@ -30,15 +30,17 @@ export default function UserSearchSubscription({ userSearchId, userSearchRespons
   );
 
   useEffect(() => {
-    console.log("subscription mounted: " + moment().format("hh:mm:ss"))
+    //console.log("subscription mounted: " + moment().format("hh:mm:ss"))
     if (subscriptionData) {
       console.log({ subscriptionData })
       const openingDay = StoreHelper.getCurrentOpDay(subscriptionData.openingDay)
       subscriptionData.isOpen = StoreHelper.isOpen(openingDay)
+      console.log("adding subscription data to stores")
       addToCollection("stores", subscriptionData)
+
     }
     return () => {
-      console.log("subscription cleaned up: " + moment().format("hh:mm:ss"));
+      //console.log("subscription cleaned up: " + moment().format("hh:mm:ss"));
     };
   }, [subscriptionData])
 
