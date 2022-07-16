@@ -81,10 +81,10 @@ export const useAllRecentlyAddedStore = () => {
       startDate: startOfWeek
     },*/
   const { data, error, loading } = useQuery(ALL_STORE, {
-    //fetchPolicy: "cache-and-network",
     fetchPolicy: "cache-only",
+    // *returnPartialData: true because of 
+    // https://github.com/apollographql/apollo-client/pull/9367/commits/d1d6666a130b92f81058d8a3fc1178af093ae5d3
     returnPartialData: true
-    //nextFetchPolicy: "cache-only"    
   });
 
   return {
