@@ -36,7 +36,7 @@
     "lodash.debounce": "4.0.8",
     "moment": "2.29.1",
     "next": "12",
-    "next-i18next": "10.2.0",
+    "next-i18next": "11.2.2",
     "next-with-apollo": "5.2.1",
     "nprogress": "0.2.0",
     "react": "18.2.0",
@@ -63,7 +63,8 @@
     "npm": "6.14.15"
   },
   "resolutions": {
-    "@mui/styled-engine": "npm:@mui/styled-engine-sc@5.0.0"
+    "@mui/styled-engine": "npm:@mui/styled-engine-sc@5.0.0",
+    "react-i18next": ">=11.16.4"
   },
   "devDependencies": {
     "@types/node": "^18.0.4",
@@ -71,7 +72,7 @@
     "@types/react": "18.0.15",
     "babel-plugin-styled-components": "^1.13.2",
     "eslint": "7.32.0",
-    "eslint-config-next": "11.1.2",
+    "eslint-config-next": "12.2.2",
     "typescript": "4.7.4"
   }
 }

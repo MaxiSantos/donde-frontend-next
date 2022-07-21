@@ -1,5 +1,7 @@
 import { useApolloClient } from '@apollo/client';
 import Grid from 'app/common/components/elements/Grid';
+import { useRouteChange } from 'app/common/hooks/useRouteChange';
+import { cache } from 'app/common/lib/apolloCache';
 import { StoreHelper } from 'app/common/model/Store';
 import { ALL_STORE, useAllRecentlyAddedStore } from 'app/graphql/Store';
 import { cloneDeep } from 'lodash';
@@ -22,12 +24,23 @@ export default function Store() {
       });
     }
   }, [client, data]);
+
+  useRouteChange(() => {
+    client.writeQuery({
+      query: ALL_STORE,
+      data: { stores: [] }
+    });
+    cache.gc();
+  })
+
   return (
     <>
-      {data?.stores?.length > 0 ?
-        <Grid list={data.stores} type="store" />
-        :
-        <p>{t('no-data')}</p>}
+      {
+        data?.stores?.length > 0 ?
+          <Grid list={data.stores} type="store" />
+          :
+          <p>{`${t('no-data')}`}</p>
+      }
     </>
   )
 }
