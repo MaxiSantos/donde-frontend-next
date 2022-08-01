@@ -30,9 +30,12 @@ import { appWithTranslation } from 'next-i18next';
 import { ToastContainer } from 'react-toastify';
 import { UserActivityProvider } from 'app/common/context/useUserActivity';
 import ErrorBoundary from 'app/common/components/elements/ErrorBoundary'
+import { manageRefresh } from 'app/common/lib/navigation';
 
-Router.events.on('routeChangeStart', () => {
+Router.events.on('routeChangeStart', (route) => {
   NProgress.start();
+  console.log({ route })
+  manageRefresh(route)
 });
 Router.events.on('routeChangeComplete', () => NProgress.done());
 Router.events.on('routeChangeError', () => NProgress.done());
