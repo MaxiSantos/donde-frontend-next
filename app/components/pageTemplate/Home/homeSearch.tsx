@@ -7,9 +7,9 @@ import { useSearchProductsByCategory } from "../../../common/graphql/Product";
 import { useSeachStore } from "../../../common/graphql/Search";
 import { useApolloClient, useQuery } from "@apollo/client";
 import { useAuth } from 'app/common/context/useAuthContext';
-import { GetIsSearching, GetIsSearchBoxOpen, GetIsSubscribed, GetUserSearchId, GetUserSearchResponse, GetCountdownTimeout } from "../../../common/graphql/local";
+import { GetIsSearching, GetIsSearchBoxOpen, GetIsSubscribed, GetUserSearchId, GetLastHomeSearch } from "../../../common/graphql/local";
 import { ALL_STORE } from "../../../graphql/Store";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { selectOptionsProps } from "app/common/components/elements/Form/FormProps";
 import CustomButton from "app/common/components/elements/Button";
 import { useTranslation } from 'next-i18next';
@@ -21,7 +21,8 @@ import * as Yup from 'yup';
 import {
   Amplitude,
 } from "@amplitude/react-amplitude";
-import { udpateUserSearchState } from "./helper";
+import { isNewSearch, udpateUserSearchState } from "./helper";
+import { debounce } from "lodash";
 
 const locations = [
   {
@@ -36,6 +37,7 @@ export const HomeSearch = () => {
 
   const { authResponse: { user } } = useAuth();
   const { data: { isSubscribed } = {} } = useQuery(GetIsSubscribed);
+  const { data: { lastHomeSearch } = {} } = useQuery(GetLastHomeSearch);
   const { t } = useTranslation('common');
 
   const schema = Yup.object().shape({
@@ -80,14 +82,12 @@ export const HomeSearch = () => {
 
   useEffect(() => {
     if (searchData) {
-
       client.writeQuery({
         query: GetUserSearchId,
         data: {
           userSearchId: searchData.id
         },
       });
-
       udpateUserSearchState({
         client,
         isSubscribed: true,
@@ -121,7 +121,7 @@ export const HomeSearch = () => {
       console.log({ formState: formState })
     }*/
     const values = getValues();
-    //console.log(values)
+    console.log(values)
   }, [formState]);
 
   const onChangeCategorySelect = (item) => {
@@ -136,21 +136,38 @@ export const HomeSearch = () => {
 
     }
   };
-  const onSearch = (data: IFormInput) => {
+
+  /*const debouncedSearch = useRef(
+    debounce((criteria) => {
+      return isNewSearch();
+    }, 300)
+  ).current;*/
+
+  const getFormValues = (data) => {
     let variables = {
       userId: user.id,
-      categoryId: data.category.value,
+      categoryId: data.category?.value,
       productId: undefined,
       query: "",
-      location: data.location.value
+      location: data.location?.value
     }
-
-    if (data.search.value === "NEW") {
-      variables.query = data.search.title;
+    if (data.search?.value === "NEW") {
+      variables.query = data.search?.title;
     } else {
-      variables.productId = data.search.value
+      variables.productId = data.search?.value
     }
 
+    return variables;
+  }
+
+  const onSearch = (data: IFormInput) => {
+    const variables = getFormValues(data);
+    if (!isNewSearch(lastHomeSearch, variables)) {
+      console.log("new search not available, change your search query")
+      console.log({ lastHomeSearch })
+      console.log({ variables })
+      return;
+    }
     client.writeQuery({
       query: GetIsSearching,
       data: {
@@ -162,6 +179,12 @@ export const HomeSearch = () => {
       data: {
         isSearchBoxOpen: false
       },
+    });
+    client.writeQuery({
+      query: GetLastHomeSearch,
+      data: {
+        lastHomeSearch: variables
+      }
     });
 
     udpateUserSearchState({
@@ -193,20 +216,20 @@ export const HomeSearch = () => {
           return option?.category
         }} />
     },
-    {
+    /*{
       name: "submit",
       component: <Amplitude>
         {({ logEvent, instrument }) =>
           <CustomButton
             variant="contained"
-            //disabled={isSubscribed}
+            disabled={!isNewSearch(lastHomeSearch, getFormValues(getValues()))}
             //onClick={handleSubmit(onSearch)}>
             onClick={instrument('user searching', handleSubmit(onSearch))}>
             {t('search-box.search')}
           </CustomButton>
         }
       </Amplitude >
-    }
+    }*/
   ]
 
   return <SearchFactory options={options} />

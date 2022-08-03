@@ -31,3 +31,20 @@ export const udpateUserSearchState = (props) => {
   //return { isSubscribed, countdownTimeout, userSearchResponse };
   return null;
 };
+
+export const isNewSearch = (crrSearch, newSearch) => {
+  if (!crrSearch) {
+    return true
+  }
+  console.log({ crrSearch })
+  console.log({ newSearch })
+  const keys = Object.keys(crrSearch)
+  for (let index = 0; index < keys.length; index++) {
+    const value1 = crrSearch[keys[index]];
+    const value2 = newSearch[keys[index]];
+    if (value1 !== value2) {
+      return true
+    }
+  }
+  return false;
+}
