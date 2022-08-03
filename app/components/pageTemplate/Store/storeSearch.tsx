@@ -100,11 +100,13 @@ export const StoreSearch = () => {
   const options = [
     {
       name: "category",
-      component: <CategorySelect control={control} variant="standard" />
+      component: <CategorySelect control={control} variant="standard" />,
+      bp: 5
     },
     {
       name: "location",
-      component: <LocationSelect control={control} freeSolo={false} multiple={false} variant="standard" />
+      component: <LocationSelect control={control} freeSolo={false} multiple={false} variant="standard" />,
+      bp: 5
     },
     {
       name: "submit",
@@ -112,7 +114,9 @@ export const StoreSearch = () => {
         variant="contained"
         onClick={handleSubmit(onSearch)}>
         {t('search-box.search')}
-      </CustomButton>
+      </CustomButton>,
+      bp: 2,
+      isButton: true
     }
   ]
 
