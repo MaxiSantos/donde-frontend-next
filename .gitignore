@@ -107,6 +107,7 @@ dist
 ### VisualStudioCode ###
 *sublime*
 *workspace*
+.vscode
 
 ### Builds ###
 build
