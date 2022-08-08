@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@algolia/autocomplete-core": "^1.7.1",
     "@algolia/autocomplete-js": "1.7.1",
     "@algolia/autocomplete-theme-classic": "^1.7.0",
     "@amcharts/amcharts4": "4.10.22",
