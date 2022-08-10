@@ -18,9 +18,7 @@ import { useFocus } from 'app/common/hooks/useFocus'
 import { StoreHelper } from "app/common/model/Store";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
-import {
-  Amplitude,
-} from "@amplitude/react-amplitude";
+import { track } from '@amplitude/analytics-browser'
 import { isNewSearch, udpateUserSearchState } from "./helper";
 import { debounce } from "lodash";
 
@@ -168,6 +166,9 @@ export const HomeSearch = () => {
       console.log({ variables })
       return;
     }
+
+    track('Home search', variables)
+
     client.writeQuery({
       query: GetIsSearching,
       data: {

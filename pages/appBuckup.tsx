@@ -4,7 +4,11 @@ import dynamic from "next/dynamic";
 import { ApolloProvider } from '@apollo/client';
 import type { AppProps, AppContext } from 'next/app';
 import Head from 'next/head';
-import * as amplitude from '@amplitude/analytics-browser';
+import { AmplitudeClient, Identify } from 'amplitude-js';
+import {
+  AmplitudeProvider,
+} from "@amplitude/react-amplitude";
+
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
 import 'react-toastify/dist/ReactToastify.css';
@@ -27,13 +31,10 @@ import { ToastContainer } from 'react-toastify';
 import { UserActivityProvider } from 'app/common/context/useUserActivity';
 import ErrorBoundary from 'app/common/components/elements/ErrorBoundary'
 import { manageRefresh } from 'app/common/lib/navigation';
-import { Identify } from '@amplitude/analytics-browser';
 
 Router.events.on('routeChangeStart', (route) => {
   NProgress.start();
-  const event = new Identify();
-  const props = event.getUserProperties()
-  console.log(props)
+  console.log({ route })
   manageRefresh(route)
 });
 Router.events.on('routeChangeComplete', () => NProgress.done());
@@ -44,25 +45,7 @@ const onRedirectCallback = (appState) => {
   Router.replace(appState?.returnTo || '/');
 };
 
-amplitude.init(process.env.NEXT_PUBLIC_AMPLITUDE_API_KEY, null, {
-  //logLevel: 
-  logLevel: process.env.APP_STAGE === 'production' ? 0 : 2,
-  // https://www.docs.developers.amplitude.com/data/sdks/typescript-browser/#page-view-tracking
-  attribution: {
-    trackPageViews: true,
-  },
-  // @ts-ignore XXX onError should be allowed, see https://github.com/DefinitelyTyped/DefinitelyTyped/issues/42005
-  onError: (error): void => {
-    //Sentry.captureException(error);
-    console.error(error); // eslint-disable-line no-console
-  },
-});
-
 const MyApp = ({ Component, pageProps }: AppProps) => {
-  /*
-  * UniversalApp was used with react-amplitude because of ssr of nextjs. But since we now use officila amplitude ts package we don't need it anymore.
-  source: https://github.com/amplitude/Amplitude-Javascript/issues/110#issuecomment-594088315
-  */
   const UniversalApp = (): JSX.Element => (
     <>
       <Head>
@@ -90,7 +73,36 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
       </ThemeProvider>
     </>
   )
-  return <UniversalApp />
+
+  if (typeof window === 'undefined') {
+    return <UniversalApp />
+  } else {
+    //const amplitude = require('amplitude-js');
+    const amplitude = require('amplitude-js').default;
+    //debugger;
+    const amplitudeInstance: AmplitudeClient = amplitude.getInstance();
+
+    // https://help.amplitude.com/hc/en-us/articles/115001361248#settings-configuration-options
+    amplitudeInstance.init(process.env.NEXT_PUBLIC_AMPLITUDE_API_KEY, null, {
+      logLevel: process.env.APP_STAGE === 'production' ? 'DISABLE' : 'WARN',
+      includeGclid: true,
+      includeReferrer: true, // https://help.amplitude.com/hc/en-us/articles/215131888#track-referrers
+      includeUtm: true,
+      // @ts-ignore XXX onError should be allowed, see https://github.com/DefinitelyTyped/DefinitelyTyped/issues/42005
+      onError: (error): void => {
+        //Sentry.captureException(error);
+        console.error(error); // eslint-disable-line no-console
+      },
+    });
+
+    amplitudeInstance.setVersionName(process.env.NEXT_PUBLIC_APP_VERSION); // e.g: 1.0.0
+    return <AmplitudeProvider
+      amplitudeInstance={amplitude.getInstance()}
+      apiKey={process.env.NEXT_PUBLIC_AMPLITUDE_API_KEY}
+    >
+      <UniversalApp />
+    </AmplitudeProvider>
+  }
 }
 
 MyApp.getInitialProps = async function ({ Component, ctx }: AppContext) {
