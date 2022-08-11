@@ -21,6 +21,8 @@ import * as Yup from 'yup';
 import { track } from '@amplitude/analytics-browser'
 import { isNewSearch, udpateUserSearchState } from "./helper";
 import { debounce } from "lodash";
+import { AmplitudeHelper } from "app/common/lib/amplitudeHelper";
+import { useRouter } from "next/router";
 
 const locations = [
   {
@@ -32,6 +34,7 @@ const locations = [
 export const HomeSearch = () => {
   const client = useApolloClient();
   const [ref, setFocus] = useFocus();
+  const router = useRouter();
 
   const { authResponse: { user } } = useAuth();
   const { data: { isSubscribed } = {} } = useQuery(GetIsSubscribed);
@@ -167,7 +170,7 @@ export const HomeSearch = () => {
       return;
     }
 
-    track('Home search', variables)
+    AmplitudeHelper.trackSearch(variables, router.asPath)
 
     client.writeQuery({
       query: GetIsSearching,

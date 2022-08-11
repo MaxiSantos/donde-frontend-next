@@ -44,9 +44,12 @@ const onRedirectCallback = (appState) => {
   Router.replace(appState?.returnTo || '/');
 };
 
+// https://community.amplitude.com/instrumentation-and-data-management-57/disabling-metric-tracking-during-development-182
+// *not working disabling amplitude this way. I had to create a wrapper for track function
+//if (process.env.NEXT_PUBLIC_IS_AMPLITUDE_ACTIVE === '1') {
 amplitude.init(process.env.NEXT_PUBLIC_AMPLITUDE_API_KEY, null, {
   //logLevel: 
-  logLevel: process.env.APP_STAGE === 'production' ? 0 : 2,
+  logLevel: process.env.NEXT_PUBLIC_APP_STAGE === 'production' ? 0 : 2,
   // https://www.docs.developers.amplitude.com/data/sdks/typescript-browser/#page-view-tracking
   attribution: {
     trackPageViews: true,
@@ -57,6 +60,7 @@ amplitude.init(process.env.NEXT_PUBLIC_AMPLITUDE_API_KEY, null, {
     console.error(error); // eslint-disable-line no-console
   },
 });
+//}
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   /*
