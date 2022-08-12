@@ -30,7 +30,7 @@ export default function Home() {
 
   useEffect(() => {
     //if (stores.length >= 0 && !loading) {
-    console.log({ stores: data?.stores }, "from useEffect")
+    //console.log({ stores: data?.stores }, "from useEffect")
     if (data?.stores.length >= 0) {
       const clonedStores = cloneDeep(data?.stores);
       StoreHelper.addIsOpen(clonedStores)
