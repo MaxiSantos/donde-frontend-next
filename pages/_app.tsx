@@ -25,7 +25,7 @@ import { ToastContainer } from 'react-toastify';
 import { UserActivityProvider } from 'app/common/context/useUserActivity';
 import ErrorBoundary from 'app/common/components/elements/ErrorBoundary'
 import { useMainRouteChange } from 'app/common/hooks/useMainRouteChange';
-import { AmplitudeHelper } from 'app/common/lib/amplitudeHelper';
+import { AmplitudeHelper } from 'app/lib/amplitudeHelper';
 
 // https://community.amplitude.com/instrumentation-and-data-management-57/disabling-metric-tracking-during-development-182
 // *not working disabling amplitude this way. I had to create a wrapper for track function

@@ -18,10 +18,9 @@ import { useFocus } from 'app/common/hooks/useFocus'
 import { StoreHelper } from "app/common/model/Store";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
-import { track } from '@amplitude/analytics-browser'
 import { isNewSearch, udpateUserSearchState } from "./helper";
 import { debounce } from "lodash";
-import { AmplitudeHelper } from "app/common/lib/amplitudeHelper";
+import { AmplitudeHelper } from "app/lib/amplitudeHelper";
 import { useRouter } from "next/router";
 
 const locations = [
