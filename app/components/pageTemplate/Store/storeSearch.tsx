@@ -100,7 +100,7 @@ export const StoreSearch = () => {
   const options = [
     {
       name: "category",
-      component: <CategorySelect control={control} variant="standard" />,
+      component: <CategorySelect blurOnSelect={true} control={control} variant="standard" />,
       bp: 5
     },
     {

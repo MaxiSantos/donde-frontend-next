@@ -85,7 +85,7 @@ export const PublicationSearch = () => {
   const options = [
     {
       name: "category",
-      component: <CategorySelect control={control} variant="standard" />,
+      component: <CategorySelect control={control} blurOnSelect={true} variant="standard" />,
       bp: 5
     },
     {
