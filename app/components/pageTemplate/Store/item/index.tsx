@@ -20,11 +20,14 @@ import { Actions } from 'app/common/components/elements/Grid/Items/Store/Actions
 
 SwiperCore.use([Navigation]);
 
-export default function Store() {
+export default function Store(props) {
   const router = useRouter();
+  const { data } = props;
+  console.log("data+++++++++++++++")
+  console.log(data)
   const { isMobile } = useMedia()
   const { t } = useTranslation('common');
-  const [getStore, { loading, data, error }] = useLazyQuery(
+  /*const [getStore, { loading, data, error }] = useLazyQuery(
     STORE_BY_ID
   );
 
@@ -34,13 +37,13 @@ export default function Store() {
       const [storeId, productId] = router.query.id.split("_")
       getStore({ variables: { storeId: parseInt(storeId) } })
     }
-  }, [router.isReady]);
+  }, [router.isReady]);*/
 
-  console.log({ loading })
+  /*console.log({ loading })
   console.log({ data })
   if (loading || !data?.store) {
     return <p>{t('loading')}</p>
-  }
+  }*/
   const products = data.store.storeProduct.map(item => ({
     ...item.product,
     image: item.image,

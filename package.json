@@ -36,7 +36,7 @@
     "lodash.clonedeep": "4.5.0",
     "lodash.debounce": "4.0.8",
     "moment": "2.29.1",
-    "next": "12",
+    "next": "12.2.5",
     "next-i18next": "11.2.2",
     "next-with-apollo": "5.2.1",
     "nprogress": "0.2.0",
