@@ -206,7 +206,7 @@ export const HomeSearch = () => {
       name: "category",
       component: <CategorySelect onClose={() => {
         setFocus()
-      }} control={control} blurOnSelect={true} freeSolo={false} byChange={onChangeCategorySelect} multiple={false} variant="standard" />
+      }} control={control} freeSolo={false} byChange={onChangeCategorySelect} multiple={false} variant="standard" />
     },
     {
       name: "location",
