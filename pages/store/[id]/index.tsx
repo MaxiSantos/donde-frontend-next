@@ -32,7 +32,12 @@ export async function getStaticProps(context) {
       protected: true,
       data: response.data,
       ...(sst),
-    }
+    },
+    /*
+    TODO for now we use revalidate, but we should update backend to do a on-deman revalidation on store update 
+    https://nextjs.org/docs/basic-features/data-fetching/incremental-static-regeneration#using-on-demand-revalidation
+    */
+    revalidate: 3600
   };
 }
 
@@ -48,6 +53,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const { data } = await client.query({ query: ALL_STORE_QUERY })
 
   // Get the paths we want to pre-render based on stores
+  // https://nextjs.org/docs/api-reference/data-fetching/get-static-paths#paths
+  /* The value for each params object must match the parameters used in the page name
+  store[id] hence I use id as a key in params object
+  */
   const paths = data.stores.map((store) => ({
     params: { id: store.id.toString() }, //https://stackoverflow.com/a/60814690
   }))

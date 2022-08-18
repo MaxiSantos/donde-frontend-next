@@ -27,6 +27,10 @@ export default function Store(props) {
   console.log(data)
   const { isMobile } = useMedia()
   const { t } = useTranslation('common');
+  if (router.isFallback) {
+    return <p>{t('loading')}</p>
+  }
+
   /*const [getStore, { loading, data, error }] = useLazyQuery(
     STORE_BY_ID
   );
