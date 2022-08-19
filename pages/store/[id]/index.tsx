@@ -1,12 +1,10 @@
 import { Default } from "app/common/components/layouts/default";
 import { TranslationHelper } from "app/common/lib/translation";
+import client from "app/common/lib/apolloClient";
 import Store from "app/components/pageTemplate/Store/item";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { GetStaticPaths } from 'next'
 import { ALL_STORE_QUERY, STORE_BY_ID } from "app/common/graphql/queries/Store";
-import { useQuery } from "@apollo/client";
-import client from "app/common/lib/apolloClient";
-import { domainToASCII } from "url";
 
 const App = ({ data }) => (
   <Default>
@@ -20,11 +18,14 @@ export async function getStaticProps(context) {
   let response: any;
   try {
     sst = await serverSideTranslations(context.locale, TranslationHelper.getCommonSource());
+    console.log("getStaticProps++++")
+    console.log("context.params++++")
+    console.log(context)
     response = await client.query({ query: STORE_BY_ID, variables: { storeId: parseInt(context.params.id) } })
 
   } catch (err) {
     console.log("error in getStaticProps")
-    console.log({ err })
+    console.log(err)
   };
 
   return {
@@ -61,6 +62,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
     params: { id: store.id.toString() }, //https://stackoverflow.com/a/60814690
   }))
 
+  console.log("getStaticPaths++++")
+  console.log("paths++++")
+  console.log(paths)
   // We'll pre-render only these paths at build time.
   // { fallback: false } means other routes should 404.
   return { paths, fallback: true }

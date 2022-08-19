@@ -50,6 +50,14 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
 
+## Isuses found
+
+1- <Link href="profile"
+
+this was causing getStaticProps from store[i] to somehow receive { params:{id:'profile'}}
+
+FIX: always prepend slash on next link
+
 ## Setup DNS
 
 1- https://vercel.com/support/articles/how-to-manage-vercel-dns-records
