@@ -62,7 +62,7 @@ export default function Store(props) {
         {data.store.category.map(item => <CategoryTag key={item.id}>{item.name}</CategoryTag>)}
       </Title>
       <Box component="div" sx={{ marginBottom: "20px", marginTop: "-15px" }}>
-        <a target="_blank" href={`https://www.google.com/maps/search/?api=1&query=${data.store.location}`} rel="noreferrer">
+        <a target="_blank" href={`https://www.google.com/maps/search/?api=1&query=${data.store.location}`} rel="noopener noreferrer">
           <i className="fa fa-map-marker"></i> {data.store.location}
         </a>
       </Box>
