@@ -62,3 +62,9 @@ FIX: always prepend slash on next link
 
 1- https://vercel.com/support/articles/how-to-manage-vercel-dns-records
 2-
+
+## Knowledge
+
+1- https://stackoverflow.com/questions/67787456/what-is-the-difference-between-fallback-false-vs-true-vs-blocking-of-getstaticpa
+
+info about fallback flag on getStaticPaths

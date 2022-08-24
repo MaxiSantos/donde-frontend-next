@@ -45,6 +45,7 @@
     "react-dom": "18.2.0",
     "react-highlight-words": "0.18.0",
     "react-hook-form": "7.28.1",
+    "react-hooks-outside": "1.0.3",
     "react-idle-timer": "4.6.4",
     "react-image-gallery": "1.2.7",
     "react-share": "4.4.0",

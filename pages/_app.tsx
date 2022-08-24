@@ -1,3 +1,4 @@
+import { ReactHooksWrapper, setHook } from 'react-hooks-outside';
 import dynamic from "next/dynamic";
 import { ApolloProvider } from '@apollo/client';
 import type { AppProps, AppContext } from 'next/app';
@@ -20,18 +21,22 @@ import AuthorizationProvider from '../app/common/lib/AuthorizationProvider';
 import { NotificationProvider } from 'app/common/context/useNotification';
 import { CustomNotification } from 'app/common/components/elements/CustomNotification';
 import { AuthProvider } from '../app/common/context/useAuthContext';
-import { appWithTranslation } from 'next-i18next';
+import { appWithTranslation, useTranslation } from 'next-i18next';
 import { ToastContainer } from 'react-toastify';
 import { UserActivityProvider } from 'app/common/context/useUserActivity';
 import ErrorBoundary from 'app/common/components/elements/ErrorBoundary'
 import { useMainRouteChange } from 'app/common/hooks/useMainRouteChange';
 import { AmplitudeHelper } from 'app/lib/amplitudeHelper';
+import { useLogout } from 'app/common/hooks/useLogout';
 
 // https://community.amplitude.com/instrumentation-and-data-management-57/disabling-metric-tracking-during-development-182
 // *not working disabling amplitude this way. I had to create a wrapper for track function
 //if (process.env.NEXT_PUBLIC_IS_AMPLITUDE_ACTIVE === '1') {
 AmplitudeHelper.init();
 //}
+
+setHook("logout", useLogout)
+setHook("translation", () => { return useTranslation('common') })
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   useMainRouteChange();
@@ -57,6 +62,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
                   <CustomNotification />
                   <AuthorizationProvider pageProps={pageProps}>
                     <Component {...pageProps} />
+                    <ReactHooksWrapper />
                   </AuthorizationProvider>
                 </NotificationProvider>
               </UserActivityProvider>
