@@ -113,16 +113,16 @@ export const HomeSearch = () => {
   });
   const { handleSubmit, reset, control, getValues, formState } = methods;
 
-  useEffect(() => {
+  /*useEffect(() => {
     if (formState.errors) {
-      //console.log({ formError: formState.errors })
+      console.log({ formError: formState.errors })
     }
-    /*if (formState) {
+    if (formState) {
       console.log({ formState: formState })
-    }*/
+    }
     const values = getValues();
     console.log(values)
-  }, [formState]);
+  }, [formState]);*/
 
   const onChangeCategorySelect = (item) => {
     //console.log({ item })

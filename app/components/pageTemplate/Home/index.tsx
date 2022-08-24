@@ -15,7 +15,6 @@ import { udpateUserSearchState } from './helper';
 import { cache } from 'app/common/lib/apolloCache';
 
 export default function Home() {
-  console.log("rendering home page template !!!!!!!!!!!!")
   const client = useApolloClient();
 
   const { data, error, loading } = useAllRecentlyAddedStore();
