@@ -4,7 +4,7 @@ import { Default } from '../app/common/components/layouts/default';
 import { Login } from '../app/common/components/pageTemplate/Auth/Login';
 
 const App = () => (
-  <Default pageTitle="login">
+  <Default>
     <Login client='user' />
   </Default>
 );

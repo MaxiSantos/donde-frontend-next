@@ -4,7 +4,7 @@ import { Default } from '../app/common/components/layouts/default';
 import { Signup } from '../app/common/components/pageTemplate/Auth/Signup';
 
 const App = () => (
-  <Default pageTitle="signup">
+  <Default>
     <Signup />
   </Default>
 );
