@@ -38,7 +38,7 @@ export const StoreSearch = () => {
 
   interface IFormInput {
     category: selectOptionsProps | null,
-    location: string,
+    location: selectOptionsProps,
   }
 
   const {
