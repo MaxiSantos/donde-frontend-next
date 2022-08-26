@@ -56,7 +56,7 @@ export const HomeSearch = () => {
 
   interface IFormInput {
     category: selectOptionsProps | null,
-    location: string,
+    location: selectOptionsProps | null,
     search: number | string,
   }
 

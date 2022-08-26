@@ -68,3 +68,22 @@ FIX: always prepend slash on next link
 1- https://stackoverflow.com/questions/67787456/what-is-the-difference-between-fallback-false-vs-true-vs-blocking-of-getstaticpa
 
 info about fallback flag on getStaticPaths
+
+## MUI components
+export const Container = styled('div')<Props>((props) => ({
+  position: `${props.$ismobile ? 'relative' : 'fixed'}`,
+  minHeight: '100vh',
+  overflow: 'hidden',
+  backgroundColor: props.theme.palette.grey2.darken,
+  display: 'block',
+  boxShadow: "0px 0px 12px 0px rgba(0,0,0,0.12)",
+  zIndex: 11,
+  minWidth: '225px',
+  maxWidth: '225px',
+  '& .QontoStepIcon-completedIcon': {
+    color: '#784af4',
+    zIndex: 1,
+    fontSize: 18,
+  },
+}));
+
