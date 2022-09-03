@@ -4,7 +4,7 @@ import { SearchFactory } from "../../../common/components/sections/Search2/facto
 import { useApolloClient } from "@apollo/client";
 import { useAuth } from 'app/common/context/useAuthContext';
 import { GetIsSearching, GetIsSearchBoxOpen } from "../../../common/graphql/local";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { selectOptionsProps } from "app/common/components/elements/Form/FormProps";
 import CustomButton from "app/common/components/elements/Button";
 import { ALL_STORE_QUERY, useStoreByCategory } from "app/common/graphql/queries/Store";
@@ -13,6 +13,7 @@ import { LocationSelect } from "app/common/components/elements/Form/withData/Loc
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import { StoreHelper } from "app/common/model/Store";
+import { useMedia } from "app/common/hooks/useMedia";
 
 const locations = [
   {
@@ -23,8 +24,11 @@ const locations = [
 
 export const StoreSearch = () => {
   const client = useApolloClient();
-  const { authResponse: { user } } = useAuth();
   const { t } = useTranslation('common');
+  const refCategory = useRef(null);
+  const timerRef = useRef(null);
+  const timerRef2 = useRef(null);
+  const { isMobile } = useMedia();
   const schema = Yup.object().shape({
     category: Yup.object().shape({
       value: Yup.number(),
@@ -47,6 +51,14 @@ export const StoreSearch = () => {
     error: resultsError,
     loading: resultsLoading,
   } = useStoreByCategory();
+
+  useEffect(() => {
+    // Clear the interval when the component unmounts
+    return () => {
+      clearTimeout(timerRef.current);
+      clearTimeout(timerRef2.current);
+    }
+  }, []);
 
   useEffect(() => {
     if (stores?.length >= 0) {
@@ -73,6 +85,11 @@ export const StoreSearch = () => {
 
   const onSearch = (data: IFormInput) => {
     console.dir(data)
+    if (isMobile) {
+      timerRef2.current = setTimeout(() => {
+        window.scroll({ behavior: 'smooth', top: 0 })
+      }, 250);
+    }
     let variables = {
       categoryId: data?.category?.value,
       location: data.location.value
@@ -97,10 +114,18 @@ export const StoreSearch = () => {
     })
   }
 
+  const handleOnOpen = () => {
+    if (isMobile) {
+      timerRef.current = setTimeout(() => {
+        refCategory.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }, 250);
+    }
+  };
+
   const options = [
     {
       name: "category",
-      component: <CategorySelect blurOnSelect={true} control={control} variant="standard" />,
+      component: <CategorySelect optional={refCategory} onOpen={handleOnOpen} blurOnSelect={true} control={control} variant="standard" />,
       bp: 5
     },
     {
