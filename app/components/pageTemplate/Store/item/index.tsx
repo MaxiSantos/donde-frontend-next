@@ -23,8 +23,6 @@ SwiperCore.use([Navigation]);
 export default function Store(props) {
   const router = useRouter();
   const { data } = props;
-  console.log("data+++++++++++++++")
-  console.log(data)
   const { isMobile } = useMedia()
   const { t } = useTranslation('common');
   if (router.isFallback) {

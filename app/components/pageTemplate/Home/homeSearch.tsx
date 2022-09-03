@@ -14,7 +14,6 @@ import { selectOptionsProps } from "app/common/components/elements/Form/FormProp
 import CustomButton from "app/common/components/elements/Button";
 import { useTranslation } from 'next-i18next';
 import { LocationSelect } from "app/common/components/elements/Form/withData/LocationSelect";
-import { useFocus } from 'app/common/hooks/useFocus'
 import { StoreHelper } from "app/common/model/Store";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
@@ -22,6 +21,7 @@ import { isNewSearch, udpateUserSearchState } from "./helper";
 import { debounce } from "lodash";
 import { AmplitudeHelper } from "app/lib/amplitudeHelper";
 import { useRouter } from "next/router";
+import { useMedia } from "app/common/hooks/useMedia";
 
 const locations = [
   {
@@ -32,8 +32,11 @@ const locations = [
 
 export const HomeSearch = () => {
   const client = useApolloClient();
-  const [ref, setFocus] = useFocus();
+  const refCategory = useRef(null);
+  const timerRef = useRef(null);
+  const timerRef2 = useRef(null);
   const router = useRouter();
+  const { isMobile } = useMedia();
 
   const { authResponse: { user } } = useAuth();
   const { data: { isSubscribed } = {} } = useQuery(GetIsSubscribed);
@@ -79,6 +82,14 @@ export const HomeSearch = () => {
     title: item.name,
     category: item.category[0].name,
   })) || [];
+
+  useEffect(() => {
+    // Clear the interval when the component unmounts
+    return () => {
+      clearTimeout(timerRef.current);
+      clearTimeout(timerRef2.current);
+    }
+  }, []);
 
   useEffect(() => {
     if (searchData) {
@@ -162,6 +173,11 @@ export const HomeSearch = () => {
 
   const onSearch = (data: IFormInput) => {
     const variables = getFormValues(data);
+    if (isMobile) {
+      timerRef2.current = setTimeout(() => {
+        window.scroll({ behavior: 'smooth', top: 0 })
+      }, 250);
+    }
     if (!isNewSearch(lastHomeSearch, variables)) {
       console.log("new search not available, change your search query")
       console.log({ lastHomeSearch })
@@ -201,12 +217,20 @@ export const HomeSearch = () => {
     })
   }
 
+  const handleOnOpen = () => {
+    if (isMobile) {
+      timerRef.current = setTimeout(() => {
+        refCategory.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }, 250);
+    }
+  };
+
   const options = [
     {
       name: "category",
-      component: <CategorySelect onClose={() => {
-        setFocus()
-      }} control={control} blurOnSelect={true} freeSolo={false} byChange={onChangeCategorySelect} multiple={false} variant="standard" />
+      component: <CategorySelect optional={refCategory}
+        onOpen={handleOnOpen}
+        control={control} blurOnSelect={true} freeSolo={false} byChange={onChangeCategorySelect} multiple={false} variant="standard" />
     },
     {
       name: "location",
@@ -214,7 +238,7 @@ export const HomeSearch = () => {
     },
     {
       name: "search",
-      component: <FormSelect2 optional={ref} name="search" control={control} label={t('search-box.what-u-looking')} options={productOptions} $isAsking={true} freeSolo variant="standard" onSelect={handleSubmit(onSearch)}
+      component: <FormSelect2 name="search" control={control} label={t('search-box.what-u-looking')} options={productOptions} $isAsking={true} freeSolo variant="standard" onSelect={handleSubmit(onSearch)}
         groupBy={(option) => {
           return option?.category
         }} />
