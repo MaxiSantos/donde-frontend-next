@@ -8,12 +8,13 @@ import { Button } from "@mui/material";
 import { useApolloClient } from "@apollo/client";
 import { useAuth } from 'app/common/context/useAuthContext';
 import { GetIsSearching, GetIsSearchBoxOpen, GetIsSubscribed, GetUserSearchId, GetUserSearchResponse } from "../../../common/graphql/local";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { ALL_PUBLICATION_QUERY, usePublicationsByCategory } from "app/common/graphql/queries/Publication";
 import { selectOptionsProps } from "app/common/components/elements/Form/FormProps";
 import CustomButton from "app/common/components/elements/Button";
 import { LocationSelect } from "app/common/components/elements/Form/withData/LocationSelect";
 import { useTranslation } from "react-i18next";
+import { useMedia } from "app/common/hooks/useMedia";
 
 const locations = [
   {
@@ -25,6 +26,10 @@ const locations = [
 export const PublicationSearch = () => {
   const client = useApolloClient();
   const { authResponse: { user } } = useAuth();
+  const refCategory = useRef(null);
+  const timerRef = useRef(null);
+  const timerRef2 = useRef(null);
+  const { isMobile } = useMedia();
   const { t } = useTranslation('common');
   const defaultValues = {
     category: null,
@@ -46,6 +51,14 @@ export const PublicationSearch = () => {
   } = usePublicationsByCategory();
 
   useEffect(() => {
+    // Clear the interval when the component unmounts
+    return () => {
+      clearTimeout(timerRef.current);
+      clearTimeout(timerRef2.current);
+    }
+  }, []);
+
+  useEffect(() => {
     if (publications?.length >= 0) {
       client.writeQuery({
         query: ALL_PUBLICATION_QUERY,
@@ -59,6 +72,11 @@ export const PublicationSearch = () => {
 
   const onSearch = (data: IFormInput) => {
     console.dir(data)
+    if (isMobile) {
+      timerRef2.current = setTimeout(() => {
+        window.scroll({ behavior: 'smooth', top: 0 })
+      }, 250);
+    }
     let variables = {
       categoryId: data?.category?.value,
       location: data.location.value
@@ -82,10 +100,19 @@ export const PublicationSearch = () => {
       variables,
     })
   }
+
+  const handleOnOpen = () => {
+    if (isMobile) {
+      timerRef.current = setTimeout(() => {
+        refCategory.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }, 250);
+    }
+  };
+
   const options = [
     {
       name: "category",
-      component: <CategorySelect control={control} blurOnSelect={true} variant="standard" />,
+      component: <CategorySelect optional={refCategory} onOpen={handleOnOpen} control={control} blurOnSelect={true} variant="standard" />,
       bp: 5
     },
     {
