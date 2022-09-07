@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { CategorySelect } from "../../../common/components/elements/Form/withData/CategorySelect";
 import { SearchFactory } from "../../../common/components/sections/Search2/factory"
-import { useApolloClient } from "@apollo/client";
+import { useApolloClient, useQuery } from "@apollo/client";
 import { useAuth } from 'app/common/context/useAuthContext';
 import { GetIsSearching, GetIsSearchBoxOpen } from "../../../common/graphql/local";
 import { useEffect, useRef } from "react";
@@ -29,6 +29,7 @@ export const StoreSearch = () => {
   const timerRef = useRef(null);
   const timerRef2 = useRef(null);
   const { isMobile } = useMedia();
+  const { data: { isSearching } = {} } = useQuery(GetIsSearching);
   const schema = Yup.object().shape({
     category: Yup.object().shape({
       value: Yup.number(),
@@ -98,7 +99,10 @@ export const StoreSearch = () => {
     client.writeQuery({
       query: GetIsSearching,
       data: {
-        isSearching: true
+        isSearching: {
+          ...isSearching,
+          store: true
+        }
       },
     });
 
@@ -150,5 +154,5 @@ export const StoreSearch = () => {
     subtitle: t("search-box.subtitle-general")
   }
 
-  return <SearchFactory options={options} header={header} />
+  return <SearchFactory options={options} header={header} isSearching={isSearching?.store} />
 }

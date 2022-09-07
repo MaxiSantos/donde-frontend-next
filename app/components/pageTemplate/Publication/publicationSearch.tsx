@@ -5,7 +5,7 @@ import { CategorySelect } from "../../../common/components/elements/Form/withDat
 import { SearchFactory } from "../../../common/components/sections/Search2/factory"
 import { FormSelect } from "../../../common/components/elements/Form/FormSelect";
 import { Button } from "@mui/material";
-import { useApolloClient } from "@apollo/client";
+import { useApolloClient, useQuery } from "@apollo/client";
 import { useAuth } from 'app/common/context/useAuthContext';
 import { GetIsSearching, GetIsSearchBoxOpen, GetIsSubscribed, GetUserSearchId, GetUserSearchResponse } from "../../../common/graphql/local";
 import { useEffect, useRef } from "react";
@@ -30,6 +30,7 @@ export const PublicationSearch = () => {
   const timerRef = useRef(null);
   const timerRef2 = useRef(null);
   const { isMobile } = useMedia();
+  const { data: { isSearching } = {} } = useQuery(GetIsSearching);
   const { t } = useTranslation('common');
   const defaultValues = {
     category: null,
@@ -85,7 +86,10 @@ export const PublicationSearch = () => {
     client.writeQuery({
       query: GetIsSearching,
       data: {
-        isSearching: true
+        isSearching: {
+          ...isSearching,
+          publication: true
+        }
       },
     });
 
@@ -155,5 +159,5 @@ export const PublicationSearch = () => {
     subtitle: t("search-box.subtitle-general")
   }
 
-  return <SearchFactory options={options} header={header} />
+  return <SearchFactory options={options} header={header} isSearching={isSearching?.publication} />
 }

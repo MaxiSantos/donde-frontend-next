@@ -40,6 +40,7 @@ export const HomeSearch = () => {
 
   const { authResponse: { user } } = useAuth();
   const { data: { isSubscribed } = {} } = useQuery(GetIsSubscribed);
+  const { data: { isSearching } = {} } = useQuery(GetIsSearching);
   const { data: { lastHomeSearch } = {} } = useQuery(GetLastHomeSearch);
   const { t } = useTranslation('common');
 
@@ -190,7 +191,10 @@ export const HomeSearch = () => {
     client.writeQuery({
       query: GetIsSearching,
       data: {
-        isSearching: true
+        isSearching: {
+          ...isSearching,
+          home: true
+        }
       },
     });
     client.writeQuery({
@@ -264,5 +268,5 @@ export const HomeSearch = () => {
     subtitle: t("search-box.subtitle")
   }
 
-  return <SearchFactory options={options} header={header} />
+  return <SearchFactory options={options} header={header} isSearching={isSearching?.home} />
 }
