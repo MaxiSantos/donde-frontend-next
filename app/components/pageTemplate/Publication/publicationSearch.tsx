@@ -39,7 +39,7 @@ export const PublicationSearch = () => {
 
   interface IFormInput {
     category: selectOptionsProps | null,
-    location: string,
+    location: selectOptionsProps,
     search: number | string,
   }
 
@@ -143,7 +143,7 @@ export const PublicationSearch = () => {
       component: <CustomButton
         variant="contained"
         onClick={handleSubmit(onSearch)}>
-        {t('search-box.search')}
+        {t('actions.search')}
       </CustomButton>,
       bp: 2,
       isButton: true

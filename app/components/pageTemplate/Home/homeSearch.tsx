@@ -252,7 +252,7 @@ export const HomeSearch = () => {
             disabled={!isNewSearch(lastHomeSearch, getFormValues(getValues()))}
             //onClick={handleSubmit(onSearch)}>
             onClick={instrument('user searching', handleSubmit(onSearch))}>
-            {t('search-box.search')}
+            {t('actions.search')}
           </CustomButton>
         }
       </Amplitude >
