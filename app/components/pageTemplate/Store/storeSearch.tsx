@@ -145,5 +145,10 @@ export const StoreSearch = () => {
     }
   ]
 
-  return <SearchFactory options={options} />
+  const header = {
+    title: t("search-box.title-store"),
+    subtitle: t("search-box.subtitle-general")
+  }
+
+  return <SearchFactory options={options} header={header} />
 }

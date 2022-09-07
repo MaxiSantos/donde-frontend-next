@@ -259,5 +259,10 @@ export const HomeSearch = () => {
     }*/
   ]
 
-  return <SearchFactory options={options} />
+  const header = {
+    title: t("search-box.title"),
+    subtitle: t("search-box.subtitle")
+  }
+
+  return <SearchFactory options={options} header={header} />
 }

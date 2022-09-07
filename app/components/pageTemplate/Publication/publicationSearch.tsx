@@ -150,5 +150,10 @@ export const PublicationSearch = () => {
     }
   ]
 
-  return <SearchFactory options={options} />
+  const header = {
+    title: t("search-box.title-publication"),
+    subtitle: t("search-box.subtitle-general")
+  }
+
+  return <SearchFactory options={options} header={header} />
 }
