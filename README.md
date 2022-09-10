@@ -49,6 +49,16 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
+## Github actions
+
+https://vercel.com/guides/how-can-i-use-github-actions-with-vercel
+
+If build process needs to checkout private repo then do this
+1- https://stackoverflow.com/a/70283191 
+create ssh keys and set them in private repo (as deploy_key) and dependent repo (as secret key) (SSH key dont have to have passphrase)
+###### official way to generate ssh keys: https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#about-ssh-key-passphrases
+
+2- then use ssh_key flag in checkout actions
 
 ## Isuses found
 

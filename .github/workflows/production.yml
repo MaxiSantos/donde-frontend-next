@@ -1,0 +1,39 @@
+name: GitHub Actions Vercel Production Deployment
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+on:
+  push:
+    branches:
+      - main
+jobs:
+  Deploy-Production:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run a one-line script
+        run: echo running github actions for production environment
+      - name: setup node version
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14.x
+      - name: Checkout main branch
+        uses: actions/checkout@v3
+      - name: Checkout common repo with main branch
+        uses: actions/checkout@v3
+        with:
+          repository: MaxiSantos/donde-frontend-common
+          ref: main
+          path: common
+          ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
+      - name: Copying common to project
+        run: cp -r ./common/common ./app/common
+      - name: Copying public to project
+        run: cp -r ./common/public ./public
+      - name: Install Vercel CLI
+        run: npm install --global vercel@28.2.3
+      - name: Pull Vercel Environment Information
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Build Project Artifacts
+        run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Deploy Project Artifacts to Vercel
+        run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
