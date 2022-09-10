@@ -68,6 +68,10 @@ this was causing getStaticProps from store[i] to somehow receive { params:{id:'p
 
 FIX: always prepend slash on next link
 
+2- styled componet and mui were failing at build time
+
+a- follow next and tsconf steps https://mui.com/material-ui/guides/styled-engine/#next-js
+b- also add mui/lab https://github.com/mui/material-ui/issues/28559#issuecomment-931423462
 ## Setup DNS
 
 1- https://vercel.com/support/articles/how-to-manage-vercel-dns-records
@@ -80,6 +84,7 @@ FIX: always prepend slash on next link
 info about fallback flag on getStaticPaths
 
 ## MUI components
+```js
 export const Container = styled('div')<Props>((props) => ({
   position: `${props.$ismobile ? 'relative' : 'fixed'}`,
   minHeight: '100vh',
@@ -97,3 +102,4 @@ export const Container = styled('div')<Props>((props) => ({
   },
 }));
 
+```
