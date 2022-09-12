@@ -42,7 +42,10 @@ jobs:
         run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
       
       - name: showing files and folders
-        run: ls
+        run: ls -a
+        
+      - name: showing output folder
+        run: ls -a .verlcel/output
         
       - uses: amondnet/vercel-action@v25.1.0      
         with:          
