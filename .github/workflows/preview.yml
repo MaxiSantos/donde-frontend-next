@@ -1,15 +1,24 @@
-name: Deploying Staging
+name: GitHub Actions Vercel Preview Deployment
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 on:
   push:
     branches:
       - staging
+
 jobs:
   Deploy-Preview:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Code
+      - name: setup node version
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14.x
+      
+      - name: Checkout staging branch
         uses: actions/checkout@v3
- 
+      
       - name: Checkout common repo with staging branch
         uses: actions/checkout@v3
         with:
@@ -21,18 +30,23 @@ jobs:
       - name: Copying common to project
         run: |
           cp -r ./common/common ./app/common
-          cp -r ./common/public ./public
- 
-      - name: Setup Node 14
-        uses: actions/setup-node@v3
-        with:
-          node-version: 14.x
- 
-      - name: Deploy to Staging
-        id: deploy-vercel-staging
-        uses: amondnet/vercel-action@v20
-        with:
+          cp -r ./common/public ./public 
+      
+      - name: Install Vercel CLI
+        run: npm install --global vercel@28.2.3
+
+      - name: Pull Vercel Environment Information
+        run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+      
+      - name: Build Project Artifacts
+        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+
+      - uses: ./
+        id: now-deployment-production        
+        with:          
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-          alias-domains: test.dondelobusco.com
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID_NEXTJS }}
+          vercel-args: --prebuilt         
+          alias-domains: |
+            test.dondelobusco.com
