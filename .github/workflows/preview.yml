@@ -40,8 +40,17 @@ jobs:
       
       - name: Copying env files to project
         run: |
-          cp -r ./.vercel/.env.preview.local ./
+          cp -r ./.vercel/.env.preview.local ./.env.local
       
+      - name: Read file contents
+        id: read_file
+        uses: andstor/file-reader-action@v1
+        with:
+          path: ".env.local"
+
+      - name: File contents
+        run: echo "${ steps.read_file.outputs.contents }"
+        
       - name: Build Project Artifacts
         run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
       
