@@ -42,11 +42,27 @@ jobs:
         run: |
           cp -r ./.vercel/.env.preview.local ./.env.local
       
-      - name: Read file contents
+      - name: Copying env files to .env file
+        run: |
+          cp -r ./.vercel/.env.preview.local ./.env
+      
+      - name: Read file env.local
         id: read_file
         uses: andstor/file-reader-action@v1
         with:
           path: ".env.local"
+      
+      - name: Read file env.production
+        id: read_file2
+        uses: andstor/file-reader-action@v1
+        with:
+          path: ".env.production"
+          
+      - name: Read file env
+        id: read_file3
+        uses: andstor/file-reader-action@v1
+        with:
+          path: ".env"
        
       - name: Build Project Artifacts
         run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
