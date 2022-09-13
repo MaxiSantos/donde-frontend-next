@@ -45,7 +45,7 @@ jobs:
         run: ls -a
         
       - name: showing output folder
-        run: ls -a .vercel/output
+        run: ls -a .vercel/output/static
         
       - uses: amondnet/vercel-action@v25.1.0      
         with:          
