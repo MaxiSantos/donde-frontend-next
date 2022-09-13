@@ -134,7 +134,7 @@ export const StoreSearch = () => {
     },
     {
       name: "location",
-      component: <LocationSelect control={control} freeSolo={false} multiple={false} variant="standard" />,
+      component: <LocationSelect disabled={true} control={control} freeSolo={false} multiple={false} variant="standard" />,
       bp: 5
     },
     {

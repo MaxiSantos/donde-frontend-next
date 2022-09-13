@@ -11,7 +11,7 @@ jobs:
   Deploy-Preview:
     runs-on: ubuntu-latest
     steps:
-      - name: setup node version
+      - name: Setup node version
         uses: actions/setup-node@v3
         with:
           node-version: 14.x
@@ -38,40 +38,20 @@ jobs:
       - name: Pull Vercel Environment Information
         run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
       
+      # need this because vercel pull only download env.preview which is not recognized by next build and therefore it uses env.production and its also downladed under .vercel folder
+      # https://nextjs.org/docs/basic-features/environment-variables#environment-variable-load-order
       - name: Copying env files to project
         run: |
-          cp -r ./.vercel/.env.preview.local ./.env.local
-      
-      - name: Copying env files to .env file
-        run: |
-          cp -r ./.vercel/.env.preview.local ./.env
+          cp -r ./.vercel/.env.preview.local ./.env.local          
       
       - name: Read file env.local
         id: read_file
         uses: andstor/file-reader-action@v1
         with:
           path: ".env.local"
-      
-      - name: Read file env.production
-        id: read_file2
-        uses: andstor/file-reader-action@v1
-        with:
-          path: ".env.production"
-          
-      - name: Read file env
-        id: read_file3
-        uses: andstor/file-reader-action@v1
-        with:
-          path: ".env"
        
       - name: Build Project Artifacts
         run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
-      
-      - name: showing files and folders
-        run: ls -a
-        
-      - name: showing output folder
-        run: ls -a .vercel/output/static
         
       - uses: amondnet/vercel-action@v25.1.0      
         with:          

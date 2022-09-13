@@ -39,7 +39,6 @@ export const HomeSearch = () => {
   const { isMobile } = useMedia();
 
   const { authResponse: { user } } = useAuth();
-  const { data: { isSubscribed } = {} } = useQuery(GetIsSubscribed);
   const { data: { isSearching } = {} } = useQuery(GetIsSearching);
   const { data: { lastHomeSearch } = {} } = useQuery(GetLastHomeSearch);
   const { t } = useTranslation('common');
@@ -238,7 +237,7 @@ export const HomeSearch = () => {
     },
     {
       name: "location",
-      component: <LocationSelect control={control} freeSolo={false} multiple={false} variant="standard" />
+      component: <LocationSelect disabled={true} control={control} freeSolo={false} multiple={false} variant="standard" />
     },
     {
       name: "search",
