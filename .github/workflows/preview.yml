@@ -47,10 +47,7 @@ jobs:
         uses: andstor/file-reader-action@v1
         with:
           path: ".env.local"
-
-      - name: File contents
-        run: echo "${ steps.read_file.outputs.contents }"
-        
+       
       - name: Build Project Artifacts
         run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
       
