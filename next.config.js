@@ -29,6 +29,11 @@ module.exports = withTM({
       'res.cloudinary.com'
     ],
   },
+  // using env instead of publicRuntimeConfig
+  // https://github.com/vercel/next.js/discussions/11493#discussioncomment-14606
+  env: {
+    version: process.env.npm_package_version,
+  },
   webpack: (config, { buildId, dev }) => {
     config.resolve.symlinks = false;
     config.resolve.alias = {
