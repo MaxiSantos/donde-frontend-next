@@ -1,14 +1,7 @@
 /** @type {import('next').NextConfig} */
 const { i18n } = require('./next-i18next.config');
 
-const withTM = require('next-transpile-modules')([
-  '@mui/material',
-  '@mui/system',
-  '@mui/lab',
-  '@mui/icons-material', // If @mui/icons-material is being used
-]);
-
-module.exports = withTM({
+module.exports = {
   reactStrictMode: false,
   i18n,
   eslint: {
@@ -36,10 +29,6 @@ module.exports = withTM({
   },
   webpack: (config, { buildId, dev }) => {
     config.resolve.symlinks = false;
-    config.resolve.alias = {
-      ...config.resolve.alias,
-      '@mui/styled-engine': '@mui/styled-engine-sc',
-    };
     return config
   }
-});
+};

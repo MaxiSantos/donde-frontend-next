@@ -25,9 +25,10 @@
     "incremental": true, // Enable incremental compilation by reading/writing information from prior compilations to a file on disk
     "noFallthroughCasesInSwitch": true, // Report errors for fallthrough cases in switch statement
     "baseUrl": ".",
-    "paths": {
-      "@mui/styled-engine": ["./node_modules/@mui/styled-engine-sc"]
-    }
+    // https://github.com/mui/material-ui/issues/27846#issuecomment-1089116666
+    //"paths": {
+      //"@mui/styled-engine": ["./node_modules/@mui/styled-engine-sc"]
+    //}
   },
   "include": [
     "next-env.d.ts",
