@@ -11,8 +11,8 @@ import 'app/common/styles/nprogress.css';
 import '@algolia/autocomplete-theme-classic';
 import "swiper/css";
 import "swiper/css/navigation";
-import '../app/common/styles/icons.css';
 import "./_app.css";
+import '../app/common/styles/icons.css';
 import "app/common/styles/theme/themes-vars.module.scss"
 
 import { theme } from 'app/common/styles/theme';
