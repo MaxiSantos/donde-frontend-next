@@ -1,12 +1,13 @@
 {
   "name": "frontend-next",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "release:web": "node app/common/scripts/release-web-manager.mjs"
   },
   "dependencies": {
     "@algolia/autocomplete-core": "^1.7.1",
@@ -31,6 +32,7 @@
     "ag-grid-react": "26.2.0",
     "apollo-link-logger": "^2.0.0",
     "apollo-upload-client": "16.0.0",
+    "cli-select": "^1.1.2",
     "date-fns": "2.27.0",
     "graphql": "15.5.3",
     "graphql-ws": "5.5.0",
