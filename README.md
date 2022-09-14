@@ -90,6 +90,14 @@ FIX: always prepend slash on next link
 
 a- follow next and tsconf steps https://mui.com/material-ui/guides/styled-engine/#next-js
 b- also add mui/lab https://github.com/mui/material-ui/issues/28559#issuecomment-931423462
+**UPDATE:** we switched to emotion
+
+3- With emotion
+
+a- content: "\a100" was not working, we have to escape them
+https://github.com/emotion-js/emotion/issues/1660
+
+
 ## Setup DNS
 
 1- https://vercel.com/support/articles/how-to-manage-vercel-dns-records
