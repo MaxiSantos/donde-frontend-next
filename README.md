@@ -27,6 +27,12 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
+## Versioning
+Common folder contains scripts for versioning app. But that is a symbolink link and when executing the script it was failing because it was using original path. To solve that we added `node --preserve-symlinks and --preserve-symlinks-main path-to-symbolic-file`
+
+https://nodejs.org/api/cli.html#--preserve-symlinks
+
+
 ## Deploy on Vercel
 
 You can deploy with git, deploy hooks or vercel-cli
