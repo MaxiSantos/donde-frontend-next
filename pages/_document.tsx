@@ -1,46 +1,33 @@
 // eslint-disable-next-line @next/next/no-document-import-in-page
 import Document, { Html, Head, Main, NextScript } from 'next/document';
-import { ServerStyleSheet } from 'styled-components';
+import * as React from 'react'
+import {renderStatic} from 'app/common/components/render'
 
-/*make next, ts, mui and styled-component work togheter
-https://github.com/mui-org/material-ui/issues/28559
-https://mui.com/guides/styled-engine/
-https://github.com/mui-org/material-ui/tree/next/examples/nextjs-with-styled-components-typescript
-*/
+/* https://emotion.sh/docs/ssr#nextjs */
 
 export default class MyDocument extends Document {
   static async getInitialProps(ctx) {
-    const sheet = new ServerStyleSheet();
-    const originalRenderPage = ctx.renderPage
-
-    try {
-      ctx.renderPage = () =>
-        originalRenderPage({
-          enhanceApp: (App) => (props) =>
-            sheet.collectStyles(<App {...props} />),
-        })
-
-      const initialProps = await Document.getInitialProps(ctx)
-      return {
-        ...initialProps,
-        styles: (
-          <>
-            {initialProps.styles}
-            {sheet.getStyleElement()}
-          </>
-        ),
-      }
-    } finally {
-      sheet.seal()
+    const page = await ctx.renderPage()
+    const { css, ids } = await renderStatic(page.html)
+    const initialProps = await Document.getInitialProps(ctx)
+    return {
+      ...initialProps,
+      styles: (
+        <React.Fragment>
+          {initialProps.styles}
+          <style
+            data-emotion={`css ${ids.join(' ')}`}
+            dangerouslySetInnerHTML={{ __html: css }}
+          />
+        </React.Fragment>
+      ),
     }
   }
 
   render() {
     return (
-      <Html lang="en">
+      <Html lang="es">
         <Head>
-          {/* PWA primary color */}
-          <meta content="#469be2" name="theme-color" />
           <link
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
             rel="stylesheet"

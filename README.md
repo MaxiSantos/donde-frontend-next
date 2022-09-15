@@ -27,6 +27,12 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
+## Versioning
+Common folder contains scripts for versioning app. But that is a symbolink link and when executing the script it was failing because it was using original path. To solve that we added `node --preserve-symlinks and --preserve-symlinks-main path-to-symbolic-file`
+
+https://nodejs.org/api/cli.html#--preserve-symlinks
+
+
 ## Deploy on Vercel
 
 You can deploy with git, deploy hooks or vercel-cli
@@ -60,6 +66,18 @@ create ssh keys and set them in private repo (as deploy_key) and dependent repo 
 
 2- then use ssh_key flag in checkout actions
 
+
+##### Example yaml for next
+https://github.com/amondnet/vercel-action/blob/master/.github/workflows/example-nextjs.yml
+and 
+https://aaronfrancis.com/2021/the-perfect-vercel-github-actions-deployment-pipeline
+
+1- Going with the example above we have to configure on nextjs project settings what to do in install and build (I removed those settings based on some posts but by doing that the build step in github actions was doing nothing and therefore it was pushing useless folder to vercel)
+
+2- I tried to use `vercel env pull .env.local` which worked as it downloads the env.local file in current directory  instead of .vercel dir but github actions complain I need a vercel project (that's because vercel pull also download the project settings) So at the end I left vercel pull and then copied the env file from .vercel to current directoy so next build could make it using preview env file 
+
+3- Finally, env.preview.local was not recognized by next build as preview is not allowed so therefore I had to copy content from env.preview.local into .env file
+
 ## Isuses found
 
 1- <Link href="profile"
@@ -72,6 +90,14 @@ FIX: always prepend slash on next link
 
 a- follow next and tsconf steps https://mui.com/material-ui/guides/styled-engine/#next-js
 b- also add mui/lab https://github.com/mui/material-ui/issues/28559#issuecomment-931423462
+**UPDATE:** we switched to emotion
+
+3- With emotion
+
+a- content: "\a100" was not working, we have to escape them
+https://github.com/emotion-js/emotion/issues/1660
+
+
 ## Setup DNS
 
 1- https://vercel.com/support/articles/how-to-manage-vercel-dns-records

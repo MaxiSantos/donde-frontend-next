@@ -1,9 +1,0 @@
-@import url('https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700');
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:500,600,700');
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap');
-
-/* Main Font */
-body, h1, h2, h3, h4, h5, h6,  input[type="text"], input[type="password"], input[type="email"],
-textarea, select, input[type="button"], input[type="submit"], button, #tiptip_content, .map-box p, .map-box div,
-.numerical-rating .rating-counter, body .menu-responsive i.menu-trigger:after
-{ font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif; text-transform: none; }

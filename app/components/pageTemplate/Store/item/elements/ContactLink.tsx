@@ -1,6 +1,6 @@
-import styled from "styled-components"
+import { styled } from '@mui/material/styles';
 
-export const ContactLink = styled.ul`
+export const ContactLink = styled("ul")`
   list-style: none;
 	margin: 0;
 	padding: 0;
