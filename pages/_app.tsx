@@ -31,6 +31,7 @@ import ErrorBoundary from 'app/common/components/elements/ErrorBoundary'
 import { useMainRouteChange } from 'app/common/hooks/useMainRouteChange';
 import { AmplitudeHelper } from 'app/lib/amplitudeHelper';
 import { useLogout } from 'app/common/hooks/useLogout';
+import { EmotionHelper } from 'app/common/lib/emotion';
 
 // https://community.amplitude.com/instrumentation-and-data-management-57/disabling-metric-tracking-during-development-182
 // *not working disabling amplitude this way. I had to create a wrapper for track function
@@ -41,7 +42,9 @@ AmplitudeHelper.init();
 setHook("logout", useLogout)
 setHook("translation", () => { return useTranslation('common') })
 
-const MyApp = ({ Component, pageProps }: AppProps) => {
+const clientSideEmotionCache = EmotionHelper.createEmotionCache();
+
+const MyApp = ({ Component, emotionCache = clientSideEmotionCache, pageProps: { session, ...pageProps } }: AppProps) => {
   useMainRouteChange();
   /**
    * *potentially unsafe when doing server-side
@@ -50,8 +53,8 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
    * https://gist.github.com/Danetag/800e1281a8e58a05cdd5de2caeeab4d1
    * https://github.com/emotion-js/emotion/issues/1105#issuecomment-557726922
    */
-  const myCache = createCache({ key: 'css', prepend: true });
-  myCache.compat = true
+  /*const myCache = createCache({ key: 'css', prepend: true });
+  myCache.compat = true*/
   
   /*
   * UniversalApp was used with react-amplitude because of ssr of nextjs. But since we now use officila amplitude ts package we don't need it anymore.
@@ -59,7 +62,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   */
   const UniversalApp = (): JSX.Element => (
     <>
-    <CacheProvider value={myCache}>
+    <CacheProvider value={emotionCache}>
       <Head>
         <title>Donde lo busco</title>
         <link href="/favicon.ico" rel="icon" />
@@ -70,7 +73,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         <ToastContainer />
         <ErrorBoundary>
           <ApolloProvider client={client}>
-            <SessionProvider>            
+            <SessionProvider session={session}>            
               {/* <AuthProvider> */}
                 <UserActivityProvider>
                   <NotificationProvider>
