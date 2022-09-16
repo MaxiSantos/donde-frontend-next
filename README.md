@@ -97,6 +97,14 @@ b- also add mui/lab https://github.com/mui/material-ui/issues/28559#issuecomment
 a- content: "\a100" was not working, we have to escape them
 https://github.com/emotion-js/emotion/issues/1660
 
+b- There is potentially unsafe when doing server-side
+  * https://dev.to/hajhosein/nextjs-mui-v5-tutorial-2k35
+  * https://gist.github.com/Danetag/800e1281a8e58a05cdd5de2caeeab4d1
+  * https://github.com/emotion-js/emotion/issues/1105#issuecomment-557726922
+
+I follwed this tutorial at the end: https://dev.to/hajhosein/nextjs-mui-v5-tutorial-2k35#step-seven reason: https://github.com/vercel/next.js/issues/15642
+
+it turns out changes applied only to app wasn't enough.. on first load the page was rendered on the browser instead of coming all styled from server. The change made in document made that possible. Also the change made in app with compat=true makes possible quit the "There is potentially unsafe when doing server-side"
 
 ## Setup DNS
 
