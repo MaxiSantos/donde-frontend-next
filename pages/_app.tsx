@@ -1,7 +1,10 @@
 import { ReactHooksWrapper, setHook } from 'react-hooks-outside';
 import dynamic from "next/dynamic";
 import { ApolloProvider } from '@apollo/client';
+import { SessionProvider } from 'next-auth/react';
 import type { AppProps, AppContext } from 'next/app';
+import { CacheProvider } from '@emotion/react'
+import createCache from '@emotion/cache'
 import Head from 'next/head';
 
 import CssBaseline from '@mui/material/CssBaseline';
@@ -40,12 +43,23 @@ setHook("translation", () => { return useTranslation('common') })
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   useMainRouteChange();
+  /**
+   * *potentially unsafe when doing server-side
+   * if error stils occurs then apply remaining changes in _document.ts
+   * https://dev.to/hajhosein/nextjs-mui-v5-tutorial-2k35
+   * https://gist.github.com/Danetag/800e1281a8e58a05cdd5de2caeeab4d1
+   * https://github.com/emotion-js/emotion/issues/1105#issuecomment-557726922
+   */
+  const myCache = createCache({ key: 'css', prepend: true });
+  myCache.compat = true
+  
   /*
   * UniversalApp was used with react-amplitude because of ssr of nextjs. But since we now use officila amplitude ts package we don't need it anymore.
   source: https://github.com/amplitude/Amplitude-Javascript/issues/110#issuecomment-594088315
   */
   const UniversalApp = (): JSX.Element => (
     <>
+    <CacheProvider value={myCache}>
       <Head>
         <title>Donde lo busco</title>
         <link href="/favicon.ico" rel="icon" />
@@ -56,20 +70,23 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         <ToastContainer />
         <ErrorBoundary>
           <ApolloProvider client={client}>
-            <AuthProvider>
-              <UserActivityProvider>
-                <NotificationProvider>
-                  <CustomNotification />
-                  <AuthorizationProvider pageProps={pageProps}>
-                    <Component {...pageProps} />
-                    <ReactHooksWrapper />
-                  </AuthorizationProvider>
-                </NotificationProvider>
-              </UserActivityProvider>
-            </AuthProvider>
+            <SessionProvider>            
+              {/* <AuthProvider> */}
+                <UserActivityProvider>
+                  <NotificationProvider>
+                    <CustomNotification />
+                    {/* <AuthorizationProvider pageProps={pageProps}> */}
+                      <Component {...pageProps} />
+                      <ReactHooksWrapper />
+                    {/* </AuthorizationProvider> */}
+                  </NotificationProvider>
+                </UserActivityProvider>
+              {/* </AuthProvider> */}
+            </SessionProvider>
           </ApolloProvider>
         </ErrorBoundary>
       </ThemeProvider>
+    </CacheProvider>
     </>
   )
   return <UniversalApp />
