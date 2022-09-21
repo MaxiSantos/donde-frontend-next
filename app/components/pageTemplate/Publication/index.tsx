@@ -2,12 +2,14 @@ import { useQuery } from '@apollo/client';
 import Grid from '../../../common/components/elements/Grid';
 import { ALL_PUBLICATION_QUERY } from 'app/common/graphql/queries/Publication';
 import { useTranslation } from 'react-i18next';
-import { useSession } from "next-auth/react";
+import { useSession, getSession } from "next-auth/react";
 
 
 export default function Publication() {
   const { t } = useTranslation('common');
   const { data: session } = useSession()
+  
+  //const session = await getSession()
 
   console.log("session in publication client")
   console.log({session})

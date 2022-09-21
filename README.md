@@ -106,6 +106,21 @@ I follwed this tutorial at the end: https://dev.to/hajhosein/nextjs-mui-v5-tutor
 
 it turns out changes applied only to app wasn't enough.. on first load the page was rendered on the browser instead of coming all styled from server. The change made in document made that possible. Also the change made in app with compat=true makes possible quit the "There is potentially unsafe when doing server-side"
 
+4- NextAuth
+
+1- Can't use token created in backend
+2- Can't use middleware with next-auth: at some point protected routes were requesting process.version which is only available in node enviroment but some pages were executing in edge enviorment from next which dosen't have node stuff
+
+3- OAUTH_CALLBACK_ERROR
+** can't read state: this issue was caused because on my encode jwt function I was returning a custom token, but it would be better to return what it comes in the token. So for now I added the state argument missing
+`"state": source?.['state'],`
+
+4- getSession and unstable_getServerSession  are not calling jwt callback therefore when session expired there is no call to refreshToken so not sure how to contiune. I also added refreshInterval but that is only making a request to api/auth/session but no callback made in server debug.
+
+5- Also, as I see this next-auth authentication method only works on routes request. But what happen if I'm already on protected page A and session expire? In that page I may be doing some request to my own server and some actions should be protected. I can send the token to my server and check if the session is still valid, it not then use the refresh toekn to query user and check if everything is still valid. But then I should return new access/refresh tokens to next-auth so it will send new ones when user makes some actions. But right now, next-auth won't generate those tokens until a callback to jwt is made and appereantly is only done on route access. But when session was expired and I tried to enter a protected route it never called the jwt callback so let the fuck this shit
+
+
+
 ## Setup DNS
 
 1- https://vercel.com/support/articles/how-to-manage-vercel-dns-records
@@ -114,6 +129,10 @@ it turns out changes applied only to app wasn't enough.. on first load the page 
 ## Knowledge
 
 1- https://stackoverflow.com/questions/67787456/what-is-the-difference-between-fallback-false-vs-true-vs-blocking-of-getstaticpa
+
+2- How to create a secret for jwt
+
+`openssl rand -base64 32`
 
 info about fallback flag on getStaticPaths
 

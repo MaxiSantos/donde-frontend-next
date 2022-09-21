@@ -18,4 +18,10 @@ export async function getStaticProps(context) {
   };
 }
 
+App.auth = {
+  role: "admin",
+  loading: <p>Loading an authorized page</p>,
+  unauthorized: "/login", // redirect
+}
+
 export default App;

@@ -1,7 +1,7 @@
 import { ReactHooksWrapper, setHook } from 'react-hooks-outside';
 import dynamic from "next/dynamic";
 import { ApolloProvider } from '@apollo/client';
-import { SessionProvider } from 'next-auth/react';
+import { SessionProvider, useSession } from 'next-auth/react';
 import type { AppProps, AppContext } from 'next/app';
 import { CacheProvider } from '@emotion/react'
 import createCache from '@emotion/cache'
@@ -44,6 +44,7 @@ setHook("translation", () => { return useTranslation('common') })
 
 const clientSideEmotionCache = EmotionHelper.createEmotionCache();
 
+// TODO: check if emotionCache es being received here or it has to be reeived from pageProps section
 const MyApp = ({ Component, emotionCache = clientSideEmotionCache, pageProps: { session, ...pageProps } }: AppProps) => {
   useMainRouteChange();
   /**
@@ -71,28 +72,46 @@ const MyApp = ({ Component, emotionCache = clientSideEmotionCache, pageProps: { 
       <ThemeProvider theme={theme({})}>
         <CssBaseline />
         <ToastContainer />
-        <ErrorBoundary>
-          <ApolloProvider client={client}>
-            <SessionProvider session={session}>            
-              {/* <AuthProvider> */}
-                <UserActivityProvider>
-                  <NotificationProvider>
-                    <CustomNotification />
-                    {/* <AuthorizationProvider pageProps={pageProps}> */}
-                      <Component {...pageProps} />
-                      <ReactHooksWrapper />
-                    {/* </AuthorizationProvider> */}
-                  </NotificationProvider>
-                </UserActivityProvider>
-              {/* </AuthProvider> */}
-            </SessionProvider>
-          </ApolloProvider>
-        </ErrorBoundary>
+        <SessionProvider session={session} refetchInterval={120} >            
+          <ErrorBoundary>
+            <ApolloProvider client={client}>
+                {/* <AuthProvider> */}
+                  <UserActivityProvider>
+                    <NotificationProvider>
+                      <CustomNotification />
+                      <AuthorizationProvider pageProps={pageProps}>
+                        {Component.auth ? (
+                          <Auth>
+                            <Component {...pageProps} />
+                          </Auth>
+                        ) : (
+                          <Component {...pageProps} />
+                        )}
+                        {/* <Component {...pageProps} /> */}
+                        {/* <ReactHooksWrapper /> */}
+                      </AuthorizationProvider>
+                    </NotificationProvider>
+                  </UserActivityProvider>
+                {/* </AuthProvider> */}
+            </ApolloProvider>
+          </ErrorBoundary>
+        </SessionProvider>
       </ThemeProvider>
     </CacheProvider>
     </>
   )
   return <UniversalApp />
+}
+
+function Auth({ children }) {
+  // if `{ required: true }` is supplied, `status` can only be "loading" or "authenticated"
+  const { status } = useSession({ required: true })
+
+  if (status === "loading") {
+    return <div>Loading...</div>
+  }
+
+  return children
 }
 
 MyApp.getInitialProps = async function ({ Component, ctx }: AppContext) {
