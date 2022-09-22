@@ -2,6 +2,8 @@ import { ReactHooksWrapper, setHook } from 'react-hooks-outside';
 import dynamic from "next/dynamic";
 import { ApolloProvider } from '@apollo/client';
 import type { AppProps, AppContext } from 'next/app';
+import { CacheProvider } from '@emotion/react'
+import createCache from '@emotion/cache'
 import Head from 'next/head';
 
 import CssBaseline from '@mui/material/CssBaseline';
@@ -28,6 +30,7 @@ import ErrorBoundary from 'app/common/components/elements/ErrorBoundary'
 import { useMainRouteChange } from 'app/common/hooks/useMainRouteChange';
 import { AmplitudeHelper } from 'app/lib/amplitudeHelper';
 import { useLogout } from 'app/common/hooks/useLogout';
+import { EmotionHelper } from 'app/common/lib/emotion';
 
 // https://community.amplitude.com/instrumentation-and-data-management-57/disabling-metric-tracking-during-development-182
 // *not working disabling amplitude this way. I had to create a wrapper for track function
@@ -38,14 +41,28 @@ AmplitudeHelper.init();
 setHook("logout", useLogout)
 setHook("translation", () => { return useTranslation('common') })
 
-const MyApp = ({ Component, pageProps }: AppProps) => {
+const clientSideEmotionCache = EmotionHelper.createEmotionCache();
+
+// TODO: check if emotionCache es being received here or it has to be reeived from pageProps section
+const MyApp = ({ Component, emotionCache = clientSideEmotionCache, pageProps }: AppProps) => {
   useMainRouteChange();
+  /**
+   * *potentially unsafe when doing server-side
+   * if error stils occurs then apply remaining changes in _document.ts
+   * https://dev.to/hajhosein/nextjs-mui-v5-tutorial-2k35
+   * https://gist.github.com/Danetag/800e1281a8e58a05cdd5de2caeeab4d1
+   * https://github.com/emotion-js/emotion/issues/1105#issuecomment-557726922
+   */
+  /*const myCache = createCache({ key: 'css', prepend: true });
+  myCache.compat = true*/
+  
   /*
   * UniversalApp was used with react-amplitude because of ssr of nextjs. But since we now use officila amplitude ts package we don't need it anymore.
   source: https://github.com/amplitude/Amplitude-Javascript/issues/110#issuecomment-594088315
   */
   const UniversalApp = (): JSX.Element => (
     <>
+    <CacheProvider value={emotionCache}>
       <Head>
         <title>Donde lo busco</title>
         <link href="/favicon.ico" rel="icon" />
@@ -70,6 +87,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
           </ApolloProvider>
         </ErrorBoundary>
       </ThemeProvider>
+    </CacheProvider>
     </>
   )
   return <UniversalApp />
