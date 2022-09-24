@@ -105,9 +105,16 @@ I follwed this tutorial at the end: https://dev.to/hajhosein/nextjs-mui-v5-tutor
 
 it turns out changes applied only to app wasn't enough.. on first load the page was rendered on the browser instead of coming all styled from server. The change made in document made that possible. Also the change made in app with compat=true makes possible quit the "There is potentially unsafe when doing server-side"
 
+4- With middlewares
+a- a console.log({req}) from within middleware was causing 
 
+Error: Failed to get the 'cache' property on 'Request': the property is not implemented.
 
+removing the console fixed the issue, seems other faced similar issues: https://github.com/orgs/vercel/discussions/152
 
+b- Can't use axios in middleware, moved to fetch
+c- By using fetch, I wasn't receving cookies on backend if they are set with strict. Has to change to lex.
+d- Also, in order to updated cookies we have to do a redirection with updated cookies.. backend return cookies but for some reason they are not updated when doind NextResponse.next() (it make sense cause the NextResponse is not supposed to be the response of some extra api request): https://github.com/vercel/next.js/issues/36049#issuecomment-1122077832
 
 
 ## Setup DNS
