@@ -18,9 +18,6 @@ export async function getStaticProps(context) {
   let response: any;
   try {
     sst = await serverSideTranslations(context.locale, TranslationHelper.getCommonSource());
-    console.log("getStaticProps++++")
-    console.log("context.params++++")
-    console.log(context)
     response = await client.query({ query: STORE_BY_ID, variables: { storeId: parseInt(context.params.id) } })
 
   } catch (err) {
@@ -30,7 +27,6 @@ export async function getStaticProps(context) {
 
   return {
     props: {
-      protected: true,
       data: response.data,
       ...(sst),
     },
@@ -62,8 +58,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
     params: { id: store.id.toString() }, //https://stackoverflow.com/a/60814690
   }))
 
-  console.log("getStaticPaths++++")
-  console.log("paths++++")
   console.log(paths)
   // We'll pre-render only these paths at build time.
   // { fallback: false } means other routes should 404.

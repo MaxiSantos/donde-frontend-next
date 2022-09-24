@@ -1,4 +1,5 @@
 import { TranslationHelper } from 'app/common/lib/translation';
+import { GetStaticProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Default } from '../app/common/components/layouts/default';
 import { Login } from '../app/common/components/pageTemplate/Auth/Login';
@@ -9,10 +10,9 @@ const App = () => (
   </Default>
 );
 
-export async function getStaticProps(context) {
+export const getStaticProps: GetStaticProps = async (context) => {  
   return {
     props: {
-      protected: false,
       ...(await serverSideTranslations(context.locale, TranslationHelper.getCommonSource())),
     }
   };

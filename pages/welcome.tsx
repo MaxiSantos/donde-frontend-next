@@ -16,7 +16,8 @@ const App = () => (
 );
 
 export async function getStaticProps(context) {
-  const props = {    
+  const props = {
+    protected: true,
     ...(await serverSideTranslations(context.locale, TranslationHelper.getCommonSource())),
   }
   return {
