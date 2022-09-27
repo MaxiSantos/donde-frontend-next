@@ -30,7 +30,7 @@ const locations = [
   }
 ];
 
-export const HomeSearch = () => {
+export const QuerySearch = () => {
   const client = useApolloClient();
   const refCategory = useRef(null);
   const timerRef = useRef(null);

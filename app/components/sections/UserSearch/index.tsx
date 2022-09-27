@@ -1,19 +1,18 @@
+import { useEffect } from "react";
 import { useApolloClient, useQuery, useSubscription } from "@apollo/client";
 import Container from '@mui/material/Container';
 import { Box } from "@mui/system";
-import { USER_SEARCH_SUBSCRIPTION } from '../../../graphql/UserSearch';
 import Countdown from 'react-countdown';
-import { GetCountdownTimeout, GetIsSubscribed, GetNewStoreBySearch, GetUserSearchResponse } from "../../../common/graphql/local";
-import { useEffect } from "react";
-import { addToCollection } from "../../../common/lib/apolloCache";
-import { LinearProgressWithLabel } from '../../../common/components/elements/Progress/LinearProgressWithLabel'
-import { StoreHelper } from "app/common/model/Store";
 import { useTranslation } from "next-i18next";
-import moment from "moment";
+import { GetCountdownTimeout, GetIsSubscribed, GetNewStoreBySearch, GetUserSearchResponse } from "app/common/graphql/local";
+import { USER_SEARCH_SUBSCRIPTION } from 'app/graphql/UserSearch';
+import { addToCollection } from "app/common/lib/apolloCache";
+import { LinearProgressWithLabel } from 'app/common/components/elements/Progress/LinearProgressWithLabel'
+import { StoreHelper } from "app/common/model/Store";
 import { useMedia } from "app/common/hooks/useMedia";
 import { TypingIndicator } from "app/common/components/elements/Typing/TypingIndicator";
 import { useRouteChange } from "app/common/hooks/useRouteChange";
-import { udpateUserSearchState } from "app/components/pageTemplate/Home/helper";
+import { udpateUserSearchState } from "app/components/pageTemplate/Query/helper";
 
 export default function UserSearchSubscription({ userSearchId, userSearchResponse = {} }) {
   const client = useApolloClient();

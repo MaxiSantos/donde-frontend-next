@@ -132,6 +132,17 @@ d- Also, in order to updated cookies we have to do a redirection with updated co
 
 info about fallback flag on getStaticPaths
 
+## emotion component
+```js
+  export const ContainerSection = styled(Container, EmotionHelper.getTransientOptions()) <Props>`
+    margin-top: 25px;
+    border-radius: 4px;
+    background-color: #fff;
+    box-shadow: 0 0 12px 0 rgba(0,0,0,0.06);
+    padding: ${(props) => props.$ismobile ? "0 10px 15px 10px" : "0 40px 25px 40px !important"};		
+  `;
+```
+
 ## MUI components
 ```js
 export const Container = styled('div')<Props>((props) => ({

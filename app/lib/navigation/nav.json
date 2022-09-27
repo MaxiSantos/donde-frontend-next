@@ -5,6 +5,11 @@
     "icon": "store"
   },
   {
+    "path": "/query",
+    "title": "query",
+    "icon": "store"
+  },
+  {
     "path": "/publications",
     "title": "publication",
     "icon": "publication"
