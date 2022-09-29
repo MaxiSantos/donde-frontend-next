@@ -1,40 +1,43 @@
+import { styled } from '@mui/material/styles';
 import { Container } from "@mui/material";
-import { TextHelper } from "app/common/lib/text";
-import { useTranslation } from "next-i18next";
-import { BoxTitle, Paragraph, Title } from "../Typography";
+import Paper from '@mui/material/Paper';
+import Masonry from '@mui/lab/Masonry';
 
-const TitleBox = (props) => {
-  const {title, image, p} = props;
-  return <Container
-  sx={{
-    backgroundImage: `url(${image})`,
-    backgroundPositionY: 'center',
-    backgroundSize: 'cover',
-    height:'150px',
-    position: 'relative',
-    width: '100%',
-    ["&::before"]:{
-      content: '""',
-      position: "absolute",
-      backgroundSize: "cover",
-      background: "rgba(0,0,0,0.75)",
-      top: "0px",
-      right: "0px",
-      bottom: "0px",
-      left: "0px",
-      opacity: 0.75,
-    }
-  }}
->
-  <BoxTitle>{title}</BoxTitle>
-  <Paragraph sx={{color:'white', position: 'absolute', top: '70px'}}>{p}</Paragraph>
-</Container>
-} 
+import { TextHelper } from "app/common/lib/text";
+import { SuperTitle } from "app/common/components/elements/Typography";
+import { useTranslation } from "next-i18next";
+import { BoxTitle, SubTitle, Paragraph, Title } from "../Typography";
+import { useMedia } from 'app/common/hooks/useMedia';
+import { CardTopBorder } from 'app/common/components/elements/Cards/Basic/CardTopBorder';
+import { Jumbotron } from 'app/common/components/elements/Jumbotron';
 
 export default function Welcome(props) {
   const { t } = useTranslation('common');
-  return <Container sx={{marginBottom: "50px"}}>
-    <Title>Bienvenido</Title>
-    <TitleBox title={TextHelper.capitalize(t('home.welcome.title'))} alt={t('home.welcome.title')} image={'/images/slider-bg-01.jpg'} p={t('home.welcome.p')} />
-  </Container> 
+  const { isMobile } = useMedia();
+  const list = [
+    t('home.welcome.jumbotron.p1'),
+    t('home.welcome.jumbotron.p2'),
+    t('home.welcome.jumbotron.p3'),
+    t('home.welcome.jumbotron.p4'),
+  ]
+  return <Container
+    sx={{
+      height: isMobile ? "800px" : "600px"
+    }}>
+    <Title>{TextHelper.capitalize(t('home.welcome.title'))}</Title>
+    <Jumbotron
+      title={TextHelper.capitalize(t('home.welcome.jumbotron.title'))}
+      tagline={TextHelper.capitalize(t('home.welcome.jumbotron.tagline'))}
+      image={'/images/shopping1.jpeg'}
+    >
+      <Container sx={{ marginTop: "25px" }}>
+        <SubTitle sx={{ background: "white", color: "black", display: "inline-block", padding: '5px', borderRadius: '5px' }}>{TextHelper.capitalize(t('home.welcome.jumbotron.subtitle'))}</SubTitle>
+        <Masonry columns={isMobile ? 1 : 2} spacing={2}>
+          {list.map((item, index) => (
+            <CardTopBorder key={index} p={item} />
+          ))}
+        </Masonry>
+      </Container>
+    </Jumbotron>
+  </Container>
 }

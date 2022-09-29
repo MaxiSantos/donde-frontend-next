@@ -11,7 +11,7 @@ let routes = [
   '_default',
   'reset',
   'publications',
-  'notifications',
+  //'notifications',
   'login',
   'query',
   'profile',
@@ -41,11 +41,7 @@ export const protectedPaths: PathMap = {
   query: {
     ...pathConfig,
     protected: true
-  },
-  notifications: {
-    ...pathConfig,
-    protected: true
-  },
+  },  
   profile: {
     ...pathConfig,
     protected: true
