@@ -22,7 +22,7 @@ export default function Welcome(props) {
   ]
   return <Container
     sx={{
-      height: isMobile ? "800px" : "600px"
+      height: isMobile ? "800px" : "570px"
     }}>
     <Title>{TextHelper.capitalize(t('home.welcome.title'))}</Title>
     <Jumbotron
@@ -32,7 +32,7 @@ export default function Welcome(props) {
     >
       <Container sx={{ marginTop: "25px" }}>
         <SubTitle sx={{ background: "white", color: "black", display: "inline-block", padding: '5px', borderRadius: '5px' }}>{TextHelper.capitalize(t('home.welcome.jumbotron.subtitle'))}</SubTitle>
-        <Masonry columns={isMobile ? 1 : 2} spacing={2}>
+        <Masonry columns={isMobile ? 1 : 2} spacing={4}>
           {list.map((item, index) => (
             <CardTopBorder key={index} p={item} />
           ))}
