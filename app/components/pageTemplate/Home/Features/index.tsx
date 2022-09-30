@@ -21,7 +21,7 @@ export default function Features(props) {
     <Divider orientation="horizontal" flexItem style={{ marginTop: "20px", marginBottom: "20px" }} />
     <Section
       type="publication"
-      url={"/publication"}
+      url={"/publications"}
     />
     {/* <Divider orientation="horizontal" flexItem style={{marginRight:"-1px"}} />
     <Section
