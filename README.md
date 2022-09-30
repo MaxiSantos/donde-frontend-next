@@ -27,13 +27,10 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Versioning
-Common folder contains scripts for versioning app. But that is a symbolink link and when executing the script it was failing because it was using original path. To solve that we added `node --preserve-symlinks and --preserve-symlinks-main path-to-symbolic-file`
-
 https://nodejs.org/api/cli.html#--preserve-symlinks
 
 
-## Deploy on Vercel
+# Deploy on Vercel
 
 You can deploy with git, deploy hooks or vercel-cli
 
@@ -55,7 +52,7 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
-## Github actions
+# Github actions
 
 https://vercel.com/guides/how-can-i-use-github-actions-with-vercel
 
@@ -78,7 +75,9 @@ https://aaronfrancis.com/2021/the-perfect-vercel-github-actions-deployment-pipel
 
 3- Finally, env.preview.local was not recognized by next build as preview is not allowed so therefore I had to copy content from env.preview.local into .env file
 
-## Isuses found
+# Isuses found
+
+## Next
 
 1- <Link href="profile"
 
@@ -92,7 +91,17 @@ a- follow next and tsconf steps https://mui.com/material-ui/guides/styled-engine
 b- also add mui/lab https://github.com/mui/material-ui/issues/28559#issuecomment-931423462
 **UPDATE:** we switched to emotion
 
-3- With emotion
+## Middlewares
+a- a console.log({req}) from within middleware was causing 
+
+Error: Failed to get the 'cache' property on 'Request': the property is not implemented.
+
+removing the console fixed the issue, seems other faced similar issues: https://github.com/orgs/vercel/discussions/152
+
+b- Can't use axios in middleware, moved to fetch
+c- By using fetch, I wasn't receving cookies on backend if they are set with strict. Has to change to lex.
+d- Also, in order to updated cookies we have to do a redirection with updated cookies.. backend return cookies but for some reason they are not updated when doind NextResponse.next() (it make sense cause the NextResponse is not supposed to be the response of some extra api request): https://github.com/vercel/next.js/issues/36049#issuecomment-1122077832
+## Emotion
 
 a- content: "\a100" was not working, we have to escape them
 https://github.com/emotion-js/emotion/issues/1660
@@ -105,24 +114,14 @@ I follwed this tutorial at the end: https://dev.to/hajhosein/nextjs-mui-v5-tutor
 
 it turns out changes applied only to app wasn't enough.. on first load the page was rendered on the browser instead of coming all styled from server. The change made in document made that possible. Also the change made in app with compat=true makes possible quit the "There is potentially unsafe when doing server-side"
 
-4- With middlewares
-a- a console.log({req}) from within middleware was causing 
-
-Error: Failed to get the 'cache' property on 'Request': the property is not implemented.
-
-removing the console fixed the issue, seems other faced similar issues: https://github.com/orgs/vercel/discussions/152
-
-b- Can't use axios in middleware, moved to fetch
-c- By using fetch, I wasn't receving cookies on backend if they are set with strict. Has to change to lex.
-d- Also, in order to updated cookies we have to do a redirection with updated cookies.. backend return cookies but for some reason they are not updated when doind NextResponse.next() (it make sense cause the NextResponse is not supposed to be the response of some extra api request): https://github.com/vercel/next.js/issues/36049#issuecomment-1122077832
-
-
+## Versioning
+Common folder contains scripts for versioning app. But that is a symbolink link and when executing the script it was failing because it was using original path. To solve that we added `node --preserve-symlinks and --preserve-symlinks-main path-to-symbolic-file`
 ## Setup DNS
 
 1- https://vercel.com/support/articles/how-to-manage-vercel-dns-records
 2-
 
-## Knowledge
+# Knowledge
 
 1- https://stackoverflow.com/questions/67787456/what-is-the-difference-between-fallback-false-vs-true-vs-blocking-of-getstaticpa
 
@@ -130,7 +129,20 @@ d- Also, in order to updated cookies we have to do a redirection with updated co
 
 `openssl rand -base64 32`
 
-info about fallback flag on getStaticPaths
+## CSS
+1- Position absolute elements
+https://stackoverflow.com/questions/8508275/how-to-center-a-position-absolute-element
+
+## emotion component
+```js
+  export const ContainerSection = styled(Container, EmotionHelper.getTransientOptions()) <Props>`
+    margin-top: 25px;
+    border-radius: 4px;
+    background-color: #fff;
+    box-shadow: 0 0 12px 0 rgba(0,0,0,0.06);
+    padding: ${(props) => props.$ismobile ? "0 10px 15px 10px" : "0 40px 25px 40px !important"};		
+  `;
+```
 
 ## MUI components
 ```js

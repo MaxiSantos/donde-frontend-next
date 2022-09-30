@@ -5,13 +5,13 @@
     "icon": "store"
   },
   {
+    "path": "/query",
+    "title": "query",
+    "icon": "query"
+  },
+  {
     "path": "/publications",
     "title": "publication",
     "icon": "publication"
-  },
-  {
-    "path": "/notification",
-    "title": "notification",
-    "icon": "notification"
   }
 ]

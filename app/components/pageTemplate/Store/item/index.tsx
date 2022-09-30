@@ -17,6 +17,7 @@ import { Title } from 'app/common/components/elements/Title';
 import { Box } from '@mui/system';
 import { CategoryTag } from 'app/common/components/elements/Tag/CategoryTag'
 import { Actions } from 'app/common/components/elements/Grid/Items/Store/Actions';
+import { LoadingScreen } from 'app/common/components/elements/LoadingScreen';
 
 SwiperCore.use([Navigation]);
 
@@ -25,10 +26,11 @@ export default function Store(props) {
   const { data } = props;
   const { isMobile } = useMedia()
   const { t } = useTranslation('common');
+  return <LoadingScreen />
   if (router.isFallback) {
-    return <p>{t('loading')}</p>
+    return <LoadingScreen />
   }
-
+  
   /*const [getStore, { loading, data, error }] = useLazyQuery(
     STORE_BY_ID
   );

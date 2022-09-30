@@ -11,10 +11,11 @@ let routes = [
   '_default',
   'reset',
   'publications',
-  'notifications',
+  //'notifications',
   'login',
   'query',
   'profile',
+  'query',
   'store',
 ] as const;
 

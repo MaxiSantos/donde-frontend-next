@@ -7,6 +7,9 @@
       "esnext"
     ], // List of library files to be included in the compilation
     "allowJs": true, // Allow JavaScript files to be compiled
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "strictNullChecks": true,
     "skipLibCheck": true, // Skip type checking of all declaration files
     "esModuleInterop": true, // Disables namespace imports (import * as fs from "fs") and enables CJS/AMD/UMD style imports (import fs from "fs")
     "allowSyntheticDefaultImports": true, // Allow default imports from modules with no default export
@@ -17,7 +20,7 @@
     "isolatedModules": true, // Unconditionally emit imports for unresolved files
     "resolveJsonModule": true, // Include modules imported with .json extension
     "noEmit": true, // Do not emit output (meaning do not compile code, only perform type checking)
-    "jsx": "preserve", // Support JSX in .tsx files: https://stackoverflow.com/questions/64656055/react-refers-to-a-umd-global-but-the-current-file-is-a-module
+    "jsx": "react-jsx", // Support JSX in .tsx files: https://stackoverflow.com/questions/64656055/react-refers-to-a-umd-global-but-the-current-file-is-a-module
     "sourceMap": true, // Generate corrresponding .map file
     "declaration": true, // Generate corresponding .d.ts file
     "noUnusedLocals": true, // Report errors on unused locals
@@ -27,7 +30,7 @@
     "baseUrl": ".",
     // https://github.com/mui/material-ui/issues/27846#issuecomment-1089116666
     //"paths": {
-      //"@mui/styled-engine": ["./node_modules/@mui/styled-engine-sc"]
+    //"@mui/styled-engine": ["./node_modules/@mui/styled-engine-sc"]
     //}
   },
   "include": [
