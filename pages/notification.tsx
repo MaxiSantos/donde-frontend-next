@@ -13,7 +13,7 @@ const App = () => (
 export async function getStaticProps(context) {
   return {
     props: {
-      pathConfig: protectedPaths.notifications,
+      pathConfig: protectedPaths._default,
       ...(await serverSideTranslations(context.locale, TranslationHelper.getCommonSource())),
     }
   };
