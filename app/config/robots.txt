@@ -1,0 +1,6 @@
+# https://developers.google.com/search/docs/crawling-indexing/robots/create-robots-txt?hl=en&visit_id=638004903466535066-1996864343&rd=1#create_rules
+
+User-agent: *
+Disallow: /profile
+Disallow: /auth/activate
+Disallow: /reset

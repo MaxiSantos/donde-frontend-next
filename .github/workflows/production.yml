@@ -15,10 +15,10 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 14.x
-      
+
       - name: Checkout main branch
         uses: actions/checkout@v3
-      
+
       - name: Checkout common repo with staging branch
         uses: actions/checkout@v3
         with:
@@ -26,36 +26,40 @@ jobs:
           ref: main
           path: common
           ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
-      
+
       - name: Copying common to project
         run: |
           cp -r ./common/common ./app/common
-          cp -r ./common/public ./public 
-      
+          cp -r ./common/public ./public
+
+      - name: Copying production robotx.txt file
+        run: |
+          cp ./app/config/robots.txt ./public/robots.txt
+
       - name: Install Vercel CLI
         run: npm install --global vercel@28.2.3
-      
+
       - name: Pull Vercel Environment Information
         run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
-      
+
       # need this because vercel pull only download env.preview which is not recognized by next build and therefore it uses env.production and its also downladed under .vercel folder
       # https://nextjs.org/docs/basic-features/environment-variables#environment-variable-load-order
       - name: Copying env files to project
         run: |
-          cp -r ./.vercel/.env.production.local ./.env.local          
-      
+          cp -r ./.vercel/.env.production.local ./.env.local
+
       - name: Read file env.local
         id: read_file
         uses: andstor/file-reader-action@v1
         with:
           path: ".env.local"
-       
+
       - name: Build Project Artifacts
         run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
-        
-      - uses: amondnet/vercel-action@v25.1.0      
-        with:          
+
+      - uses: amondnet/vercel-action@v25.1.0
+        with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID_NEXTJS }}
-          vercel-args: --prod --prebuilt          
+          vercel-args: --prod --prebuilt
