@@ -123,17 +123,27 @@ Common folder contains scripts for versioning app. But that is a symbolink link 
 
 # Knowledge
 
+#### nextjs
 1- https://stackoverflow.com/questions/67787456/what-is-the-difference-between-fallback-false-vs-true-vs-blocking-of-getstaticpa
 
-2- How to create a secret for jwt
+#### jwt
+
+1- How to create a secret for jwt
 
 `openssl rand -base64 32`
 
-## CSS
+#### node
+1- exporting an imported function
+https://stackoverflow.com/questions/30712638/typescript-export-imported-interface
+```js
+export { name } from 'source'
+```
+
+#### CSS
 1- Position absolute elements
 https://stackoverflow.com/questions/8508275/how-to-center-a-position-absolute-element
 
-## emotion component
+#### emotion component
 ```js
   export const ContainerSection = styled(Container, EmotionHelper.getTransientOptions()) <Props>`
     margin-top: 25px;
@@ -144,7 +154,7 @@ https://stackoverflow.com/questions/8508275/how-to-center-a-position-absolute-el
   `;
 ```
 
-## MUI components
+#### MUI components
 ```js
 export const Container = styled('div')<Props>((props) => ({
   position: `${props.$ismobile ? 'relative' : 'fixed'}`,
