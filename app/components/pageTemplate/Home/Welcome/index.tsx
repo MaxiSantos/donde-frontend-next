@@ -1,12 +1,9 @@
-import { styled } from '@mui/material/styles';
 import { Container } from "@mui/material";
-import Paper from '@mui/material/Paper';
 import Masonry from '@mui/lab/Masonry';
 
 import { TextHelper } from "app/common/lib/text";
-import { SuperTitle } from "app/common/components/elements/Typography";
 import { useTranslation } from "next-i18next";
-import { BoxTitle, SubTitle, Paragraph, Title } from "../Typography";
+import { SubTitle, Title } from "../Typography";
 import { useMedia } from 'app/common/hooks/useMedia';
 import { CardTopBorder } from 'app/common/components/elements/Cards/Basic/CardTopBorder';
 import { Jumbotron } from 'app/common/components/elements/Jumbotron';
@@ -22,7 +19,7 @@ export default function Welcome(props) {
   ]
   return <Container
     sx={{
-      height: isMobile ? "800px" : "570px"
+      height: isMobile ? "850px" : "600px"
     }}>
     <Title>{TextHelper.capitalize(t('home.welcome.title'))}</Title>
     <Jumbotron
