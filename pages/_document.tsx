@@ -2,7 +2,7 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 import createEmotionServer from '@emotion/server/create-instance';
 import * as React from 'react'
-import {renderStatic} from 'app/common/components/render'
+import { renderStatic } from 'app/common/components/render'
 import { EmotionHelper } from 'app/common/lib/emotion';
 
 /* https://emotion.sh/docs/ssr#nextjs */
@@ -53,6 +53,7 @@ export default class MyDocument extends Document {
     return (
       <Html lang="es">
         <Head>
+          {process.env.NEXT_PUBLIC_APP_STAGE !== 'PRODUCTION' && <meta name="robots" content="noindex,nofollow" key="robot" />}
           <link
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
             rel="stylesheet"
