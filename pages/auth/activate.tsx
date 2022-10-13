@@ -16,7 +16,6 @@ const Index: NextPage = () => {
 export async function getStaticProps(context) {
   return {
     props: {
-      protected: false,
       ...(await serverSideTranslations(context.locale, TranslationHelper.getCommonSource())),
     }
   };
