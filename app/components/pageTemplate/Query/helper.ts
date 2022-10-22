@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import { GetCountdownTimeout, GetIsSubscribed, GetUserSearchResponse } from "app/common/graphql/local";
 
 export const udpateUserSearchState = (props) => {

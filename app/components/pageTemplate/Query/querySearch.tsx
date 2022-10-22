@@ -18,10 +18,12 @@ import { StoreHelper } from "app/common/model/Store";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import { isNewSearch, udpateUserSearchState } from "./helper";
+import { ToastHelper as TH } from "app/common/lib/toast";
 import { debounce } from "lodash";
 import { AmplitudeHelper } from "app/lib/amplitudeHelper";
 import { useRouter } from "next/router";
 import { useMedia } from "app/common/hooks/useMedia";
+import { toast } from "react-toastify";
 
 const locations = [
   {
@@ -182,6 +184,7 @@ export const QuerySearch = () => {
       console.log("new search not available, change your search query")
       console.log({ lastHomeSearch })
       console.log({ variables })
+      toast.warn(t('search-box.new-search-required'), TH.getBaseOption());
       return;
     }
 
