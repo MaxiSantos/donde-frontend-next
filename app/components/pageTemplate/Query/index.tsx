@@ -1,9 +1,9 @@
 import { useApolloClient, useQuery } from '@apollo/client';
-import { Box } from '@mui/material';
+import { Box, Divider } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import Grid from '../../../common/components/elements/Grid';
-import { GetCountdownTimeout, GetIsSubscribed, GetUserSearchId, GetUserSearchResponse } from '../../../common/graphql/local';
-import { ALL_STORE, useAllRecentlyAddedStore } from 'app/graphql/Store';
+import { GetCountdownTimeout, GetIsSubscribed, GetNewStoreBySearch, GetStoresPayload, GetUserSearchId, GetUserSearchResponse } from '../../../common/graphql/local';
+import { ALL_STORE, STORE_PAYLOAD, useAllRecentlyAddedStore } from 'app/graphql/Store';
 import UserSearchSubscription from '../../sections/UserSearch';
 import { Delayed } from 'app/common/components/elements/Delayed'
 import { useEffect } from 'react';
@@ -18,6 +18,7 @@ export default function Query() {
   const client = useApolloClient();
 
   const { data, error, loading } = useAllRecentlyAddedStore();
+  const { data: { storesPayload } = {} } = useQuery(GetStoresPayload);
   //const { stores } = data;
   //const stores = [];
 
@@ -49,6 +50,10 @@ export default function Query() {
       query: ALL_STORE,
       data: { stores: [] }
     });
+    client.writeQuery({
+      query: GetStoresPayload,
+      data: { storesPayload: [] }
+    });
     cache.gc();
 
     udpateUserSearchState({
@@ -75,6 +80,13 @@ export default function Query() {
           <span>{t("search-box.no-answer")}</span>
         </Box>
       }
+      {storesPayload?.length > 0 ?
+        <>
+          <Grid list={storesPayload} type="store" />
+          <Divider sx={{ margin: 2 }} />
+        </>
+        :
+        <p>{t('no-data')}</p>}
       {data?.stores?.length > 0 ?
         <Grid list={data.stores} type="store" />
         :

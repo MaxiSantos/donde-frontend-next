@@ -1,4 +1,5 @@
 import { GetCountdownTimeout, GetIsSubscribed, GetUserSearchResponse } from "app/common/graphql/local";
+import { StoreHelper } from "app/common/model/Store";
 
 export const udpateUserSearchState = (props) => {
   const { client, isSubscribed, userSearchResponse, countdownTimeout } = props;
@@ -46,4 +47,16 @@ export const isNewSearch = (crrSearch, newSearch) => {
     }
   }
   return false;
+}
+
+export const transformPayload = (payload) => {
+  let response;
+  const openingDay = StoreHelper.getCurrentOpDay(payload.openingDay)
+  payload.isOpen = StoreHelper.isOpen(openingDay)
+  response = {
+    ...payload,
+    isOpen: StoreHelper.isOpen(openingDay),
+    //storeResponse: payload.storeResponse
+  }
+  return response;
 }

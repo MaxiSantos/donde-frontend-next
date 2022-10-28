@@ -7,7 +7,7 @@ import { useSearchProductsByCategory } from "../../../common/graphql/Product";
 import { useSeachStore } from "../../../common/graphql/Search";
 import { useApolloClient, useQuery } from "@apollo/client";
 import { useAuth } from 'app/common/context/useAuthContext';
-import { GetIsSearching, GetIsSearchBoxOpen, GetIsSubscribed, GetUserSearchId, GetLastHomeSearch } from "../../../common/graphql/local";
+import { GetIsSearching, GetIsSearchBoxOpen, GetIsSubscribed, GetUserSearchId, GetLastHomeSearch, GetStoresPayload } from "../../../common/graphql/local";
 import { ALL_STORE } from "../../../graphql/Store";
 import { useEffect, useRef } from "react";
 import { selectOptionsProps } from "app/common/components/elements/Form/FormProps";
@@ -195,7 +195,7 @@ export const QuerySearch = () => {
       data: {
         isSearching: {
           ...isSearching,
-          home: true
+          query: true
         }
       },
     });
@@ -210,6 +210,11 @@ export const QuerySearch = () => {
       data: {
         lastHomeSearch: variables
       }
+    });
+
+    client.writeQuery({
+      query: GetStoresPayload,
+      data: { storesPayload: [] }
     });
 
     udpateUserSearchState({
@@ -270,5 +275,5 @@ export const QuerySearch = () => {
     subtitle: t("search-box.subtitle")
   }
 
-  return <SearchFactory options={options} header={header} isSearching={isSearching?.home} />
+  return <SearchFactory options={options} header={header} isSearching={isSearching?.query} />
 }
