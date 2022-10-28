@@ -7,7 +7,7 @@ import { useSearchProductsByCategory } from "../../../common/graphql/Product";
 import { useSeachStore } from "../../../common/graphql/Search";
 import { useApolloClient, useQuery } from "@apollo/client";
 import { useAuth } from 'app/common/context/useAuthContext';
-import { GetIsSearching, GetIsSearchBoxOpen, GetIsSubscribed, GetUserSearchId, GetLastHomeSearch } from "../../../common/graphql/local";
+import { GetIsSearching, GetIsSearchBoxOpen, GetIsSubscribed, GetUserSearchId, GetLastHomeSearch, GetStoresPayload } from "../../../common/graphql/local";
 import { ALL_STORE } from "../../../graphql/Store";
 import { useEffect, useRef } from "react";
 import { selectOptionsProps } from "app/common/components/elements/Form/FormProps";
@@ -18,10 +18,12 @@ import { StoreHelper } from "app/common/model/Store";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import { isNewSearch, udpateUserSearchState } from "./helper";
+import { ToastHelper as TH } from "app/common/lib/toast";
 import { debounce } from "lodash";
 import { AmplitudeHelper } from "app/lib/amplitudeHelper";
 import { useRouter } from "next/router";
 import { useMedia } from "app/common/hooks/useMedia";
+import { toast } from "react-toastify";
 
 const locations = [
   {
@@ -182,6 +184,7 @@ export const QuerySearch = () => {
       console.log("new search not available, change your search query")
       console.log({ lastHomeSearch })
       console.log({ variables })
+      toast.warn(t('search-box.new-search-required'), TH.getBaseOption());
       return;
     }
 
@@ -192,7 +195,7 @@ export const QuerySearch = () => {
       data: {
         isSearching: {
           ...isSearching,
-          home: true
+          query: true
         }
       },
     });
@@ -207,6 +210,11 @@ export const QuerySearch = () => {
       data: {
         lastHomeSearch: variables
       }
+    });
+
+    client.writeQuery({
+      query: GetStoresPayload,
+      data: { storesPayload: [] }
     });
 
     udpateUserSearchState({
@@ -267,5 +275,5 @@ export const QuerySearch = () => {
     subtitle: t("search-box.subtitle")
   }
 
-  return <SearchFactory options={options} header={header} isSearching={isSearching?.home} />
+  return <SearchFactory options={options} header={header} isSearching={isSearching?.query} />
 }
