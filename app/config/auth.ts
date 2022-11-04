@@ -1,10 +1,10 @@
 type PathConfig = {
   protected: boolean;
-  role: ['USER']
+  allowedRoles: ['USER']
 }
 let pathConfig: PathConfig = {
   protected: false,
-  role: ['USER']
+  allowedRoles: ['USER']
 };
 
 let routes = [
@@ -21,7 +21,7 @@ let routes = [
 
 // creating types from array
 // https://github.com/microsoft/TypeScript/issues/28046#issuecomment-431871542
-type RouteType < T extends ReadonlyArray < unknown > > = T extends ReadonlyArray<
+type RouteType<T extends ReadonlyArray<unknown>> = T extends ReadonlyArray<
   infer RouteType
 >
   ? RouteType
@@ -35,13 +35,13 @@ type PathMap = {
   [key in Foo]: PathConfig;
 };
 
-let routesWithConfig = routes.map(path => ({ [path]: pathConfig})); 
+let routesWithConfig = routes.map(path => ({ [path]: pathConfig }));
 export const protectedPaths: PathMap = {
   ...(Object.assign({}, ...(routesWithConfig))),
   query: {
     ...pathConfig,
     protected: true
-  },  
+  },
   profile: {
     ...pathConfig,
     protected: true
