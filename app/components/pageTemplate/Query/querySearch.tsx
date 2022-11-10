@@ -249,7 +249,7 @@ export const QuerySearch = () => {
     },
     {
       name: "search",
-      component: <FormSelect2 name="search" control={control} label={t('search-box.what-u-looking')} options={productOptions} $isAsking={true} freeSolo variant="standard" onSelect={handleSubmit(onSearch)}
+      component: <FormSelect2 name="search" control={control} label={t('search-box.what-u-looking')} options={productOptions} $isAsking={true} maxLength={70} freeSolo variant="standard" onSelect={handleSubmit(onSearch)}
         groupBy={(option) => {
           return option?.category
         }} />

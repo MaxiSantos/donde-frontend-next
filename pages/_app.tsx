@@ -5,6 +5,7 @@ import { CacheProvider } from '@emotion/react'
 import Head from 'next/head';
 import { appWithTranslation, useTranslation } from 'next-i18next';
 import { ToastContainer } from 'react-toastify';
+import NProgress from 'nprogress';
 
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
@@ -24,11 +25,14 @@ import { NotificationProvider } from 'app/common/context/useNotification';
 import { CustomNotification } from 'app/common/components/elements/CustomNotification';
 import { AuthProvider } from 'app/common/context/useAuthContext';
 import { UserActivityProvider } from 'app/common/context/useUserActivity';
-import ErrorBoundary from 'app/common/components/elements/ErrorBoundary'
+import ErrorBoundary from 'app/common/components/elements/ErrorBoundary';
 import { useMainRouteChange } from 'app/common/hooks/useMainRouteChange';
 import { AmplitudeHelper } from 'app/lib/amplitudeHelper';
 import { useLogout } from 'app/common/hooks/useLogout';
 import { EmotionHelper } from 'app/common/lib/emotion';
+import { useRouter } from 'next/router';
+import { useCallback, useEffect } from 'react';
+import { manageRefresh } from 'app/common/lib/navigation';
 
 // https://community.amplitude.com/instrumentation-and-data-management-57/disabling-metric-tracking-during-development-182
 // *not working disabling amplitude this way. I had to create a wrapper for track function
@@ -44,6 +48,7 @@ const clientSideEmotionCache = EmotionHelper.createEmotionCache();
 // TODO: check if emotionCache es being received here or it has to be reeived from pageProps section
 const MyApp = ({ Component, emotionCache = clientSideEmotionCache, pageProps }: AppProps) => {
   useMainRouteChange();
+
   /**
    * *potentially unsafe when doing server-side
    * if error stils occurs then apply remaining changes in _document.ts
