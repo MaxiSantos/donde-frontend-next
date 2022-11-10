@@ -20,9 +20,9 @@ export default class MyDocument extends Document {
     ctx.renderPage = () =>
       originalRenderPage({
         enhanceApp: (App) =>
-          function EnhanceApp(props) {
+          (function EnhanceApp(props) {
             return <App emotionCache={cache} {...props} />;
-          },
+          }),
       });
     /* eslint-enable */
 
