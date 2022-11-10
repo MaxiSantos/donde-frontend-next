@@ -48,7 +48,7 @@ const clientSideEmotionCache = EmotionHelper.createEmotionCache();
 // TODO: check if emotionCache es being received here or it has to be reeived from pageProps section
 const MyApp = ({ Component, emotionCache = clientSideEmotionCache, pageProps }: AppProps) => {
   useMainRouteChange();
-
+  console.log("rendering app page")
   /**
    * *potentially unsafe when doing server-side
    * if error stils occurs then apply remaining changes in _document.ts
