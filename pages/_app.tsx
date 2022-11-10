@@ -47,36 +47,7 @@ const clientSideEmotionCache = EmotionHelper.createEmotionCache();
 
 // TODO: check if emotionCache es being received here or it has to be reeived from pageProps section
 const MyApp = ({ Component, emotionCache = clientSideEmotionCache, pageProps }: AppProps) => {
-  //useMainRouteChange();
-  const router = useRouter();
-  const handleRouteChange = useCallback((url, { shallow }) => {
-    console.log(
-      `App is changing to ${url} ${shallow ? 'with' : 'without'
-      } shallow routing`
-    )
-    NProgress.start();
-    AmplitudeHelper.trackNavigation(router.asPath, url);
-    manageRefresh(url)
-  }, [router]);
-
-  const handleNProgressEnd = useCallback((url, { shallow }) => {
-    NProgress.done()
-  }, [router]);
-
-  useEffect(() => {
-    console.log("single useEffect ++++++");
-  }, [])
-
-  useEffect(() => {
-    router.events.on('routeChangeStart', handleRouteChange);
-    router.events.on('routeChangeComplete', handleNProgressEnd);
-    router.events.on('routeChangeError', handleNProgressEnd);
-    return () => {
-      router.events.off('routeChangeStart', handleRouteChange);
-      router.events.off('routeChangeComplete', handleNProgressEnd);
-      router.events.off('routeChangeError', handleNProgressEnd);
-    };
-  }, []);
+  useMainRouteChange();
 
   /**
    * *potentially unsafe when doing server-side
