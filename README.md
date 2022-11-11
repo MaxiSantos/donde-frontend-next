@@ -143,11 +143,15 @@ export { name } from 'source'
 1- Position absolute elements
 https://stackoverflow.com/questions/8508275/how-to-center-a-position-absolute-element
 
-### SEO
+#### SEO
 1- https://developers.google.com/search/docs/crawling-indexing/control-what-you-share
 
 2- disallowing some content from _next folder:
 https://www.webdevtutor.net/blog/robots-txt-block-next-folder-next-js
+
+#### Debug web in mobile
+
+1- `chrome://inspect/#devices`
 
 #### emotion component
 ```js
