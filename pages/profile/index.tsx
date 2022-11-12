@@ -4,8 +4,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { Default } from "app/common/components/layouts/default";
 import { TranslationHelper } from "app/common/lib/translation";
 import { Profile } from "app/components/pageTemplate/Profile";
-import { protectedPaths } from "app/config/auth";
-import { validateJWT } from "app/common/lib/jwt";
+import { getProtectedPath } from "app/config/auth";
 
 const App = () => (
   <Default pageTitle="profile">
@@ -17,11 +16,9 @@ const App = () => (
 );
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const isAuthorized = await validateJWT(context.req, context.res);
   return {
     props: {
-      pathConfig: protectedPaths.profile,
-      isAuthorized,
+      ...(await getProtectedPath("profile", context)),
       ...(await serverSideTranslations(context.locale, TranslationHelper.getCommonSource(['profile']))),
     }
   };

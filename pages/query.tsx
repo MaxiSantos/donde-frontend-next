@@ -4,8 +4,7 @@ import { QuerySearch } from "app/components/pageTemplate/Query/querySearch";
 import { Default } from "app/common/components/layouts/default";
 import Query from "app/components/pageTemplate/Query";
 import { TranslationHelper } from "app/common/lib/translation";
-import { protectedPaths } from "app/config/auth";
-import { validateJWT } from "app/common/lib/jwt";
+import { getProtectedPath } from "app/config/auth";
 
 const App = () => (
   <Default top={<QuerySearch />}>
@@ -14,11 +13,9 @@ const App = () => (
 );
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const isAuthorized = await validateJWT(context.req, context.res);
   const props = {
     ...(await serverSideTranslations(context.locale, TranslationHelper.getCommonSource())),
-    pathConfig: protectedPaths.query,
-    isAuthorized
+    ...(await getProtectedPath("query", context)),
   }
   return {
     props,
