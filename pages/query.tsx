@@ -1,4 +1,4 @@
-import { GetStaticProps } from "next";
+import { GetServerSideProps } from "next";
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { QuerySearch } from "app/components/pageTemplate/Query/querySearch";
 import { Default } from "app/common/components/layouts/default";
@@ -12,14 +12,13 @@ const App = () => (
   </Default>
 );
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const props = {
     ...(await serverSideTranslations(context.locale, TranslationHelper.getCommonSource())),
     pathConfig: protectedPaths.query
   }
   return {
     props,
-    revalidate: 60
   };
 }
 
