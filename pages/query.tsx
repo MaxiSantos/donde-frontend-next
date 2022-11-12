@@ -1,23 +1,24 @@
-import { QuerySearch } from "app/components/pageTemplate/Query/querySearch";
-import { Default } from "../app/common/components/layouts/default";
-import Query from "../app/components/pageTemplate/Query";
+import { GetStaticProps } from "next";
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { QuerySearch } from "app/components/pageTemplate/Query/querySearch";
+import { Default } from "app/common/components/layouts/default";
+import Query from "app/components/pageTemplate/Query";
 import { TranslationHelper } from "app/common/lib/translation";
 import { protectedPaths } from "app/config/auth";
 
 const App = () => (
-  <Default top={<QuerySearch />}>    
+  <Default top={<QuerySearch />}>
     <Query />
   </Default>
 );
 
-export async function getStaticProps(context) {
-  const props = {    
+export const getStaticProps: GetStaticProps = async (context) => {
+  const props = {
     ...(await serverSideTranslations(context.locale, TranslationHelper.getCommonSource())),
     pathConfig: protectedPaths.query
   }
   return {
-    props
+    props,
   };
 }
 
