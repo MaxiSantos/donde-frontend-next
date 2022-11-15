@@ -38,6 +38,24 @@ export const ALL_STORE = gql`
   }               
 `;
 
+export const STORE_PAYLOAD = gql`
+  ${BASE_STORE_FIELDS}
+  ${BASE_STORE_PRODUCT_FIELDS}
+  query STORE_PAYLOAD($includeStoreProduct: Boolean = false){
+    storesPayload{
+      ...BaseStoreFields
+      storeProduct @include(if: $includeStoreProduct){ 
+        ...BaseStoreProductFields
+      }
+      storeProductFiltered @include(if: $includeStoreProduct){
+        storeId
+        productId
+        image
+      }  
+    }
+  }               
+`;
+
 export const STORE = gql`
   ${BASE_STORE_FIELDS}
   ${BASE_STORE_PRODUCT_FIELDS}

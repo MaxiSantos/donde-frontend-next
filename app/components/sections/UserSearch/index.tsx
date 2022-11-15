@@ -1,24 +1,23 @@
+import { useEffect } from "react";
 import { useApolloClient, useQuery, useSubscription } from "@apollo/client";
 import Container from '@mui/material/Container';
 import { Box } from "@mui/system";
-import { USER_SEARCH_SUBSCRIPTION } from '../../../graphql/UserSearch';
 import Countdown from 'react-countdown';
-import { GetCountdownTimeout, GetIsSubscribed, GetNewStoreBySearch, GetUserSearchResponse } from "../../../common/graphql/local";
-import { useEffect } from "react";
-import { addToCollection } from "../../../common/lib/apolloCache";
-import { LinearProgressWithLabel } from '../../../common/components/elements/Progress/LinearProgressWithLabel'
-import { StoreHelper } from "app/common/model/Store";
 import { useTranslation } from "next-i18next";
-import moment from "moment";
+import { GetCountdownTimeout, GetIsSearching, GetIsSubscribed, GetNewStoreBySearch, GetStoresPayload, GetUserSearchResponse } from "app/common/graphql/local";
+import { USER_SEARCH_SUBSCRIPTION } from 'app/graphql/UserSearch';
+import { addToCollection, cache } from "app/common/lib/apolloCache";
+import { LinearProgressWithLabel } from 'app/common/components/elements/Progress/LinearProgressWithLabel'
+import { StoreHelper } from "app/common/model/Store";
 import { useMedia } from "app/common/hooks/useMedia";
 import { TypingIndicator } from "app/common/components/elements/Typing/TypingIndicator";
 import { useRouteChange } from "app/common/hooks/useRouteChange";
-import { udpateUserSearchState } from "app/components/pageTemplate/Home/helper";
+import { transformPayload, udpateUserSearchState } from "app/components/pageTemplate/Query/helper";
 
 export default function UserSearchSubscription({ userSearchId, userSearchResponse = {} }) {
   const client = useApolloClient();
   let countdownApi;
-  const { data: { newStoreBySearch } = {} } = useQuery(GetNewStoreBySearch);
+  const { data: { storesPayload } = { storesPayload: [] } } = useQuery(GetStoresPayload);
   const { t } = useTranslation('common');
   const { isMobile } = useMedia();
   const { data: { userSearchSubscription: subscriptionData } = {}, loading: subscriptionLoading, error: subscriptionError } = useSubscription(
@@ -32,11 +31,22 @@ export default function UserSearchSubscription({ userSearchId, userSearchRespons
   useEffect(() => {
     //console.log("subscription mounted: " + moment().format("hh:mm:ss"))
     if (subscriptionData) {
-      console.log({ subscriptionData })
-      const openingDay = StoreHelper.getCurrentOpDay(subscriptionData.openingDay)
-      subscriptionData.isOpen = StoreHelper.isOpen(openingDay)
+      const data = transformPayload(subscriptionData)
+      //const openingDay = StoreHelper.getCurrentOpDay(subscriptionData.openingDay)
+      //subscriptionData.isOpen = StoreHelper.isOpen(openingDay)
       console.log("adding subscription data to stores")
-      addToCollection("stores", subscriptionData)
+      console.log({ data })
+      console.log({ storesPayload })
+      client.writeQuery({
+        query: GetStoresPayload,
+        data: {
+          //storesPayload: [data]
+          storesPayload: [...storesPayload, data],
+        },
+      });
+
+      //addToCollection("stores", data)
+      //addToCollection("storesPayload", data)
 
     }
     return () => {

@@ -1,14 +1,17 @@
 import { ReactHooksWrapper, setHook } from 'react-hooks-outside';
-import dynamic from "next/dynamic";
 import { ApolloProvider } from '@apollo/client';
 import type { AppProps, AppContext } from 'next/app';
+import { CacheProvider } from '@emotion/react'
 import Head from 'next/head';
+import { appWithTranslation, useTranslation } from 'next-i18next';
+import { ToastContainer } from 'react-toastify';
+import NProgress from 'nprogress';
 
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
 import 'react-toastify/dist/ReactToastify.css';
-import 'app/common/styles/nprogress.css';
 import '@algolia/autocomplete-theme-classic';
+import 'app/common/styles/nprogress.css';
 import "swiper/css";
 import "swiper/css/navigation";
 import "app/common/styles/_app.css";
@@ -16,18 +19,20 @@ import 'app/common/styles/icons.css';
 import "app/common/styles/theme/themes-vars.module.scss"
 
 import { theme } from 'app/common/styles/theme';
-import client from '../app/common/lib/apolloClient';
-import AuthorizationProvider from '../app/common/lib/AuthorizationProvider';
+import client from 'app/common/lib/apolloClient';
+import AuthorizationProvider from 'app/common/lib/AuthorizationProvider';
 import { NotificationProvider } from 'app/common/context/useNotification';
 import { CustomNotification } from 'app/common/components/elements/CustomNotification';
-import { AuthProvider } from '../app/common/context/useAuthContext';
-import { appWithTranslation, useTranslation } from 'next-i18next';
-import { ToastContainer } from 'react-toastify';
+import { AuthProvider } from 'app/common/context/useAuthContext';
 import { UserActivityProvider } from 'app/common/context/useUserActivity';
-import ErrorBoundary from 'app/common/components/elements/ErrorBoundary'
+import ErrorBoundary from 'app/common/components/elements/ErrorBoundary';
 import { useMainRouteChange } from 'app/common/hooks/useMainRouteChange';
 import { AmplitudeHelper } from 'app/lib/amplitudeHelper';
 import { useLogout } from 'app/common/hooks/useLogout';
+import { EmotionHelper } from 'app/common/lib/emotion';
+import { useRouter } from 'next/router';
+import { useCallback, useEffect } from 'react';
+import { manageRefresh } from 'app/common/lib/navigation';
 
 // https://community.amplitude.com/instrumentation-and-data-management-57/disabling-metric-tracking-during-development-182
 // *not working disabling amplitude this way. I had to create a wrapper for track function
@@ -38,38 +43,54 @@ AmplitudeHelper.init();
 setHook("logout", useLogout)
 setHook("translation", () => { return useTranslation('common') })
 
-const MyApp = ({ Component, pageProps }: AppProps) => {
+const clientSideEmotionCache = EmotionHelper.createEmotionCache();
+
+// TODO: check if emotionCache es being received here or it has to be reeived from pageProps section
+const MyApp = ({ Component, emotionCache = clientSideEmotionCache, pageProps }: AppProps) => {
   useMainRouteChange();
+  console.log("rendering app page")
+  /**
+   * *potentially unsafe when doing server-side
+   * if error stils occurs then apply remaining changes in _document.ts
+   * https://dev.to/hajhosein/nextjs-mui-v5-tutorial-2k35
+   * https://gist.github.com/Danetag/800e1281a8e58a05cdd5de2caeeab4d1
+   * https://github.com/emotion-js/emotion/issues/1105#issuecomment-557726922
+   */
+  /*const myCache = createCache({ key: 'css', prepend: true });
+  myCache.compat = true*/
+
   /*
   * UniversalApp was used with react-amplitude because of ssr of nextjs. But since we now use officila amplitude ts package we don't need it anymore.
   source: https://github.com/amplitude/Amplitude-Javascript/issues/110#issuecomment-594088315
   */
   const UniversalApp = (): JSX.Element => (
     <>
-      <Head>
-        <title>Donde lo busco</title>
-        <link href="/favicon.ico" rel="icon" />
-        <meta content="minimum-scale=1, initial-scale=1, width=device-width" name="viewport" />
-      </Head>
-      <ThemeProvider theme={theme({})}>
-        <CssBaseline />
-        <ToastContainer />
-        <ErrorBoundary>
-          <ApolloProvider client={client}>
-            <AuthProvider>
-              <UserActivityProvider>
-                <NotificationProvider>
-                  <CustomNotification />
-                  <AuthorizationProvider pageProps={pageProps}>
-                    <Component {...pageProps} />
-                    <ReactHooksWrapper />
-                  </AuthorizationProvider>
-                </NotificationProvider>
-              </UserActivityProvider>
-            </AuthProvider>
-          </ApolloProvider>
-        </ErrorBoundary>
-      </ThemeProvider>
+      <CacheProvider value={emotionCache}>
+        <Head>
+          <title>Donde lo busco</title>
+          <link href="/favicon.ico" rel="icon" />
+          <meta content="minimum-scale=1, initial-scale=1, width=device-width" name="viewport" />
+        </Head>
+        <ThemeProvider theme={theme({})}>
+          <CssBaseline />
+          <ToastContainer />
+          <ErrorBoundary>
+            <ApolloProvider client={client}>
+              <AuthProvider>
+                <UserActivityProvider>
+                  <NotificationProvider>
+                    <CustomNotification />
+                    <AuthorizationProvider pageProps={pageProps}>
+                      <Component {...pageProps} />
+                      <ReactHooksWrapper />
+                    </AuthorizationProvider>
+                  </NotificationProvider>
+                </UserActivityProvider>
+              </AuthProvider>
+            </ApolloProvider>
+          </ErrorBoundary>
+        </ThemeProvider>
+      </CacheProvider>
     </>
   )
   return <UniversalApp />

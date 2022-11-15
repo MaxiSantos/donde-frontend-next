@@ -1,6 +1,3 @@
-import { useLazyQuery, useQuery } from '@apollo/client';
-import { useEffect } from 'react';
-import { STORE_BY_ID } from 'app/common/graphql/queries/Store';
 import { useRouter } from 'next/router';
 import { Grid as MaterialGrid, Typography } from '@mui/material';
 import Grid from 'app/common/components/elements/Grid';
@@ -17,6 +14,7 @@ import { Title } from 'app/common/components/elements/Title';
 import { Box } from '@mui/system';
 import { CategoryTag } from 'app/common/components/elements/Tag/CategoryTag'
 import { Actions } from 'app/common/components/elements/Grid/Items/Store/Actions';
+import { LoadingScreen } from 'app/common/components/elements/LoadingScreen';
 
 SwiperCore.use([Navigation]);
 
@@ -26,26 +24,8 @@ export default function Store(props) {
   const { isMobile } = useMedia()
   const { t } = useTranslation('common');
   if (router.isFallback) {
-    return <p>{t('loading')}</p>
+    return <LoadingScreen />
   }
-
-  /*const [getStore, { loading, data, error }] = useLazyQuery(
-    STORE_BY_ID
-  );
-
-  useEffect(() => {
-    if (!router.isReady) return <p>loading</p>;
-    if (router.query.id) {
-      const [storeId, productId] = router.query.id.split("_")
-      getStore({ variables: { storeId: parseInt(storeId) } })
-    }
-  }, [router.isReady]);*/
-
-  /*console.log({ loading })
-  console.log({ data })
-  if (loading || !data?.store) {
-    return <p>{t('loading')}</p>
-  }*/
   const products = data.store.storeProduct.map(item => ({
     ...item.product,
     image: item.image,
