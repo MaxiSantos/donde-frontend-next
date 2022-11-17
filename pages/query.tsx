@@ -15,7 +15,7 @@ const App = () => (
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const logApiRoute = `${process.env.NEXT_PUBLIC_CLIENT_ENDPOINT}/api/log`;
   let headerNames = context.req.headers;
-  let isAuthenticated = headerNames.isauthenticated;
+  let isAuthenticated = headerNames.isauthenticated as string;
   console.log("headerNames.isauthenticated")
   console.log(headerNames.isauthenticated)
   try {

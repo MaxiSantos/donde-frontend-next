@@ -17,7 +17,7 @@ const App = () => (
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   let headerNames = context.req.headers;
-  let isAuthenticated = headerNames.isauthenticated;
+  let isAuthenticated = headerNames.isauthenticated as string;
   return {
     props: {
       ...(getProtectedPath("profile", isAuthenticated)),
