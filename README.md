@@ -99,8 +99,13 @@ Error: Failed to get the 'cache' property on 'Request': the property is not impl
 removing the console fixed the issue, seems other faced similar issues: https://github.com/orgs/vercel/discussions/152
 
 b- Can't use axios in middleware, moved to fetch
+
 c- By using fetch, I wasn't receving cookies on backend if they are set with strict. Has to change to lex.
+
 d- Also, in order to updated cookies we have to do a redirection with updated cookies.. backend return cookies but for some reason they are not updated when doind NextResponse.next() (it make sense cause the NextResponse is not supposed to be the response of some extra api request): https://github.com/vercel/next.js/issues/36049#issuecomment-1122077832
+
+e- It seems that redirection was being cached in mobile and in some other situation there was an infinite loop in mobile (few times in desktop). Therefore I updated Next and now there was a problem with middleware not setting cookies at all in staging/production. Therefore now middleware only request refreshtoken if needed and if it found that user is not authenticated and refresh token can't be retrieved then we setup headers with a flag indicating that. Having said this, all pages that need protection can access headers and check for this flag and send it back to client which is now in charge of redirections. This header is read from context.request because there was some issues with context.response when trying to access its value in getServerSideProps.
+
 ## Emotion
 
 a- content: "\a100" was not working, we have to escape them
