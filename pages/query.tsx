@@ -13,6 +13,17 @@ const App = () => (
 );
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
+  const logApiRoute = `${process.env.NEXT_PUBLIC_CLIENT_ENDPOINT}/api/log`;
+  let headerNames = context.res.getHeaderNames();
+  let setCookie = context.res.getHeader('set-cookie');
+  try {
+    await fetch(logApiRoute, {
+      method: 'POST',
+      body: JSON.stringify({ origin: "getServerSideProps", setCookie, headerNames })
+    });
+  } catch (err) {
+    console.log(err);
+  }
   const props = {
     ...(await serverSideTranslations(context.locale, TranslationHelper.getCommonSource())),
     ...(await getProtectedPath("query", context)),
