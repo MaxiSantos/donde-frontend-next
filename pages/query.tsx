@@ -15,8 +15,7 @@ const App = () => (
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const logApiRoute = `${process.env.NEXT_PUBLIC_CLIENT_ENDPOINT}/api/log`;
   let headerNames = context.req.headers;
-  //let isAuthenticated = context.res.getHeader('isAuthenticated') || "none";
-  let isAuthenticated = headerNames.isauthenticated || "none";
+  let isAuthenticated = headerNames.isauthenticated as string;
   console.log("headerNames.isauthenticated")
   console.log(headerNames.isauthenticated)
   try {
@@ -29,7 +28,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
   const props = {
     ...(await serverSideTranslations(context.locale, TranslationHelper.getCommonSource())),
-    ...(getProtectedPath("query", headerNames.isauthenticated)),
+    ...(getProtectedPath("query", isAuthenticated)),
   }
   return {
     props,

@@ -50,7 +50,7 @@ export const protectedPaths: PathMap = {
   }
 }
 
-export const getProtectedPath = (name: Routes, isAuthenticated) => {
+export const getProtectedPath = (name: Routes, isAuthenticated = "false") => {
   return {
     pathConfig: protectedPaths?.[name],
     isAuthenticated: isAuthenticated === "true"
