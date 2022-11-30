@@ -82,12 +82,14 @@ export default function UserSearchSubscription({ userSearchId, userSearchRespons
     } else {
       // Render a countdown
       const total = parseInt(process.env.NEXT_PUBLIC_SUBSCRIPTION_TIME) / 1000;
-      const remaining = (total - seconds);
-      const progress = remaining * 100 / total
+      const minutesToSeconds = minutes * 60;
+      const remaining = (total - seconds - minutesToSeconds);
+      const progress = remaining * 100 / total;
+      const time = `${minutes < 10 ? 0 + minutes.toString() : minutes}:${seconds < 10 ? 0 + seconds.toString() : seconds}`;
       return <Box sx={{ width: '100%', marginBottom: "40px" }}>
         <span>{t("search-box.asking-stores")}</span>
         <Box sx={{ marginLeft: "10px", display: "inline" }}><TypingIndicator /></Box>
-        <LinearProgressWithLabel value={progress} label={(seconds).toString()} />
+        <LinearProgressWithLabel value={progress} label={time} />
       </Box>
     }
   };
