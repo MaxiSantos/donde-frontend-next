@@ -4,7 +4,7 @@ import { TranslationHelper } from 'app/common/lib/translation';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 const App = () => (
-  <Default pageTitle="not-found">
+  <Default>
     <NotFound />
   </Default>
 );
