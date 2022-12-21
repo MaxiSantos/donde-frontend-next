@@ -50,9 +50,9 @@ export const protectedPaths: PathMap = {
   }
 }
 
-export const getProtectedPath = async (name: Routes, context: { req: any; res: any; }) => {
+export const getProtectedPath = (name: Routes, isAuthenticated = "false") => {
   return {
     pathConfig: protectedPaths?.[name],
-    isAuthorized: await validateJWT(context.req, context.res)
+    isAuthenticated: isAuthenticated === "true"
   }
 }

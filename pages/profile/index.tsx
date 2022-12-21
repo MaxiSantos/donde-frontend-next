@@ -16,9 +16,11 @@ const App = () => (
 );
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
+  let headerNames = context.req.headers;
+  let isAuthenticated = headerNames.isauthenticated as string;
   return {
     props: {
-      ...(await getProtectedPath("profile", context)),
+      ...(getProtectedPath("profile", isAuthenticated)),
       ...(await serverSideTranslations(context.locale, TranslationHelper.getCommonSource(['profile']))),
     }
   };

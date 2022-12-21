@@ -6,6 +6,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { ALL_STORE_QUERY, STORE_BY_ID } from "app/common/graphql/queries/Store";
 import { TextHelper } from "app/common/lib/text";
+import { getProtectedPath } from "app/config/auth";
 
 const App = ({ data }) => (
   <Default>
@@ -13,9 +14,8 @@ const App = ({ data }) => (
   </Default>
 );
 
-export const getStaticProps: GetStaticProps = async(context) => {
+export const getStaticProps: GetStaticProps = async (context) => {
   const { params } = context
-  let sst: any;
   let response: any;
   /*const urlMap = params.reduce((acc, slug) => {
     acc[store.id] = TextHelper.slugify[store.name];
@@ -26,7 +26,6 @@ export const getStaticProps: GetStaticProps = async(context) => {
   const urlFromBrowser = params.slug[1];
 
   try {
-    sst = await serverSideTranslations(context.locale, TranslationHelper.getCommonSource());
     console.log("context.params")
     console.log(params)
     response = await client.query({ query: STORE_BY_ID, variables: { storeId: parseInt(storeId) } })
@@ -36,20 +35,20 @@ export const getStaticProps: GetStaticProps = async(context) => {
     console.log(err)
   };
 
-  if(!response.data.store) {
+  if (!response.data.store) {
     return {
-      props:{ 
+      props: {
         msg: 'store dosent exist'
       },
       notFound: true
     }
   } else {
     const friendlyUrl = TextHelper.slugify(response.data.store.name);
-    if(urlFromBrowser !== friendlyUrl) {
+    if (urlFromBrowser !== friendlyUrl) {
       return {
-        props:{},
+        props: {},
         redirect: {
-          destination:  `/store/${storeId}/${friendlyUrl}`,
+          destination: `/store/${storeId}/${friendlyUrl}`,
           permanent: true,
           // statusCode: 301
         },
@@ -58,7 +57,7 @@ export const getStaticProps: GetStaticProps = async(context) => {
       return {
         props: {
           data: response.data,
-          ...(sst),
+          ...(await serverSideTranslations(context.locale, TranslationHelper.getCommonSource())),
         },
         /*
         TODO for now we use revalidate, but we should update backend to do a on-deman revalidation on store update 
@@ -90,15 +89,15 @@ export const getStaticPaths: GetStaticPaths = async () => {
     params: {
       slug: [
         //https://stackoverflow.com/a/60814690
-        store.id.toString(), 
+        store.id.toString(),
         TextHelper.slugify(store.name)
-      ] 
+      ]
     }
   }))
 
   // We'll pre-render only these paths at build time.
   // { fallback: false } means other routes should 404.
-  return { 
+  return {
     paths,
     fallback: true
   }
