@@ -35,7 +35,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
     console.log(err)
   };
 
-  if (!response.data.store) {
+  if (response.data.stores.length === 0) {
     return {
       props: {
         msg: 'store dosent exist'
@@ -43,7 +43,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
       notFound: true
     }
   } else {
-    const friendlyUrl = TextHelper.slugify(response.data.store.name);
+    const friendlyUrl = TextHelper.slugify(response.data.stores[0].name);
     if (urlFromBrowser !== friendlyUrl) {
       return {
         props: {},
@@ -56,7 +56,8 @@ export const getStaticProps: GetStaticProps = async (context) => {
     } else {
       return {
         props: {
-          data: response.data,
+          // * NOTE: we are using { store: response.data.stores...} because STORE_BY_ID was using store query but that wasn't allowing to use a where clause with status equal ACTIVE. Hence we have to use stores query which returns an array of stores.
+          data: { store: response.data.stores[0] },
           ...(await serverSideTranslations(context.locale, TranslationHelper.getCommonSource())),
         },
         /*
