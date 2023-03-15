@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:local": "env-cmd -f .env.production yarn build",
     "start": "next start",
     "lint": "next lint",
     "release:web": "node --preserve-symlinks --preserve-symlinks-main app/common/scripts/release-web-manager.mjs"
@@ -35,6 +36,7 @@
     "apollo-upload-client": "16.0.0",
     "cookie": "^0.5.0",
     "date-fns": "2.27.0",
+    "env-cmd": "10.1.0",
     "graphql": "15.5.3",
     "graphql-ws": "5.5.0",
     "jose": "^4.9.3",
