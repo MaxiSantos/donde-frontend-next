@@ -38,7 +38,7 @@
     "date-fns": "2.27.0",
     "env-cmd": "10.1.0",
     "graphql": "15.5.3",
-    "graphql-ws": "5.5.0",
+    "graphql-ws": "5.12.1",
     "jose": "^4.9.3",
     "lodash.clonedeep": "4.5.0",
     "lodash.debounce": "4.0.8",
@@ -64,6 +64,7 @@
     "set-cookie-parser": "^2.5.1",
     "slugify": "^1.6.5",
     "swiper": "7.3.1",
+    "universal-cookie": "4.0.4",
     "use-between": "0.1.0",
     "version-bump-prompt": "6.1.0",
     "websocket": "1.0.34",
@@ -77,9 +78,11 @@
     "react-i18next": ">=11.16.4"
   },
   "devDependencies": {
+    "@types/cookie": "^0.5.1",
     "@types/node": "^18.0.4",
     "@types/nprogress": "^0.2.0",
     "@types/react": "18.0.15",
+    "@types/set-cookie-parser": "^2.4.2",
     "cli-select": "^1.1.2",
     "eslint": "7.32.0",
     "eslint-config-next": "13.0.2",
