@@ -1,5 +1,18 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## Installation
+1- nvm
+2- git
+3- IDE or TextEditor (preference visual studio code)
+4- install yarn
+
+## Setup
+
+1- give github user to repo admin
+2- clone https://github.com/MaxiSantos/donde-frontend-next and https://github.com/MaxiSantos/donde-frontend-common
+3- follow steps of yaml to copy common and public folder into project
+4- create .env file
+
 ## Getting Started
 
 First, run the development server:
