@@ -70,8 +70,8 @@
     "yup": "0.32.11"
   },
   "engines": {
-    "node": "16.x",
-    "npm": "8.19.4"
+    "node": "18",
+    "npm": "9"
   },
   "resolutions": {
     "react-i18next": ">=11.16.4"
