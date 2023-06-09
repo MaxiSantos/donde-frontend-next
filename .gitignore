@@ -124,5 +124,6 @@ backend/packages/graphql/types/schema.ts
 app/common
 public
 docs
+shared
 
 .vercel
