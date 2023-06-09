@@ -19,18 +19,29 @@ jobs:
       - name: Checkout main branch
         uses: actions/checkout@v3
 
-      - name: Checkout common repo with staging branch
+      - name: Checkout common repo with main branch
         uses: actions/checkout@v3
         with:
           repository: MaxiSantos/donde-frontend-common
           ref: main
-          path: common
+          path: common-repo
           ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      - name: Copying common to project
+      - name: Checkout shared repo with main branch
+        uses: actions/checkout@v3
+        with:
+          repository: MaxiSantos/donde-shared
+          ref: main
+          path: shared-repo
+          ssh-key: ${{ secrets.SSH_SHARED_PRIVATE_KEY }}
+
+      - name: Copying common and shared to project
         run: |
-          cp -r ./common/common ./app/common
-          cp -r ./common/public ./public
+          cp -r ./shared-repo/shared ./app/shared
+          cp -r ./common-repo/common ./app/common
+          cp -r ./common-repo/public ./public
+          rm -rf ./shared-repo
+          rm -rf ./common-repo
 
       - name: Copying production robotx.txt file
         run: |
