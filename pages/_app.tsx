@@ -20,7 +20,7 @@ import "app/common/styles/theme/themes-vars.module.scss"
 
 import { theme } from 'app/common/styles/theme';
 import client from 'app/common/lib/apolloClient';
-import AuthorizationProvider from 'app/common/lib/AuthorizationProvider';
+import Authorization from 'app/common/lib/Authorization';
 import { NotificationProvider } from 'app/common/context/useNotification';
 import { CustomNotification } from 'app/common/components/elements/CustomNotification';
 import { AuthProvider } from 'app/common/context/useAuthContext';
@@ -33,6 +33,9 @@ import { EmotionHelper } from 'app/common/lib/emotion';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect } from 'react';
 import { manageRefresh } from 'app/common/lib/navigation';
+import { Composer } from 'app/common/context/composer';
+import { buildClientApi } from 'app/common/lib/api/httpClient/factory';
+import { HttpClientProvider } from 'app/common/context/useHttpclient';
 
 // https://community.amplitude.com/instrumentation-and-data-management-57/disabling-metric-tracking-during-development-182
 // *not working disabling amplitude this way. I had to create a wrapper for track function
@@ -44,7 +47,7 @@ setHook("logout", useLogout)
 setHook("translation", () => { return useTranslation('common') })
 
 const clientSideEmotionCache = EmotionHelper.createEmotionCache();
-
+const clientApi = buildClientApi();
 // TODO: check if emotionCache es being received here or it has to be reeived from pageProps section
 const MyApp = ({ Component, emotionCache = clientSideEmotionCache, pageProps }: AppProps) => {
   useMainRouteChange();
@@ -75,19 +78,20 @@ const MyApp = ({ Component, emotionCache = clientSideEmotionCache, pageProps }: 
           <CssBaseline />
           <ToastContainer />
           <ErrorBoundary>
-            <ApolloProvider client={client}>
-              <AuthProvider>
-                <UserActivityProvider>
-                  <NotificationProvider>
-                    <CustomNotification />
-                    <AuthorizationProvider pageProps={pageProps}>
-                      <Component {...pageProps} />
-                      <ReactHooksWrapper />
-                    </AuthorizationProvider>
-                  </NotificationProvider>
-                </UserActivityProvider>
-              </AuthProvider>
-            </ApolloProvider>
+            <Composer items={[
+              [ApolloProvider, {client}],
+              [AuthProvider],
+              [UserActivityProvider],
+              [NotificationProvider],
+              [HttpClientProvider, {clientApi}],
+            ]}>  
+              <CustomNotification />
+              <Authorization pageProps={pageProps}>
+                <Component {...pageProps} />
+                <ReactHooksWrapper />
+              </Authorization>
+            </Composer>
+                  
           </ErrorBoundary>
         </ThemeProvider>
       </CacheProvider>
