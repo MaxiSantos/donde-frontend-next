@@ -9,7 +9,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   // TODO: must test if this work in middleware. Maybe do something like if route.startsWith("/api") then ...
   await runCors(req, res)
   if (req.method === 'POST') {
-    console.log({ req })
     const { token } = req.headers;
     const { routeToRevalidate, id } = req.body;
     console.log({ routeToRevalidate })
@@ -31,7 +30,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         // If there was an error, Next.js will continue
         // to show the last successfully generated page
         console.log(err)
-        return res.status(500).send('Error revalidating')
+        return res.status(500).send('Error revalidating: '+err)
       }
     } else {
       console.log("Invalid token")

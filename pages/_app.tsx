@@ -30,9 +30,6 @@ import { useMainRouteChange } from 'app/common/hooks/useMainRouteChange';
 import { AmplitudeHelper } from 'app/lib/amplitudeHelper';
 import { useLogout } from 'app/common/hooks/useLogout';
 import { EmotionHelper } from 'app/common/lib/emotion';
-import { useRouter } from 'next/router';
-import { useCallback, useEffect } from 'react';
-import { manageRefresh } from 'app/common/lib/navigation';
 import { Composer } from 'app/common/context/composer';
 import { buildClientApi } from 'app/common/lib/api/httpClient/factory';
 import { HttpClientProvider } from 'app/common/context/useHttpclient';
@@ -79,19 +76,18 @@ const MyApp = ({ Component, emotionCache = clientSideEmotionCache, pageProps }: 
           <ToastContainer />
           <ErrorBoundary>
             <Composer items={[
-              [ApolloProvider, {client}],
+              [ApolloProvider, { client }],
               [AuthProvider],
               [UserActivityProvider],
               [NotificationProvider],
-              [HttpClientProvider, {clientApi}],
-            ]}>  
+              [HttpClientProvider, { clientApi }],
+            ]}>
               <CustomNotification />
               <Authorization pageProps={pageProps}>
                 <Component {...pageProps} />
                 <ReactHooksWrapper />
               </Authorization>
             </Composer>
-                  
           </ErrorBoundary>
         </ThemeProvider>
       </CacheProvider>
