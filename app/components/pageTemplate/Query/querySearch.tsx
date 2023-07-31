@@ -1,4 +1,6 @@
 import { useForm } from "react-hook-form";
+import { useWait } from "react-wait";
+import BeatLoader from "react-spinners/BeatLoader";
 import { CategorySelect } from "../../../common/components/elements/Form/withData/CategorySelect";
 import { SearchFactory } from "../../../common/components/sections/Search2/factory"
 import { FormSelect2 } from "app/common/components/elements/Form/FormSelect2";
@@ -9,7 +11,7 @@ import { useApolloClient, useQuery } from "@apollo/client";
 import { useAuth } from 'app/common/context/useAuthContext';
 import { GetIsSearching, GetIsSearchBoxOpen, GetIsSubscribed, GetUserSearchId, GetLastHomeSearch, GetStoresPayload } from "../../../common/graphql/local";
 import { ALL_STORE } from "../../../graphql/Store";
-import { useEffect, useRef } from "react";
+import { CSSProperties, useEffect, useRef } from "react";
 import { selectOptionsProps } from "app/common/components/elements/Form/FormProps";
 import CustomButton from "app/common/components/elements/Button";
 import { useTranslation } from 'next-i18next';
@@ -37,8 +39,10 @@ export const QuerySearch = () => {
   const refCategory = useRef(null);
   const timerRef = useRef(null);
   const timerRef2 = useRef(null);
+  const timerRef3 = useRef(null);
   const router = useRouter();
   const { isMobile } = useMedia();
+  const { Wait, startWaiting, endWaiting } = useWait();
 
   const { authResponse: { user } } = useAuth();
   const { data: { isSearching } = {} } = useQuery(GetIsSearching);
@@ -69,7 +73,7 @@ export const QuerySearch = () => {
     findItems: findProductsByCategory,
     data: results2,
     error: resultsError2,
-    loading: resultsLoading2,
+    loading: isLoadingProductsByCategory,
   } = useSearchProductsByCategory();
 
   const {
@@ -109,7 +113,7 @@ export const QuerySearch = () => {
           createdAt: searchData.createdAt
         }
       })
-      if (searchData.stores.length >= 0 && !resultsLoading2) {
+      if (searchData.stores.length >= 0 && !isLoadingProductsByCategory) {
         StoreHelper.addIsOpen(searchData.stores)
         const sortedStores = searchData.stores.sort(function (a, b) { return b.isOpen - a.isOpen });
         client.writeQuery({
@@ -119,6 +123,19 @@ export const QuerySearch = () => {
       }
     }
   }, [client, searchData]);
+
+  useEffect(() => {
+    if (!isLoadingProductsByCategory) {
+      endWaiting("request_category")
+    } else {
+      timerRef3.current = setTimeout(() => {
+        startWaiting("request_category");
+      }, 250);
+    }
+    return () => {
+      clearTimeout(timerRef3.current);
+    }
+  }, [isLoadingProductsByCategory])
 
   const methods = useForm({
     resolver: yupResolver(schema),
@@ -236,6 +253,9 @@ export const QuerySearch = () => {
     }
   };
 
+  const override: CSSProperties = {
+    textAlign: "center"
+  };
   const options = [
     {
       name: "category",
@@ -249,10 +269,24 @@ export const QuerySearch = () => {
     },
     {
       name: "search",
-      component: <FormSelect2 name="search" control={control} label={t('search-box.what-u-looking')} options={productOptions} $isAsking={true} maxLength={70} freeSolo variant="standard" onSelect={handleSubmit(onSearch)}
-        groupBy={(option) => {
-          return option?.category
-        }} />
+      component:
+        <Wait
+          on="request_category"
+          fallback={
+            <BeatLoader
+              loading={true}
+              size={15}
+              cssOverride={override}
+              aria-label="Loading Spinner"
+              data-testid="loader"
+            />
+          }>
+          {<FormSelect2 name="search" control={control} label={t('search-box.what-u-looking')} options={productOptions} $isAsking={true} maxLength={70} freeSolo variant="standard"
+            onSelect={handleSubmit(onSearch)}
+            groupBy={(option) => {
+              return option?.category
+            }} />}
+        </Wait>
     },
     /*{
       name: "submit",

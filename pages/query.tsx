@@ -5,6 +5,7 @@ import { Default } from "app/common/components/layouts/default";
 import Query from "app/components/pageTemplate/Query";
 import { TranslationHelper } from "app/common/lib/translation";
 import { getProtectedPath } from "app/config/auth";
+import { getEndpoint } from "app/common/lib/api/helper";
 
 const App = () => (
   <Default top={<QuerySearch />}>
@@ -13,7 +14,7 @@ const App = () => (
 );
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const logApiRoute = `${process.env.NEXT_PUBLIC_CLIENT_ENDPOINT}/api/log`;
+  const logApiRoute = `${getEndpoint()}/api/log`;
   let headerNames = context.req.headers;
   let isAuthenticated = headerNames.isauthenticated as string;
   console.log("headerNames.isauthenticated")

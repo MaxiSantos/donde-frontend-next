@@ -26,15 +26,18 @@
     "@mui/lab": "5.0.0-alpha.98",
     "@mui/material": "5.10.4",
     "@types/apollo-upload-client": "14.1.0",
+    "@types/cors": "^2.8.13",
     "@types/lodash": "^4.14.172",
     "@types/lodash.debounce": "^4.0.6",
-    "@types/react-dom": "18.0.6",
+    "@types/react-dom": "18.2.7",
     "@types/react-image-gallery": "^1.0.4",
+    "@types/react-wait": "^0.3.2",
     "ag-grid-community": "26.2.0",
     "ag-grid-react": "26.2.0",
     "apollo-link-logger": "^2.0.0",
     "apollo-upload-client": "16.0.0",
     "cookie": "^0.5.0",
+    "cors": "^2.8.5",
     "date-fns": "2.27.0",
     "env-cmd": "10.1.0",
     "graphql": "15.5.3",
@@ -46,6 +49,7 @@
     "moment": "2.29.1",
     "next": "13.4.4",
     "next-i18next": "13.3.0",
+    "nextjs-cors": "^2.1.2",
     "nprogress": "0.2.0",
     "pino": "^8.7.0",
     "react": "18.2.0",
@@ -58,8 +62,10 @@
     "react-idle-timer": "5.4.2",
     "react-image-gallery": "1.2.7",
     "react-share": "4.4.0",
+    "react-spinners": "^0.13.8",
     "react-toastify": "8.1.0",
     "react-typing-effect": "2.0.5",
+    "react-wait": "^0.3.0",
     "react-web-notification": "0.8.0",
     "sass": "1.49.7",
     "set-cookie-parser": "^2.5.1",
@@ -78,11 +84,16 @@
   "resolutions": {
     "react-i18next": ">=11.16.4"
   },
+  "overrides": {
+    "@types/react-wait": {
+      "@types/react": "18.2.18"
+    }
+  },
   "devDependencies": {
     "@types/cookie": "^0.5.1",
     "@types/node": "^18.0.4",
     "@types/nprogress": "^0.2.0",
-    "@types/react": "18.0.15",
+    "@types/react": "18.2.18",
     "@types/set-cookie-parser": "^2.4.2",
     "cli-select": "^1.1.2",
     "eslint": "7.32.0",
