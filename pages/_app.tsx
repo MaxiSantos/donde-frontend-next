@@ -5,6 +5,7 @@ import { CacheProvider } from '@emotion/react'
 import Head from 'next/head';
 import { appWithTranslation, useTranslation } from 'next-i18next';
 import { ToastContainer } from 'react-toastify';
+import { Waiter } from "react-wait";
 import NProgress from 'nprogress';
 
 import CssBaseline from '@mui/material/CssBaseline';
@@ -76,6 +77,7 @@ const MyApp = ({ Component, emotionCache = clientSideEmotionCache, pageProps }: 
           <ToastContainer />
           <ErrorBoundary>
             <Composer items={[
+              [Waiter],
               [ApolloProvider, { client }],
               [AuthProvider],
               [UserActivityProvider],
