@@ -14,7 +14,7 @@ jobs:
       - name: Setup node version
         uses: actions/setup-node@v3
         with:
-          node-version: 14.x
+          node-version: 18.x
       
       - name: Checkout staging branch
         uses: actions/checkout@v3
@@ -24,16 +24,27 @@ jobs:
         with:
           repository: MaxiSantos/donde-frontend-common
           ref: staging
-          path: common
+          path: common-repo
           ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
       
-      - name: Copying common to project
+      - name: Checkout shared repo with staging branch
+        uses: actions/checkout@v3
+        with:
+          repository: MaxiSantos/donde-shared
+          ref: staging
+          path: shared-repo
+          ssh-key: ${{ secrets.SSH_SHARED_PRIVATE_KEY }}
+
+      - name: Copying common and shared to project
         run: |
-          cp -r ./common/common ./app/common
-          cp -r ./common/public ./public 
+          cp -r ./shared-repo/shared ./app/shared
+          cp -r ./common-repo/common ./app/common
+          cp -r ./common-repo/public ./public
+          rm -rf ./shared-repo
+          rm -rf ./common-repo
       
       - name: Install Vercel CLI
-        run: npm install --global vercel@28.2.3
+        run: npm install --global vercel@30.2.0
       
       - name: Pull Vercel Environment Information
         run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}

@@ -32,11 +32,19 @@
     //"paths": {
     //"@mui/styled-engine": ["./node_modules/@mui/styled-engine-sc"]
     //}
+    ,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx" // *** The files TypeScript should type check ***
+    ,
+    ".next/types/**/*.ts"
   ],
   "exclude": [
     "node_modules",

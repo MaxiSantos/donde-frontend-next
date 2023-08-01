@@ -123,5 +123,7 @@ backend/packages/graphql/types/schema.ts
 # common files addedd by symlink
 app/common
 public
+docs
+shared
 
 .vercel
