@@ -25,13 +25,6 @@
     "@mui/icons-material": "5.10.3",
     "@mui/lab": "5.0.0-alpha.98",
     "@mui/material": "5.10.4",
-    "@types/apollo-upload-client": "14.1.0",
-    "@types/cors": "^2.8.13",
-    "@types/lodash": "^4.14.172",
-    "@types/lodash.debounce": "^4.0.6",
-    "@types/react-dom": "18.2.7",
-    "@types/react-image-gallery": "^1.0.4",
-    "@types/react-wait": "^0.3.2",
     "ag-grid-community": "26.2.0",
     "ag-grid-react": "26.2.0",
     "apollo-link-logger": "^2.0.0",
@@ -90,6 +83,13 @@
     }
   },
   "devDependencies": {
+    "@types/apollo-upload-client": "14.1.0",
+    "@types/cors": "^2.8.13",
+    "@types/lodash": "^4.14.172",
+    "@types/lodash.debounce": "^4.0.6",
+    "@types/react-dom": "18.2.7",
+    "@types/react-image-gallery": "^1.0.4",
+    "@types/react-wait": "^0.3.2",
     "@types/cookie": "^0.5.1",
     "@types/node": "^18.0.4",
     "@types/nprogress": "^0.2.0",
@@ -97,8 +97,8 @@
     "@types/set-cookie-parser": "^2.4.2",
     "cli-select": "^1.1.2",
     "eslint": "7.32.0",
+    "typescript": "4.7.4",
     "eslint-config-next": "13.0.2",
-    "pino-pretty": "^9.1.1",
-    "typescript": "4.7.4"
+    "pino-pretty": "^9.1.1"
   }
 }
