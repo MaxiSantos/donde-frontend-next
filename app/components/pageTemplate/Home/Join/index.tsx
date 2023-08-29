@@ -27,7 +27,7 @@ const Join = (props) => {
     >
       <Container sx={{ display: "flex", flexDirection: "column" }}>
         <Paragraph sx={{ position: "relative", color: "black", fontWeight: 500 }}>{t("home.join.content")}</Paragraph>
-        <Button sx={{ display: "inline", margin: "auto" }} href="mailto:consultas@dondelobusco.com" variant="contained">Quiero unirme</Button>
+        <Button sx={{ display: "inline", margin: "auto" }} href="mailto:consultas@dondelobusco.com?&subject=Quiero registrarme en dondelobusco&body=Por favor incluya nombre de su negocio, localidad y rubro al que pertence." variant="contained">Quiero unirme</Button>
       </Container>
     </ParallaxBanner>
   </Container>
