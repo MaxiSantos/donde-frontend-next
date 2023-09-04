@@ -1,10 +1,12 @@
 import Container from '@mui/material/Container';
-import Features from './Features';
+import Description from './Description';
 import Welcome from './Welcome';
+import Join from './Join';
 
 export default function Home() {
   return <Container>
     <Welcome />
-    <Features />
+    <Description />
+    <Join />
   </Container>
 }
