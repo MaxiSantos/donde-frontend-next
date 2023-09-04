@@ -6,6 +6,7 @@ import Head from 'next/head';
 import { appWithTranslation, useTranslation } from 'next-i18next';
 import { ToastContainer } from 'react-toastify';
 import { Waiter } from "react-wait";
+import { ParallaxProvider } from "react-scroll-parallax";
 import NProgress from 'nprogress';
 
 import CssBaseline from '@mui/material/CssBaseline';
@@ -18,6 +19,7 @@ import "swiper/css/navigation";
 import "app/common/styles/_app.css";
 import 'app/common/styles/icons.css';
 import "app/common/styles/theme/themes-vars.module.scss"
+import styles from './ParallaxBanner.module.scss';
 
 import { theme } from 'app/common/styles/theme';
 import client from 'app/common/lib/apolloClient';
@@ -78,6 +80,7 @@ const MyApp = ({ Component, emotionCache = clientSideEmotionCache, pageProps }: 
           <ErrorBoundary>
             <Composer items={[
               [Waiter],
+              [ParallaxProvider],
               [ApolloProvider, { client }],
               [AuthProvider],
               [UserActivityProvider],

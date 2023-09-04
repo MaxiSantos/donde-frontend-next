@@ -6,6 +6,7 @@ export const Paragraph = styled('p', EmotionHelper.getTransientOptions())`
   font-size: 18px;
   font-weight: 400;
   line-height: 34px;
+  font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
 `;
 
 export const SubTitle = styled('h3', EmotionHelper.getTransientOptions())`
