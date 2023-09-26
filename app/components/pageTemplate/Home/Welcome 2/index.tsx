@@ -40,4 +40,4 @@ const Welcome = (props) => {
   </Container>
 }
 
-export default MotionWrapper(Welcome, "welcome");
+export default Welcome;

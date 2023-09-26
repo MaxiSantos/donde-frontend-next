@@ -33,4 +33,4 @@ const Join = (props) => {
   </Container>
 }
 
-export default MotionWrapper(Join, "join");
+export default Join;
