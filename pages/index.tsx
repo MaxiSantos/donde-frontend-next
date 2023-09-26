@@ -1,18 +1,18 @@
-import { TranslationHelper } from 'app/common/lib/translation';
-import type { NextPage } from 'next'
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import type { GetStaticProps, NextPage } from 'next'
 import Home from './home';
+import { getPageProps } from 'app/common/lib/page/pageNextProps';
 
 const Index: NextPage = () => {
   return <Home />;
 }
 
-export async function getStaticProps(context) {
-  return {
-    props: {      
-      ...(await serverSideTranslations(context.locale, TranslationHelper.getCommonSource())),
+export const getStaticProps: GetStaticProps = async (context) => {
+  return await getPageProps({
+    context,
+    auth: {
+      name: 'home'
     }
-  };
+  })
 }
 
 export default Index

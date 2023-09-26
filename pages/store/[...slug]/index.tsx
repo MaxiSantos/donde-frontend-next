@@ -1,12 +1,10 @@
 import { Default } from "app/common/components/layouts/default";
-import { TranslationHelper } from "app/common/lib/translation";
 import client from "app/common/lib/apolloClient";
 import Store from "app/components/pageTemplate/Store/item";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { ALL_STORE_QUERY, STORE_BY_ID } from "app/common/graphql/queries/Store";
 import { TextHelper } from "app/common/lib/text";
-import { getProtectedPath } from "app/config/auth";
+import { getPageProps } from "app/common/lib/page/pageNextProps";
 
 const App = ({ data }) => (
   <Default>
@@ -54,18 +52,27 @@ export const getStaticProps: GetStaticProps = async (context) => {
         },
       }
     } else {
-      return {
+      let pageProps = await getPageProps({
+        context,
+        auth: {
+          name: "storeItem",
+        }
+      });
+      let _props = {
         props: {
+          ...pageProps.props,
           // * NOTE: we are using { store: response.data.stores...} because STORE_BY_ID was using store query but that wasn't allowing to use a where clause with status equal ACTIVE. Hence we have to use stores query which returns an array of stores.
           data: { store: response.data.stores[0] },
-          ...(await serverSideTranslations(context.locale, TranslationHelper.getCommonSource())),
+          //...(await serverSideTranslations(context.locale, TranslationHelper.getCommonSource())),
         },
         /*
         TODO for now we use revalidate, but we should update backend to do a on-deman revalidation on store update 
         https://nextjs.org/docs/basic-features/data-fetching/incremental-static-regeneration#using-on-demand-revalidation
         */
         revalidate: 3600
-      };
+      }
+      console.log(_props)
+      return _props;
     }
   }
 }
