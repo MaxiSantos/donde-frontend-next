@@ -1,58 +1,34 @@
-import { validateJWT } from "app/common/lib/jwt";
+import { PathMap } from "app/common/lib/page/route";
 
-type PathConfig = {
+export interface IRouteAuthConfig {
   protected: boolean;
-  allowedRoles: ['USER']
+  allowedRoles: ('USER')[];
+  isJWTValid?: boolean;
 }
-let pathConfig: PathConfig = {
+
+export let routeAuthTemplate: IRouteAuthConfig = {
   protected: false,
   allowedRoles: ['USER']
 };
 
-let routes = [
-  '_default',
-  'reset',
+export let _routes = [
+  'home',
   'publications',
-  //'notifications',
-  'login',
+  'notifications',
   'query',
   'profile',
   'query',
   'store',
+  'storeItem',
 ] as const;
 
-// creating types from array
-// https://github.com/microsoft/TypeScript/issues/28046#issuecomment-431871542
-type RouteType<T extends ReadonlyArray<unknown>> = T extends ReadonlyArray<
-  infer RouteType
->
-  ? RouteType
-  : never
-
-type Routes = RouteType<typeof routes>
-
-// key in obj with specific values
-// https://stackoverflow.com/questions/13315131/enforcing-the-type-of-the-indexed-members-of-a-typescript-object
-type PathMap = {
-  [key in Routes]: PathConfig;
-};
-
-let routesWithConfig = routes.map(path => ({ [path]: pathConfig }));
-export const protectedPaths: PathMap = {
-  ...(Object.assign({}, ...(routesWithConfig))),
+export const customPathConfig: Partial<PathMap> = {
   query: {
-    ...pathConfig,
+    ...routeAuthTemplate,
     protected: true
   },
   profile: {
-    ...pathConfig,
+    ...routeAuthTemplate,
     protected: true
-  }
-}
-
-export const getProtectedPath = (name: Routes, isAuthenticated = "false") => {
-  return {
-    pathConfig: protectedPaths?.[name],
-    isAuthenticated: isAuthenticated === "true"
-  }
+  },
 }

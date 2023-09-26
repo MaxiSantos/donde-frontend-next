@@ -95,4 +95,4 @@ const Features = (props) => {
   </Container>
 }
 
-export default MotionWrapper(Features, "features");
+export default Features;

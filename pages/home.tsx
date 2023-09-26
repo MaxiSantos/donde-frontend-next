@@ -1,7 +1,7 @@
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { GetStaticProps } from "next";
 import { Default } from "app/common/components/layouts/default";
 import Home from "app/components/pageTemplate/Home";
-import { TranslationHelper } from "app/common/lib/translation";
+import { getPageProps } from 'app/common/lib/page/pageNextProps';
 
 /*
 TODO: should we use https://nextjs.org/docs/basic-features/script#afterinteractive Script Loader for responsivevoice?
@@ -12,13 +12,13 @@ const App = () => (
   </Default>
 );
 
-export async function getStaticProps(context) {
-  const props = {
-    ...(await serverSideTranslations(context.locale, TranslationHelper.getCommonSource())),
-  }
-  return {
-    props
-  };
+export const getStaticProps: GetStaticProps = async (context) => {
+  return await getPageProps({
+    context,
+    auth: {
+      name: "home",
+    }
+  })
 }
 
 export default App;
