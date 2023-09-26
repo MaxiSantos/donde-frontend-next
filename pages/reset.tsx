@@ -21,12 +21,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
       name: 'reset'
     }
   })
-  /*return {
-    props: {
-      pathConfig: protectedPaths.reset,
-      ...(await serverSideTranslations(context.locale, TranslationHelper.getCommonSource(['profile']))),
-    }
-  };*/
 }
 
 export default App;

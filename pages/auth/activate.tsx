@@ -1,4 +1,4 @@
-import type { NextPage } from 'next'
+import type { GetStaticProps, NextPage } from 'next'
 import Activate from '../../app/common/pages/auth/activate'
 import Head from 'next/head';
 import { getPageProps } from 'app/common/lib/page/pageNextProps';
@@ -12,7 +12,7 @@ const Index: NextPage = () => {
   </>;
 }
 
-export async function getStaticProps(context) {
+export const getStaticProps: GetStaticProps = async (context) => {
   return await getPageProps({
     context,
     auth: {
@@ -20,4 +20,5 @@ export async function getStaticProps(context) {
     }
   })
 }
+
 export default Index

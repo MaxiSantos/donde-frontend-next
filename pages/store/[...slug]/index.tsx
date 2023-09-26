@@ -5,8 +5,6 @@ import { GetStaticPaths, GetStaticProps } from 'next'
 import { ALL_STORE_QUERY, STORE_BY_ID } from "app/common/graphql/queries/Store";
 import { TextHelper } from "app/common/lib/text";
 import { getPageProps } from "app/common/lib/page/pageNextProps";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { TranslationHelper } from "app/common/lib/translation";
 
 const App = ({ data }) => (
   <Default>

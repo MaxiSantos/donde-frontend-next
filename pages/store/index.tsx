@@ -1,3 +1,4 @@
+import { GetStaticProps } from 'next';
 import { Default } from 'app/common/components/layouts/default';
 import { getPageProps } from 'app/common/lib/page/pageNextProps';
 import Store from 'app/components/pageTemplate/Store';
@@ -9,7 +10,7 @@ const App = () => (
   </Default>
 );
 
-export async function getStaticProps(context) {
+export const getStaticProps: GetStaticProps = async (context) => {
   return await getPageProps({
     context,
     auth: {
