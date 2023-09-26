@@ -1,4 +1,5 @@
 import { Default } from 'app/common/components/layouts/default';
+import { getPageProps } from 'app/common/lib/page/pageNextProps';
 import { TranslationHelper } from 'app/common/lib/translation';
 import Publication from 'app/components/pageTemplate/Publication';
 import { PublicationSearch } from 'app/components/pageTemplate/Publication/publicationSearch';
@@ -11,11 +12,12 @@ const App = () => (
 );
 
 export async function getStaticProps(context) {
-  return {
-    props: {     
-      ...(await serverSideTranslations(context.locale, TranslationHelper.getCommonSource())),
+  return await getPageProps({
+    context,
+    auth: {
+      name: "publications",
     }
-  };
+  })
 }
 
 export default App;

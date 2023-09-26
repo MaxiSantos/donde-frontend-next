@@ -1,8 +1,7 @@
 import { Default } from 'app/common/components/layouts/default';
-import { TranslationHelper } from 'app/common/lib/translation';
+import { getPageProps } from 'app/common/lib/page/pageNextProps';
 import Store from 'app/components/pageTemplate/Store';
 import { StoreSearch } from 'app/components/pageTemplate/Store/storeSearch';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 const App = () => (
   <Default top={<StoreSearch />} pageTitle="store">
@@ -11,11 +10,12 @@ const App = () => (
 );
 
 export async function getStaticProps(context) {
-  return {
-    props: {     
-      ...(await serverSideTranslations(context.locale, TranslationHelper.getCommonSource())),
+  return await getPageProps({
+    context,
+    auth: {
+      name: "store",
     }
-  };
+  })
 }
 
 export default App;

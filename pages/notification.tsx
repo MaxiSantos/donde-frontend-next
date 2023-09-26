@@ -1,4 +1,5 @@
 import { Default } from 'app/common/components/layouts/default';
+import { getPageProps } from 'app/common/lib/page/pageNextProps';
 import { TranslationHelper } from 'app/common/lib/translation';
 import Notification from 'app/components/pageTemplate/Notification';
 import { protectedPaths } from 'app/config/auth';
@@ -11,12 +12,12 @@ const App = () => (
 );
 
 export async function getStaticProps(context) {
-  return {
-    props: {
-      pathConfig: protectedPaths._default,
-      ...(await serverSideTranslations(context.locale, TranslationHelper.getCommonSource())),
+  return await getPageProps({
+    context,
+    auth: {
+      name: "notifications",
     }
-  };
+  })
 }
 
 export default App;

@@ -1,9 +1,8 @@
-import { TranslationHelper } from 'app/common/lib/translation';
-import { protectedPaths } from 'app/config/auth';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Head from 'next/head';
 import { Default } from '../app/common/components/layouts/default';
 import { Reset } from '../app/common/components/pageTemplate/Auth/Reset';
+import { getPageProps } from 'app/common/lib/page/pageNextProps';
+import { GetStaticProps } from 'next';
 
 const App = () => (
   <Default>
@@ -14,13 +13,20 @@ const App = () => (
   </Default>
 );
 
-export async function getStaticProps(context) {
-  return {
+export const getStaticProps: GetStaticProps = async (context) => {
+  return await getPageProps({
+    context,
+    translationSource: ['profile'],
+    auth: {
+      name: 'reset'
+    }
+  })
+  /*return {
     props: {
       pathConfig: protectedPaths.reset,
       ...(await serverSideTranslations(context.locale, TranslationHelper.getCommonSource(['profile']))),
     }
-  };
+  };*/
 }
 
 export default App;

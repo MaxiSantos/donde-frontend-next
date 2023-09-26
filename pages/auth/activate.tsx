@@ -1,8 +1,7 @@
 import type { NextPage } from 'next'
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Activate from '../../app/common/pages/auth/activate'
-import { TranslationHelper } from 'app/common/lib/translation'
 import Head from 'next/head';
+import { getPageProps } from 'app/common/lib/page/pageNextProps';
 
 const Index: NextPage = () => {
   return <>
@@ -14,10 +13,11 @@ const Index: NextPage = () => {
 }
 
 export async function getStaticProps(context) {
-  return {
-    props: {
-      ...(await serverSideTranslations(context.locale, TranslationHelper.getCommonSource())),
+  return await getPageProps({
+    context,
+    auth: {
+      name: "activate",
     }
-  };
+  })
 }
 export default Index

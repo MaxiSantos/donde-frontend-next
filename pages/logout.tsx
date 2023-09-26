@@ -1,8 +1,7 @@
-import { TranslationHelper } from 'app/common/lib/translation';
 import { GetServerSideProps } from 'next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Default } from 'app/common/components/layouts/default';
 import { Logout } from 'app/common/components/pageTemplate/Auth/Logout';
+import { getPageProps } from 'app/common/lib/page/pageNextProps';
 
 const App = () => (
   <Default>
@@ -11,11 +10,12 @@ const App = () => (
 );
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  return {
-    props: {
-      ...(await serverSideTranslations(context.locale, TranslationHelper.getCommonSource())),
+  return await getPageProps({
+    context,
+    auth: {
+      name: "logout",
     }
-  };
+  })
 }
 
 export default App;

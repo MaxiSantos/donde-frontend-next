@@ -1,8 +1,7 @@
-import { TranslationHelper } from 'app/common/lib/translation';
 import { GetStaticProps } from 'next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Default } from '../app/common/components/layouts/default';
 import { Login } from '../app/common/components/pageTemplate/Auth/Login';
+import { getPageProps } from 'app/common/lib/page/pageNextProps';
 
 const App = () => (
   <Default>
@@ -10,12 +9,13 @@ const App = () => (
   </Default>
 );
 
-export const getStaticProps: GetStaticProps = async (context) => {  
-  return {
-    props: {
-      ...(await serverSideTranslations(context.locale, TranslationHelper.getCommonSource())),
+export const getStaticProps: GetStaticProps = async (context) => {
+  return await getPageProps({
+    context,
+    auth: {
+      name: "signin",
     }
-  };
+  })
 }
 
 export default App;
