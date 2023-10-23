@@ -21,7 +21,7 @@ const Welcome = (props) => {
     <Title>{TextHelper.capitalize(t('home.welcome.title'))}</Title>
     <ParallaxBanner
       layers={[
-        { image: '/images/fondo1.jpeg', speed: -20, style: { opacity: 0.3 } },
+        { image: '/images/fondo1b.jpeg', speed: -20, style: { opacity: 0.3 } },
       ]}
       style={{ aspectRatio: '2 / 1', height: isMobile ? "240px" : (isTablet ? "170px" : "140px") }}
     >

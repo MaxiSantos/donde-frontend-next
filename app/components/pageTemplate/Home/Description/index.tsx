@@ -19,10 +19,10 @@ const BoxWrapper = React.forwardRef(function LinkWrapper(props, ref) {
 type DetailsProp = {
   icon: {
     type: string
-    color: string
+    color: (i: number) => string
   }
-  title?: () => string
-  content?: () => React.ReactNode
+  content?: (i?: any) => React.ReactElement
+  title?: (i?: any) => string
 }
 
 const Features = (props) => {
@@ -30,10 +30,9 @@ const Features = (props) => {
   const randomColorLength = randomColors.length;
   const random = Math.floor(Math.random() * randomColorLength);
   const getNextCircularIndex = (currentIndex: number): number => {
-    console.log({ currentIndex })
     return (currentIndex + 1) % randomColorLength;
   }
-  const details: DetailsProp = [
+  const details: DetailsProp[] = [
     {
       icon: {
         type: "im-icon-Clothing-Store",

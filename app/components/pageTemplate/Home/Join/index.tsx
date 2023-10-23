@@ -21,7 +21,7 @@ const Join = (props) => {
     <Title>{TextHelper.capitalize(t('home.join.title'))}</Title>
     <ParallaxBanner
       layers={[
-        { image: '/images/fondo3.jpeg', speed: -20, style: { opacity: 0.3 } },
+        { image: '/images/fondo3b.jpeg', speed: -20, style: { opacity: 0.3 } },
       ]}
       style={{ aspectRatio: '2 / 1', height: isMobile ? "230px" : (isTablet ? "160px" : "160px") }}
     >
