@@ -25,6 +25,7 @@ import { theme } from 'app/common/styles/theme';
 import client from 'app/common/lib/apolloClient';
 import Authorization from 'app/common/lib/Authorization';
 import { NotificationProvider } from 'app/common/context/useNotification';
+import { SessionProvider } from 'next-auth/react';
 import { CustomNotification } from 'app/common/components/elements/CustomNotification';
 import { AuthProvider } from 'app/common/context/useAuthContext';
 import { UserActivityProvider } from 'app/common/context/useUserActivity';
@@ -81,6 +82,7 @@ const MyApp = ({ Component, emotionCache = clientSideEmotionCache, pageProps }: 
             <Composer items={[
               [Waiter],
               [ParallaxProvider],
+              [SessionProvider],
               [ApolloProvider, { client }],
               [AuthProvider],
               [UserActivityProvider],

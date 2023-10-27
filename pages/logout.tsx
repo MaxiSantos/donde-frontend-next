@@ -1,7 +1,7 @@
-import { GetStaticProps } from 'next';
 import { Default } from 'app/common/components/layouts/default';
 import { Logout } from 'app/common/components/pageTemplate/Auth/Logout';
 import { getPageProps } from 'app/common/lib/page/pageNextProps';
+import { GetStaticProps } from 'next';
 
 const App = () => (
   <Default>
