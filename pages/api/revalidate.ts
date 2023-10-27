@@ -15,7 +15,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     console.log({ id })
     console.log({ token })
     // Check for secret to confirm this is a valid request
-    if (token === process.env.VERCEL_API_TOKEN) {
+    if (token === process.env.NEXT_PUBLIC_VERCEL_CLIENT_API_TOKEN) {
       try {
         const pathsToRevalite = await getPaths(routeToRevalidate, id);
         console.log({ pathsToRevalite })
