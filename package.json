@@ -25,6 +25,7 @@
     "@mui/icons-material": "5.10.3",
     "@mui/lab": "5.0.0-alpha.98",
     "@mui/material": "5.10.4",
+    "@redtea/format-axios-error": "2.1.1",
     "ag-grid-community": "26.2.0",
     "ag-grid-react": "26.2.0",
     "apollo-link-logger": "^2.0.0",
