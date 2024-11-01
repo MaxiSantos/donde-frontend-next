@@ -1,0 +1,285 @@
+{
+  "actions": {
+    "activate": "activar",
+    "add": "agregar",
+    "add-store": "agregar negocio",
+    "add-time": "agregar horario",
+    "back": "atras",
+    "cancel": "cancelar",
+    "clear": "borrar",
+    "create": "crear",
+    "delete": "eliminar",
+    "edit": "modificar",
+    "finish": "terminar",
+    "go-login": "Cree su cuenta",
+    "go-signup": "Cree su cuenta",
+    "go-to": "ir a",
+    "hide": "ocultar",
+    "login": "ingresar",
+    "next": "siguiente",
+    "no": "no",
+    "open": "abrir",
+    "remove-store": "eliminar negocio",
+    "reset": "resetear",
+    "save": "guardar cambios",
+    "search": "buscar",
+    "select-store": "Seleccione su negocio",
+    "skip": "omitir",
+    "submit": "enviar",
+    "yes": "si"
+  },
+  "b": {
+    "select_a_category": "selecione una categoria"
+  },
+  "cafes": "cafes",
+  "card": {
+    "openingHour": {
+      "closed": "cerrado",
+      "friday": "viernes",
+      "monday": "lunes",
+      "open": "abierto",
+      "saturday": "sabado",
+      "sunday": "domingo",
+      "thursday": "jueves",
+      "title": "horario",
+      "today": "hoy",
+      "tuesday": "martes",
+      "wednesday": "miercoles"
+    },
+    "publication": {
+      "discount": "descuento",
+      "new_product": "producto nuevo",
+      "promotion": "promocion",
+      "valid-until": "activo hasta"
+    },
+    "store": {
+      "no-comment": "sin comentarios"
+    }
+  },
+  "category": "categoria",
+  "change_psw": "cambiar contraseña",
+  "connect": "Conecte con los lugares que tienen lo que busca",
+  "dashboard": {
+    "availavility": "respuesta",
+    "duration": "tiempo restante",
+    "location": "ubicacion",
+    "message": "mensaje",
+    "query": "consulta",
+    "time": "hora"
+  },
+  "events": {
+    "loading": "procesando"
+  },
+  "forgot-password": "olvide mi contraseña",
+  "form": {
+    "close": "cierra",
+    "company-setup-done": "Haga click en $t(actions.finish) para guardar los cambios o $t(actions.reset) para empezar de nuevo",
+    "description": "descripcion",
+    "email": "email",
+    "end-date": "visible hasta",
+    "image": "imagen",
+    "location": "ubicacion",
+    "message": "mensaje",
+    "name": "nombre",
+    "open": "abre",
+    "password": "contraseña",
+    "section": {
+      "basic-information": "informacion basica",
+      "details": "detalles",
+      "gallery": "galeria"
+    },
+    "select-product-or": "selecione un producto o cree uno",
+    "select_*_category": "selecione una o mas categorias",
+    "select_a_category": "selecione un grupo",
+    "status": "disponibilidad",
+    "telephone": "telefono",
+    "type": "tipo",
+    "username": "nombre de usuario"
+  },
+  "form-error": {
+    "invalid-email": "formato de email invalido",
+    "invalid-phone": "formato de telefono invalido",
+    "invalid-signup": "ocurrio un error con el registro de su cuenta",
+    "invalid-url": "formato de url invalido",
+    "max-length": "el maximo de caracteres es de {{max}}",
+    "min1": "debe selecionar al menos una opcion",
+    "opentime-greater": "el horario de cierre debe ser mayor al horarios de apertura",
+    "password-match": "la contraseña debe coincidir",
+    "required": "este campo es requerido",
+    "user-taken": "nombre de usuario ya existe"
+  },
+  "home": {
+    "description": {
+      "service1": {
+        "content": "Encuentra fácilmente negocios locales organizados por categorías, desde restaurantes hasta tiendas y más.",
+        "title": "Búsqueda por Rubro"
+      },
+      "service2": {
+        "content": "Busca productos y descubre dónde encontrarlos. Mostramos los negocios que tienen lo que buscas.",
+        "title": "Consulta de Productos"
+      },
+      "service3": {
+        "content": "¿Necesitas algo específico? Realiza una <strong>unica</strong> consulta a todos los negocios. Reciba <strong>multiples</strong> respuestas en tiempo real y ve qué locales están disponibles para tus necesidades.",
+        "title": "Preguntas y Respuestas en Tiempo Real"
+      },
+      "service4": {
+        "content": "Explora promociones, descuentos y los últimos lanzamientos de productos nuevos en tu área.",
+        "title": "Anuncios Exclusivos"
+      },
+      "title": "¿cómo funciona?"
+    },
+    "join": {
+      "content": "Si tiene un negocio que quiera incluir en esta plataforma envie un mail a consultas@dondelobusco.com o haga clik en el siguiente boton",
+      "title": "Me gustaria unirme a la plataforma"
+    },
+    "services": {
+      "notification": {
+        "p": "mantenganse informado de las ultimas novedades de sus negocios favoritos o sus productos de interes"
+      },
+      "publication": {
+        "p": "busque promociones, descuentos y lanzamiento de nuevos productos"
+      },
+      "query": {
+        "p": "consulte en tiempo real. realize preguntas cerradas (si o no) y los locales apareceran en pantalla"
+      },
+      "store": {
+        "p": "nuestro sistema busca locales que se ajusten a su busqueda"
+      },
+      "title": "servicios"
+    },
+    "welcome": {
+      "jumbotron": {
+        "p1": "...fue a mas de 4 locales buscando algo?",
+        "p2": "...tuvo la incertidumbre si habra otro local donde buscar?",
+        "p3": "...no encontro lo que buscaba y tuvo que comprar algo similar?",
+        "p4": "...fue a un local y no tenian stock?",
+        "subtitle": "Alguna vez.. ?",
+        "tagline": "conectando personas con comercios",
+        "title": "Donde lo busco ?"
+      },
+      "title": "bienvenido"
+    }
+  },
+  "location": "ubicacion",
+  "login": "ingreso a su cuenta",
+  "navigation": {
+    "activate": "activar su cuenta",
+    "add-product": "$t(sidebar.product.add-product)",
+    "add-publication": "$t(sidebar.publication.add-publication)",
+    "dashboard": "$t(sidebar.dashboard)",
+    "edit-product": "editar producto",
+    "edit-publication": "editar publication",
+    "home": "inicio",
+    "login": "acceso",
+    "not-found": "no se encontro",
+    "notification": "notificaciones",
+    "product": "$t(sidebar.product.title)",
+    "profile": "perfil",
+    "publication": "$t(sidebar.publication.title)",
+    "query": "consultas",
+    "report": "$t(sidebar.report)",
+    "reset": "resetear cuenta",
+    "setup_company": "creacion de cuenta",
+    "signup": "registro",
+    "sing_store": "negocio",
+    "store": "negocios"
+  },
+  "new-request": "nueva consulta",
+  "no-account": "no tiene cuenta? haga click aqui",
+  "no-data": "sin datos",
+  "no-publication": "sin publicaciones aun",
+  "notification": {
+    "activation-link": "un email de activacion ha sido enviado a su email",
+    "go-dashboard": "ir al panel"
+  },
+  "optional": "opcional",
+  "pages": {
+    "activate": {
+      "activated": "su cuenta ha sido activada",
+      "activating": "activando su cuenta",
+      "error": "Ocurrio un error, envie un mail a soporte para solucionarlo",
+      "start": "aca click aqui para empezar"
+    },
+    "setup": {
+      "add_stores": "agregue sus locales",
+      "create_company": "cree su empresa",
+      "setup_account": "configure su cuenta"
+    }
+  },
+  "pet-shop": "tienda de mascotas",
+  "report": {
+    "product": {
+      "counter": "consultas",
+      "createdAt": "fecha de creacion",
+      "location": "ubicacion",
+      "name": "nombre",
+      "options": "opciones",
+      "status": "disponibilidad",
+      "title": "$t(navigation.product)"
+    },
+    "query": {
+      "category": "categoria",
+      "createdAt": "$t(report.product.createdAt)",
+      "location": "$t(report.product.location)",
+      "parent-category": "categoria padre",
+      "query": "consulta",
+      "title": "preguntas",
+      "total-no": "no",
+      "total-yes": "si"
+    }
+  },
+  "save": "guardar cambios",
+  "search-box": {
+    "add": "agregar este item: ",
+    "asking-stores": "estamos consultando otros locales",
+    "error-answer": "disculpas, no pudimos hacer la consulta",
+    "location": "ubicacion",
+    "new-question": "consultar sobre: ",
+    "new-search-required": "ya realizo esta consulta, cambie algun parametro",
+    "no-answer": "la consulta finalizo",
+    "select_a_category": "selecione una categoria",
+    "subtitle": "para una mejor experiencia realize preguntas cerradas (por si o no)",
+    "subtitle-general": "segun categoria",
+    "title": "Consultas en tiempo real",
+    "title-publication": "Busque publicaciones activas de negocios",
+    "title-store": "Busque negocios",
+    "what-u-looking": "escriba su consulta"
+  },
+  "server-error": {
+    "BAD_USER_INPUT": "Datos ingresados incorrectos",
+    "FORBIDDEN": "No tiene permisos para esta accion",
+    "INTERNAL_SERVER_ERROR": "Error interno del sistema. Notificaremos a los administradores para solucionarlo.",
+    "NETWORK": "Sin conexion a internet",
+    "PRISMA": {
+      "P2002": "Este campo ya existe"
+    },
+    "UNAUTHENTICATED": "Sesion expirada, debe loguearse de nuevo",
+    "USER_STATUS": "No tiene permisos para esta accion"
+  },
+  "sidebar": {
+    "dashboard": "panel",
+    "main": "principal",
+    "overview": "lista",
+    "product": {
+      "add-product": "agregar producto",
+      "title": "productos"
+    },
+    "publication": {
+      "add-publication": "agregar anuncio",
+      "overview": {},
+      "title": "anuncios"
+    },
+    "report": "reportes",
+    "title": "Menu del panel"
+  },
+  "signup": "registro de cuenta",
+  "submit": "enviar",
+  "user-menu": {
+    "hi": "Hola",
+    "logout": "salir",
+    "profile": "$t(navigation.profile)"
+  },
+  "wip": "proximamente",
+  "wsp": "hola, queria consultar sobre",
+  "yes-account": "ya tiene cuenta? haga click aqui"
+}

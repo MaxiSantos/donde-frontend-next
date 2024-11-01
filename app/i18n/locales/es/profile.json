@@ -1,0 +1,47 @@
+{
+  "account": {
+    "title": "cuenta",
+    "details": {
+      "title": "detalles",
+      "userName": "nombre de usuario",
+      "telephone": "telefono"
+    },
+    "password": {
+      "title": "cambiar contraseña",
+      "title2": "resetear cuenta",
+      "current": "contraseña actual",
+      "new": "nueva contraseña",
+      "confirm": "confirmar nueva contraseña",
+      "ask": "para resetear su cuenta envie un e-mail desde su cuenta a esta direccion",
+      "subject": "reseteo de cuenta requerido!!!",
+      "body": "hola, necesito resetear este email para crear una cuenta nueva en dondelobusco.com"
+    }
+  },
+  "preference": {
+    "title": "preferencias",
+    "account": {
+      "title": "preferencias de su cuenta",
+      "notification": "notificacion",
+      "sound": "sonido",
+      "voice": "sonido por voz"
+    }
+  },
+  "subscription": {
+    "title": "subscripciones"
+  },
+  "company": {
+    "title": "empresa",
+    "company": {
+      "title": "detalles de la empresa",
+      "name": "nombre"
+    },
+    "store": {
+      "title": "detalles del local",
+      "name": "nombre",
+      "user-new": "agregue estas credenciales para agregar un ayudante a este negocio",
+      "user-delete": "para borrar un usuario borre el nombre de usuario",
+      "user-edit": "para cambiar el password escriba uno nuevo",
+      "user-edit2": "no modifique el nombre de usuario a menos que quiera eliminarlo"
+    }
+  }
+}

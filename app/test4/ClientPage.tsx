@@ -1,7 +1,6 @@
-'use client'
 
 export default function Test() {
   return (
-    <div>Test</div>
+    <div>Test 4</div>
   )
 }

@@ -1,0 +1,929 @@
+{
+  "es": {
+    "about_uw": "About the Upload Widget",
+    "actions": {
+      "clear_all": "Clear all",
+      "log_out": "Log out",
+      "next": "Next",
+      "upload": "Upload"
+    },
+    "advanced": "Advanced",
+    "advanced_options": {
+      "add_new": "Add a new tag:",
+      "public_id_ph": "Public ID",
+      "tags_ph": "Add a tag",
+      "upload_preset_placeholder": "Upload Preset"
+    },
+    "aria_label": {
+      "back": "Back",
+      "close": "Close"
+    },
+    "back": "Back",
+    "camera": {
+      "camera_error": "Failed to access camera",
+      "cancel": "Cancel",
+      "capture": "Capture",
+      "explanation": "Make sure that your camera is connected and that your browser allows camera capture. When ready, click Capture.",
+      "file_name": "Camera_{{time}}",
+      "retry": "Retry Camera",
+      "take_pic": "Take a picture and upload it"
+    },
+    "close": "Close",
+    "crop": {
+      "close_btn": "Yes",
+      "close_prompt": "Closing will cancel all uploads, Are you sure?",
+      "corner_tooltip": "Drag corner to resize",
+      "crop_btn": "Crop",
+      "handle_tooltip": "Drag handle to resize",
+      "image_data_error": "either the file size exceeds the browser limit or the file may be corrupt.",
+      "image_error": "Error loading image",
+      "reset_btn": "Reset",
+      "skip_btn": "Skip",
+      "title": "Crop"
+    },
+    "dropbox": {
+      "authenticating": "Authenticating...",
+      "list_headers": {
+        "modified": "Modified",
+        "name": "Name",
+        "select": "Select"
+      },
+      "menu": {
+        "browse": "Buscar",
+        "recent": "Reciente"
+      },
+      "no_auth_action": "Connect to Dropbox",
+      "no_auth_title": "Upload files from your Dropbox account.",
+      "no_files": "No Files",
+      "no_photos": "No Photos",
+      "root_crumb": "Root"
+    },
+    "facebook": {
+      "album_subtitle": "{{count}} photos",
+      "menu": {
+        "albums": "Albums",
+        "tagged": "Photos of You",
+        "uploaded": "Your Photos"
+      },
+      "no_auth_action": "Connect to Facebook",
+      "no_auth_statement": "We will not post anything without your permission.",
+      "no_auth_title": "Upload files from your Facebook account.",
+      "no_photos": "No photos..."
+    },
+    "getty": {
+      "buttons": {
+        "next": "Next",
+        "purchase": "Acquire",
+        "upload": "Upload"
+      },
+      "diversity_categories": "Diversity categories",
+      "filters": {
+        "age_of_people": {
+          "adult": "Adult",
+          "adults_only": "Adults only",
+          "baby": "Baby",
+          "child": "Child",
+          "label": "Age",
+          "mature_adult": "Mature adult",
+          "senior_adult": "Senior adult",
+          "teenager": "Teenager",
+          "young_adult": "Young adult"
+        },
+        "available_for_creative_editorial_videos": "Filter is available only for creative or editorial images",
+        "available_for_creative_images": "Filter is available only for creative images",
+        "available_for_creative_videos": "Filter is available only for creative videos",
+        "clear": "Clear",
+        "colors": {
+          "label": "Colors"
+        },
+        "compositions": {
+          "abstract": "Abstract",
+          "close_up": "Close-up",
+          "copy_space": "Copy space",
+          "cut_out": "Cut out",
+          "full_frame": "Full frame",
+          "label": "Image style",
+          "macro": "Macro",
+          "portrait": "Portrait",
+          "sparse": "Sparse",
+          "still_life": "Still life"
+        },
+        "duration": {
+          "label": "Duration"
+        },
+        "ethnicity": {
+          "black": "Black",
+          "caucasian": "Caucasian",
+          "east_asian": "East Asian",
+          "hispanic_latino": "Hispanic/LatinX",
+          "label": "Ethnicity",
+          "middle_eastern": "Middle Eastern",
+          "mixed_race_person": "Mixed Race Person",
+          "multiethnic_group": "Multi-Ethnic gGroup",
+          "native_american_first_nations": "Native American/First Nations",
+          "pacific_islander": "Pacific Islander",
+          "south_asian": "South Asian",
+          "southeast_asian": "Southeast Asian"
+        },
+        "frameRates": {
+          "label": "Frame Rate"
+        },
+        "imageTechniques": {
+          "animation": "Animation",
+          "black_and_white": "Black and white",
+          "color": "Color",
+          "label": "Image Technique",
+          "realtime": "Realtime",
+          "selective_focus": "Selective focus",
+          "slow_motion": "Slow motion",
+          "time_lapse": "Time lapse"
+        },
+        "license": {
+          "all": "All",
+          "creative": "Creative",
+          "editorial": "Editorial",
+          "label": "License Type"
+        },
+        "license_model": {
+          "all": "RF and RR",
+          "label": "License model",
+          "rightsready": "Rights-ready",
+          "royaltyfree": "Royality-free"
+        },
+        "minimumSize": {
+          "label": "Image resolution",
+          "large": "12 MP and larger",
+          "x_large": "16 MP and larger",
+          "xx_large": "21 MP and larger"
+        },
+        "more": {
+          "embed_content_only": "Embeddable images",
+          "exclude_editorial_use_only": "Exclude 'Editorial use only'",
+          "label": "More",
+          "safe": "Safe (Exclude nudity)"
+        },
+        "number_of_people": {
+          "group": "Group",
+          "label": "Number of People",
+          "none": "None",
+          "one": "One",
+          "two": "Two"
+        },
+        "orientation": {
+          "horizontal": "Horizontal",
+          "label": "Orientation",
+          "panoramic_horizontal": "Panoramic horizontal",
+          "panoramic_vertical": "Panoramic vertical",
+          "square": "Square",
+          "vertical": "Vertical"
+        },
+        "resolution": {
+          "label": "Resolution"
+        },
+        "sort_options": {
+          "best_match": "Best match",
+          "label": "Sort by",
+          "most_popular": "Most popular",
+          "newest": "Newest",
+          "random": "Random"
+        },
+        "summary": {
+          "color": "color: {{color}}",
+          "compositions": {
+            "abstract": "Abstract",
+            "close_up": "Close-up",
+            "copy_space": "Copy space",
+            "cut_out": "Cut out",
+            "full_frame": "Full frame",
+            "macro": "Macro",
+            "portrait": "Portrait",
+            "sparse": "Sparse",
+            "still_life": "Still life"
+          },
+          "embed_content_only": "Embeddable images",
+          "exclude_editorial_use_only": "Exclude 'Editorial use only'",
+          "exclude_nudity": "Safe (Exclude nudity)",
+          "image_techniques": {
+            "animation": "Animation",
+            "black_and_white": "Black and white",
+            "color": "Color",
+            "realtime": "Realtime",
+            "selective_focus": "Selective focus",
+            "slow_motion": "Slow motion",
+            "time_lapse": "Time lapse"
+          },
+          "label": "Filters",
+          "license_models": {
+            "all": "RF and RR",
+            "rightsready": "Rights-ready",
+            "royaltyfree": "Royality-free"
+          },
+          "license_type": {
+            "all": "All types",
+            "creative": "Creative",
+            "editorial": "Editorial"
+          },
+          "minimum_size": {
+            "large": "12 MP and larger",
+            "x_large": "16 MP and larger",
+            "xx_large": "21 MP and larger"
+          },
+          "number_of_people": {
+            "group": "With group people",
+            "none": "Without people",
+            "one": "With one person",
+            "two": "With two people"
+          },
+          "orientations": {
+            "horizontal": "Horizontal",
+            "panoramic_horizontal": "Panoramic horizontal",
+            "panoramic_vertical": "Panoramic vertical",
+            "square": "Square",
+            "vertical": "Vertical"
+          },
+          "video_compositions": {
+            "candid": "Candid",
+            "close_up": "Close-up",
+            "looking_at_camera": "Looking at camera"
+          },
+          "viewpoints": {
+            "aerial_view": "Aerial view",
+            "high_angle_view": "High angle view",
+            "lockdown": "Lockdown",
+            "low_angle_view": "Low angle view",
+            "panning": "Panning",
+            "point_of_view": "Point of view",
+            "tilt": "Tilt",
+            "tracking_shot": "Tracking shot"
+          }
+        },
+        "toggle_filters_button": "Filters",
+        "videoCompositions": {
+          "candid": "Candid",
+          "close_up": "Close-up",
+          "label": "Composition",
+          "looking_at_camera": "Looking at camera"
+        },
+        "viewpoint": {
+          "aerial_view": "Aerial view",
+          "high_angle_view": "High angle view",
+          "label": "Viewpoint",
+          "lockdown": "Lockdown",
+          "low_angle_view": "Low angle view",
+          "panning": "Panning",
+          "point_of_view": "Point of view",
+          "tilt": "Tilt",
+          "tracking_shot": "Tracking shot"
+        }
+      },
+      "media_types": {
+        "images": "Images",
+        "videos": "Videos"
+      },
+      "media_types_singular": {
+        "images": "image",
+        "videos": "video"
+      },
+      "no_auth_action": "Connect to Getty Images",
+      "no_auth_statement": "Find the perfect royalty-free image for your next project from the world's best photo library of creative stock photos, vector art illustrations and stock.",
+      "no_auth_title": "Upload assets from your Getty Images account.",
+      "popular_categories": "Popular categories",
+      "purchase": {
+        "collection": "Collection",
+        "cost": "Cost",
+        "credit": "Credit",
+        "credits": "Credits",
+        "credits_balance_too_small": "Your credits balance is too small",
+        "credits_remaining": "credits remainings",
+        "days_left": "days left",
+        "description": "Description",
+        "format": "Select Format & Size",
+        "images": "images",
+        "item_id": "Creative #",
+        "license_type": "License type",
+        "location": "Location",
+        "manage_plans": "Manage Plans",
+        "media_type_not_included": "Your current plan does not include this {{mediaType}}",
+        "plan_exceeded": "Plan Exceeded",
+        "release_info": "Release info",
+        "rightsmanaged": "Rights-Managed/Rights-Ready",
+        "royaltyfree": "Royalty-Free",
+        "select_format": "Select Format & Size",
+        "select_plan": "Select Plan",
+        "size": {
+          "large": "Large",
+          "medium": "Medium",
+          "small": "Small",
+          "vector": "Vector",
+          "x_large": "X Large",
+          "x_small": "X Small",
+          "xx_large": "XX Large"
+        },
+        "videos": "videos"
+      },
+      "reg_link_text": "Click here to create a Getty Images account",
+      "search": {
+        "placeholder": "Search...",
+        "reset": "Reset search"
+      },
+      "select": "Select"
+    },
+    "google_drive": {
+      "grid": {
+        "empty_folder": "This folder is empty.",
+        "files": "Files",
+        "folders": "Folders"
+      },
+      "modifiedByMeTime": "Last modified by me",
+      "modifiedTime": "Last modified",
+      "my_drive": "My Drive",
+      "name": "Name",
+      "no_auth_action": "Connect to Google Drive",
+      "no_auth_title": "Upload files from your Google Drive.",
+      "notifications": {
+        "retrieve_failed": "Failed to retrieve upload data from Google Drive."
+      },
+      "recent": "Recent",
+      "search": {
+        "placeholder": "Search...",
+        "reset": "Reset search"
+      },
+      "search_results": "Search results",
+      "shared_drive": "Shared drives",
+      "shared_with_me": "Shared with me",
+      "starred": "Starred",
+      "viewedByMeTime": "Last opened by me"
+    },
+    "image_search": {
+      "all": "all",
+      "customPlaceholder": "Search {{site}}",
+      "filters_title": "Site",
+      "hide_options": "Hide Options",
+      "inputPlaceholder": "Search for images",
+      "main_title": "Image Search",
+      "rights": "Usage rights:",
+      "rights_options": {
+        "free": "free to use or share",
+        "free_com": "free to use or share, even commercially",
+        "free_mod": "free to use share or modify",
+        "free_mod_com": "free to use, share or modify, even commercially",
+        "not_filtered": "not filtered by licence"
+      },
+      "search_error": "Search failed, please try again.",
+      "show_options": "Show Options"
+    },
+    "instagram": {
+      "authenticating": "Authenticating...",
+      "header_title": "Your Recent Instagram Photos",
+      "no_auth_action": "Connect to Instagram",
+      "no_auth_title": "Upload photos from your Instagram account."
+    },
+    "istock": {
+      "buttons": {
+        "next": "Next",
+        "purchase": "Purchase",
+        "upload": "Upload"
+      },
+      "diversity_categories": "Diversity categories",
+      "filters": {
+        "age_of_people": {
+          "adult": "Adult",
+          "adults_only": "Adults only",
+          "baby": "Baby",
+          "child": "Child",
+          "label": "Age",
+          "mature_adult": "Mature adult",
+          "senior_adult": "Senior adult",
+          "teenager": "Teenager",
+          "young_adult": "Young adult"
+        },
+        "clear": "Clear",
+        "colors": {
+          "label": "Colors"
+        },
+        "duration": {
+          "label": "Duration"
+        },
+        "ethnicity": {
+          "black": "Black",
+          "caucasian": "Caucasian",
+          "east_asian": "East Asian",
+          "hispanic_latino": "Hispanic/LatinX",
+          "label": "Ethnicity",
+          "middle_eastern": "Middle Eastern",
+          "mixed_race_person": "Mixed Race Person",
+          "multiethnic_group": "Multi-Ethnic gGroup",
+          "native_american_first_nations": "Native American/First Nations",
+          "pacific_islander": "Pacific Islander",
+          "south_asian": "South Asian",
+          "southeast_asian": "Southeast Asian"
+        },
+        "license": {
+          "all": "All",
+          "creative": "Creative",
+          "editorial": "Editorial",
+          "label": "License Type"
+        },
+        "more": {
+          "label": "More",
+          "safe": "Safe (Exclude nudity)"
+        },
+        "number_of_people": {
+          "group": "Group",
+          "label": "Number of People",
+          "none": "None",
+          "one": "One",
+          "two": "Two"
+        },
+        "orientation": {
+          "horizontal": "Horizontal",
+          "label": "Orientation",
+          "panoramic_horizontal": "Panoramic horizontal",
+          "panoramic_vertical": "Panoramic vertical",
+          "square": "Square",
+          "vertical": "Vertical"
+        },
+        "resolution": {
+          "label": "Resolution"
+        },
+        "sort_options": {
+          "best_match": "Best match",
+          "label": "Sort by",
+          "most_popular": "Most popular",
+          "newest": "Newest",
+          "random": "Random"
+        },
+        "summary": {
+          "age_of_people": {
+            "adult": "Adult",
+            "adults_only": "Adults only",
+            "baby": "Baby",
+            "child": "Child",
+            "mature_adult": "Mature adult",
+            "senior_adult": "Senior adult",
+            "teenager": "Teenager",
+            "young_adult": "Young adult"
+          },
+          "color": "color: {{color}}",
+          "exclude_nudity": "Safe (Exclude nudity)",
+          "label": "Filters",
+          "license_type": {
+            "all": "All types",
+            "creative": "Creative",
+            "editorial": "Editorial"
+          },
+          "number_of_people": {
+            "group": "With group people",
+            "none": "Without people",
+            "one": "With one person",
+            "two": "With two people"
+          },
+          "orientations": {
+            "horizontal": "Horizontal",
+            "panoramic_horizontal": "Panoramic horizontal",
+            "panoramic_vertical": "Panoramic vertical",
+            "square": "Square",
+            "vertical": "Vertical"
+          }
+        },
+        "toggle_filters_button": "Filters"
+      },
+      "media_types": {
+        "images": "Images",
+        "videos": "Videos"
+      },
+      "media_types_singular": {
+        "images": "image",
+        "videos": "video"
+      },
+      "no_auth_action": "Connect to iStock",
+      "no_auth_statement": "iStock by Getty Images is one of the world's leading stock content marketplaces, offering millions of hand-picked premium images at ridiculously low prices that you can only get from us.",
+      "no_auth_title": "Upload files from your iStock by Getty Images account.",
+      "popular_categories": "Popular categories",
+      "purchase": {
+        "collection": "Collection",
+        "cost": "Cost",
+        "credit": "Credit",
+        "credits": "Credits",
+        "credits_balance_too_small": "Your credits balance is too small",
+        "credits_remaining": "credits remainings",
+        "days_left": "days left",
+        "format": "Select Format & Size",
+        "images": "images",
+        "istock_photo_id": "IStock photo ID",
+        "istock_video_id": "IStock video ID",
+        "manage_plans": "Manage Plans",
+        "media_type_not_included": "Your current plan does not include this {{mediaType}}",
+        "plan_exceeded": "Plan Exceeded",
+        "select_format": "Select Format & Size",
+        "select_plan": "Select Plan",
+        "size": {
+          "large": "Large",
+          "medium": "Medium",
+          "small": "Small",
+          "vector": "Vector",
+          "x_large": "X Large",
+          "xx_large": "XX Large"
+        },
+        "videos": "videos"
+      },
+      "reg_link_text": "Click here to create an iStock by Getty Images account",
+      "search": {
+        "placeholder": "Search...",
+        "reset": "Reset search"
+      },
+      "select": "Select"
+    },
+    "landscape_overlay": {
+      "description": "Rotate your device back to portrait mode to continue.",
+      "title": "Landscape mode isn't supported"
+    },
+    "local": {
+      "browse": "Buscar",
+      "dd_title_multi": "Arrastre y suelte archivos aqui",
+      "dd_title_single": "Arrastre y suelte un archivo aqui",
+      "drop_title_multiple": "Suelte archivos para subir",
+      "drop_title_single": "Suelte un archivo para subir"
+    },
+    "menu": {
+      "camera": "Camera",
+      "dropbox": "Dropbox",
+      "facebook": "Facebook",
+      "files": "Mis archivos",
+      "gdrive": "Google Drive",
+      "getty": "gettyimages",
+      "gsearch": "Image Search",
+      "instagram": "Instagram",
+      "istock": "iStock",
+      "shutterstock": "Shutterstock",
+      "unsplash": "Unsplash",
+      "web": "Link de imagen"
+    },
+    "metadataPage": {
+      "approveCancel": "Yes",
+      "backPrompt": "Are you sure? Your file selection and the metadata values you entered will be lost.",
+      "cancel": "Cancel",
+      "closePrompt": "Are you sure you want to close this dialog box? Your files will not be uploaded.",
+      "conflict_label": "Overwrite",
+      "intro": {
+        "closingText": "After upload, you can modify metadata for individual assets from the Media Library.",
+        "conflictWarning": "Note: Select ‘Overwrite’ for the fields where you want to apply the new values to both new and replaced assets.",
+        "openingText": "You can fill in the following fields to add new metadata to your assets on upload."
+      },
+      "subtitle": "1 asset selected",
+      "subtitle_plural": "{{count}} assets selected",
+      "title": "Structured Metadata Values",
+      "tooltip": "Some required metadata fields are not set or the supplied values are invalid.",
+      "upload": "Upload",
+      "validationErrors": {
+        "date": {
+          "greaterThan": "Must be after {{min}}.",
+          "greaterThanEqual": "Can’t be before {{min}}.",
+          "lessThan": "Must be before {{max}}.",
+          "lessThanEqual": "Can’t be after {{max}}."
+        },
+        "dateError": "Must be a date.",
+        "digitsLimitError": "This number cannot be more than 16 digits long.",
+        "enum": {
+          "oneOf": "{{originalValue}} needs to be one of the specified options above."
+        },
+        "enumError": "Choose one of the specified options.",
+        "integer": {
+          "greaterThan": "Must be more than {{more}}.",
+          "greaterThanEqual": "Must be at least {{min}}.",
+          "lessThan": "Must be less than {{less}}.",
+          "lessThanEqual": "Can't be more than {{max}}."
+        },
+        "integerError": "Must be a number.",
+        "integerTypeError": "This is an integer field.",
+        "number": {
+          "greaterThan": "Must be more than {{more}}.",
+          "greaterThanEqual": "Must be at least {{min}}.",
+          "lessThan": "Must be less than {{less}}.",
+          "lessThanEqual": "Can't be more than {{max}}."
+        },
+        "numberError": "Must be a number.",
+        "required": "This field is required.",
+        "set": {
+          "oneOf": "{{originalValue}} needs to be one of the specified options above."
+        },
+        "setError": "Choose at least one of the specified options.",
+        "string": {
+          "max": "Can't be more than {{max}} characters.",
+          "min": "Must be at least {{min}} characters.",
+          "minAndMax": "Must be between {{min}}-{{max}} characters long.",
+          "regex": "Must include only XXXX."
+        },
+        "stringError": "Must be text.",
+        "unsupportedFields": "Please contact your administrator, there is a problem with the following optional metadata fields: ",
+        "unsupportedRequiredFields": "Please contact your administrator, there is a problem with the following mandatory metadata fields: "
+      }
+    },
+    "no_results": "No results",
+    "notifications": {
+      "acquisition_failed": "Acquisition failed. Please try again.",
+      "general_error": "An error has occurred.",
+      "general_prompt": "Are you sure?",
+      "great": "Great",
+      "image_acquired": "Image Acquired",
+      "image_purchased": "Image Purchased",
+      "invalid_add_url": "The URL must be valid.",
+      "invalid_public_id": "Public ID cannot contain \\,,&,#,%,<,>.",
+      "limit_reached": "No more files can be selected.",
+      "no_new_files": "The files have already been uploaded.",
+      "purchase_failed": "Purchase failed. Please try again.",
+      "service_logged_out": "Service logged out due to error",
+      "video_acquired": "Video Acquired",
+      "video_purchased": "Video Purchased"
+    },
+    "or": "O",
+    "queue": {
+      "abort_all": "Abort all",
+      "done": "Listo",
+      "mini_failed": "{{num}} fallo",
+      "mini_title": "Uploaded",
+      "mini_title_processing": "Procesando",
+      "mini_title_uploading": "Subiendo",
+      "mini_upload_count": "{{num}} subido",
+      "retry_failed": "Retry failed",
+      "show_completed": "Show completed",
+      "statuses": {
+        "aborted": "Aborted",
+        "error": "Error",
+        "processing": "Procesando...",
+        "timeout": "A large file is currently being uploaded. It might take a while to appear in your product environment.",
+        "uploaded": "Done",
+        "uploading": "Uploading..."
+      },
+      "title": "Cola de subidas",
+      "title_processing_with_counter": "Procesando {{num}} archivos",
+      "title_uploading": "Subiendo archivos",
+      "title_uploading_processing_with_counters": "Subiendo {{uploading}} archivos, procesando {{processing}} archivos",
+      "title_uploading_with_counter": "Subiendo {{num}} archivos",
+      "upload_more": "Subir mas"
+    },
+    "search": {
+      "placeholder": "Search...",
+      "reset": "Reset search"
+    },
+    "search_placeholder": "Search files",
+    "selection_counter": {
+      "selected": "Selected"
+    },
+    "shutterstock": {
+      "authenticating": "Authenticating...",
+      "dictionary": {
+        "image": "image",
+        "video": "video"
+      },
+      "filter_summary": {
+        "category": "in {{- value}}",
+        "color": "color: {{value}}",
+        "gender": "only {{value}}",
+        "label": "Filters: {{- summary}}",
+        "people": "with {{value}} people",
+        "unsafe": "unsafe"
+      },
+      "filters": {
+        "all_categories": "All Categories",
+        "clear": "clear",
+        "color": "Color",
+        "colors": {
+          "amber": "amber",
+          "aqua": "aqua",
+          "azure": "azure",
+          "blue": "blue",
+          "green": "green",
+          "lime": "lime",
+          "magenta": "magenta",
+          "orange": "orange",
+          "orchid": "orchid",
+          "purple": "purple",
+          "red": "red",
+          "teal": "teal",
+          "turquoise": "turquoise",
+          "yellow": "yellow"
+        },
+        "duration": {
+          "label": "Duration",
+          "long": "Long",
+          "long_tip": "> 20 minutes",
+          "short": "Short",
+          "short_tip": "< 4 minutes"
+        },
+        "gender": {
+          "both": "Both",
+          "female": "Female",
+          "label": "Gender",
+          "male": "Male"
+        },
+        "more_label": "More",
+        "orientation": {
+          "horizontal": "Horizontal",
+          "label": "Orientation",
+          "vertical": "Vertical"
+        },
+        "people": {
+          "label": "People",
+          "only_images_with_people": "Only images with people",
+          "only_videos_with_people": "Only videos with people"
+        },
+        "resolution": {
+          "4k": "4k",
+          "4k_tip": "4k",
+          "high_definition": "HD",
+          "high_definition_tip": "High Definition",
+          "label": "Resolution",
+          "standard_definition": "SD",
+          "standard_definition_tip": "Standard Definition"
+        },
+        "safe": "Safe",
+        "size": {
+          "label": "Size",
+          "large": "Large",
+          "medium": "Medium",
+          "small": "Small"
+        },
+        "sort_options": {
+          "label": "Sort by",
+          "newest": "New",
+          "popular": "Popular",
+          "random": "Random",
+          "relevance": "Relevant"
+        },
+        "types": {
+          "all": "All image types",
+          "illustration": "Illustration",
+          "photo": "Photo",
+          "vector": "Vector"
+        }
+      },
+      "home_page": {
+        "categories_header": "Categories",
+        "results_header": "Popular"
+      },
+      "media_types": {
+        "images": "Images",
+        "videos": "Videos"
+      },
+      "next_btn": "Next",
+      "no_auth_action": "Connect to Shutterstock",
+      "no_auth_title": "Upload assets from your Shutterstock account.",
+      "purchase_page": {
+        "aspect_ratio": "Aspect Ratio",
+        "author": "Author",
+        "button_description": {
+          "downloading": "Downloading - This may take a few seconds...",
+          "next": "You already own this {{assetType}} Click Next to continue",
+          "purchasing": "Purchasing - This may take a few seconds...",
+          "upload": "You already own this {{assetType}} Click Upload to continue"
+        },
+        "button_label": {
+          "acquire": "Purchase",
+          "downloading": "Downloading...",
+          "next": "Next",
+          "purchase": "Purchase",
+          "purchasing": "Purchasing...",
+          "upload": "Upload"
+        },
+        "description": "Description",
+        "duration": "Duration",
+        "file_limit_exceeded": "Some options have exceeded the upload file-size limit.",
+        "format_and_size": {
+          "label": "Select Format & Size"
+        },
+        "fps": "FPS",
+        "plans": {
+          "days": "days",
+          "exceeded": "exceeded",
+          "expired": "expired",
+          "label": "Select Plan",
+          "manage_plans": "Manage your Shutterstock plans...",
+          "no_plan": "Your current plan does not include ",
+          "years": "years"
+        },
+        "purchase_btn_label": "Purchase",
+        "sizes": {
+          "4k": "4K",
+          "hd": "HD",
+          "huge_jpg": "Huge",
+          "medium_jpg": "Medium",
+          "sd": "SD",
+          "small_jpg": "Small",
+          "vector_eps": "Vector",
+          "web": "Web"
+        },
+        "time_left": "{{time}} left"
+      },
+      "purchase_preview": {
+        "loading_preview": "Loading preview",
+        "open_in_new_window": "Open in new window"
+      },
+      "reg_link_text": "Click here to create a Shutterstock account",
+      "search": {
+        "placeholder": "Search...",
+        "reset": "Reset search"
+      },
+      "statement": "Shutterstock offers the best quality, royalty free stock images, photos, vectors, illustrations, videos and music for nearly any application.",
+      "toggle_filters_button": "Filters"
+    },
+    "unsplash": {
+      "colors": {
+        "black": "Black",
+        "black_and_white": "Black and white",
+        "blue": "Blue",
+        "green": "Green",
+        "magenta": "Magenta",
+        "orange": "Orange",
+        "purple": "Purple",
+        "red": "Red",
+        "teal": "Teal",
+        "white": "White",
+        "yellow": "Yellow"
+      },
+      "editorial": "Editorial",
+      "filters": {
+        "categories": {
+          "label": "Categories"
+        },
+        "clear": "Clear",
+        "color_types": {
+          "black_and_white": "Black and white",
+          "tones": "Tones"
+        },
+        "colors": {
+          "label": "Colors"
+        },
+        "filters_in": "in",
+        "license": {
+          "creative": "Creative",
+          "editorial": "Editorial",
+          "label": "License Type"
+        },
+        "orientation": {
+          "label": "Orientation",
+          "landscape": "Landscape",
+          "portrait": "Portrait",
+          "squarish": "Squarish"
+        },
+        "sort_options": {
+          "label": "Sort by",
+          "latest": "Latest",
+          "oldest": "Oldest",
+          "popular": "Popular",
+          "relevant": "Relevant"
+        },
+        "summary": {
+          "color": "Color: {{color}}",
+          "label": "Filters"
+        },
+        "toggle_filters_button": "Filters"
+      },
+      "no_auth_action": "Connect to Unsplash",
+      "no_auth_statement": "Beautiful, free images and photos that you can download and use for any project. Better than any royalty free or stock photos.",
+      "no_auth_title": "Access millions of images from Unsplash.",
+      "popular_categories": "Popular categories",
+      "select": "Select",
+      "summary": {
+        "credit": "Credit",
+        "description": "Description",
+        "format": "Select Format & Size",
+        "free_to_use": "Free to use",
+        "location": "Location",
+        "permission": "Permission",
+        "published_at": "Published at",
+        "size": {
+          "large": "Large",
+          "medium": "Medium",
+          "original_size": "Original size",
+          "small": "Small"
+        }
+      }
+    },
+    "uploader": {
+      "close_mid_upload": "There are running uploads. Click OK to abort.",
+      "errors": {
+        "allowed_formats": "File format not allowed",
+        "file_too_large": "File size ({{size}}) exceeds maximum allowed ({{allowed}})",
+        "max_dimensions_validation": "Image dimensions ({{width}}X{{height}}) are bigger than the maximum allowed: ({{maxWidth}}X{{maxHeight}})",
+        "max_file_size": "File is too large",
+        "max_number_of_files": "Maximum number of files exceeded",
+        "min_dimensions_validation": "Image dimensions ({{width}}X{{height}}) are smaller than the minimum required: ({{minWidth}}X{{minHeight}})",
+        "min_file_size": "File is too small",
+        "unavailable": "NA"
+      },
+      "filesize": {
+        "b": "{{size}} Bytes",
+        "g": "{{size}} GB",
+        "k": "{{size}} KB",
+        "m": "{{size}} MB",
+        "na": "N/A",
+        "t": "{{size}} TB"
+      }
+    },
+    "url": {
+      "inner_title": "Public URL of file to upload:",
+      "input_placeholder": "http://remote.site.example/images/remote-image.jpg"
+    }
+  }
+}

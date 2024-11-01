@@ -1,0 +1,17 @@
+{
+  "logo": {
+    "brief": "Servicio web que pretende ayudarlo en sus busquedas de forma mas eficiente"
+  },
+  "links": {
+    "title": "links utiles",
+    "profile": "mi cuenta",
+    "privacy": "politica de privacidad",
+    "partners": "Patrocinadores",
+    "how-work": "como funciona",
+    "contact": "contact"
+  },
+  "contact": {
+    "title": "contacto"
+  },
+  "copyright": "2022 Donde lo busco. Todos los derechos reservados"
+}
