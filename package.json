@@ -60,6 +60,7 @@
     "react-i18next": "^14.1.2",
     "react-idle-timer": "5.4.2",
     "react-image-gallery": "1.2.7",
+    "react-responsive": "^10.0.0",
     "react-scroll-parallax": "^3.4.2",
     "react-share": "4.4.0",
     "react-spinners": "^0.13.8",
@@ -102,10 +103,13 @@
     "@types/react-image-gallery": "^1.0.4",
     "@types/react-wait": "^0.3.2",
     "@types/set-cookie-parser": "^2.4.2",
+    "autoprefixer": "^10.4.20",
     "cli-select": "^1.1.2",
     "eslint": "7.32.0",
     "eslint-config-next": "^14.2.5",
     "pino-pretty": "^9.1.1",
-    "typescript": "4.7.4"
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.14",
+    "typescript": "5.6.3"
   }
 }

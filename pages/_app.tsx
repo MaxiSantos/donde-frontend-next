@@ -1,41 +1,39 @@
-import { ReactHooksWrapper, setHook } from 'react-hooks-outside';
 import { ApolloProvider } from '@apollo/client';
-import type { AppProps, AppContext } from 'next/app';
-import { CacheProvider } from '@emotion/react'
-import Head from 'next/head';
+import { CacheProvider } from '@emotion/react';
 import { appWithTranslation, useTranslation } from 'next-i18next';
+import type { AppContext, AppProps } from 'next/app';
+import Head from 'next/head';
+import { ReactHooksWrapper, setHook } from 'react-hooks-outside';
+import { ParallaxProvider } from "react-scroll-parallax";
 import { ToastContainer } from 'react-toastify';
 import { Waiter } from "react-wait";
-import { ParallaxProvider } from "react-scroll-parallax";
-import NProgress from 'nprogress';
 
+import '@algolia/autocomplete-theme-classic';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
-import 'react-toastify/dist/ReactToastify.css';
-import '@algolia/autocomplete-theme-classic';
-import 'app/common/styles/nprogress.css';
-import "swiper/css";
-import "swiper/css/navigation";
 import "app/common/styles/_app.css";
 import 'app/common/styles/icons.css';
-import "app/common/styles/theme/themes-vars.module.scss"
-import styles from './ParallaxBanner.module.scss';
+import 'app/common/styles/nprogress.css';
+import "app/common/styles/theme/themes-vars.module.scss";
+import 'react-toastify/dist/ReactToastify.css';
+import "swiper/css";
+import "swiper/css/navigation";
 
-import { theme } from 'app/common/styles/theme';
+import { CustomNotification } from 'app/common/components/elements/CustomNotification';
+import ErrorBoundary from 'app/common/components/elements/ErrorBoundary';
+import { Composer } from 'app/common/context/composer';
+import { AuthProvider } from 'app/common/context/useAuthContext';
+import { HttpClientProvider } from 'app/common/context/useHttpclient';
+import { NotificationProvider } from 'app/common/context/useNotification';
+import { UserActivityProvider } from 'app/common/context/useUserActivity';
+import { useLogout } from 'app/common/hooks/useLogout';
+import { useMainRouteChange } from 'app/common/hooks/useMainRouteChange';
+import { buildClientApi } from 'app/common/lib/api/httpClient/factory';
 import client from 'app/common/lib/apolloClient';
 import Authorization from 'app/common/lib/Authorization';
-import { NotificationProvider } from 'app/common/context/useNotification';
-import { CustomNotification } from 'app/common/components/elements/CustomNotification';
-import { AuthProvider } from 'app/common/context/useAuthContext';
-import { UserActivityProvider } from 'app/common/context/useUserActivity';
-import ErrorBoundary from 'app/common/components/elements/ErrorBoundary';
-import { useMainRouteChange } from 'app/common/hooks/useMainRouteChange';
-import { AmplitudeHelper } from 'app/lib/amplitudeHelper';
-import { useLogout } from 'app/common/hooks/useLogout';
 import { EmotionHelper } from 'app/common/lib/emotion';
-import { Composer } from 'app/common/context/composer';
-import { buildClientApi } from 'app/common/lib/api/httpClient/factory';
-import { HttpClientProvider } from 'app/common/context/useHttpclient';
+import { theme } from 'app/common/stylesBKP/theme';
+import { AmplitudeHelper } from 'app/lib/amplitudeHelper';
 
 // https://community.amplitude.com/instrumentation-and-data-management-57/disabling-metric-tracking-during-development-182
 // *not working disabling amplitude this way. I had to create a wrapper for track function
